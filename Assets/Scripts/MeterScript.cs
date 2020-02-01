@@ -8,7 +8,8 @@ public class MeterScript : MonoBehaviour
 
     private Vector2 posMind;
     private Vector2 sizeMind;
-    private float current
+    private float currentMindState;
+    private float currentMindPos;
 
     private Vector2 posBody;
     private Vector2 sizeBody;
@@ -16,6 +17,7 @@ public class MeterScript : MonoBehaviour
     private Vector2 posSoul;
     private Vector2 sizeSoul;
 
+    public float newMindPosVal;
     public Texture2D progressBarEmpty;
     //public Texture2D progressBarFull;
  
@@ -23,11 +25,14 @@ public class MeterScript : MonoBehaviour
     void Start()
     {
         //barDisplay = 0.5f;
-        posMind = new Vector2(Screen.width * 0.2f, Screen.height * 0.8f);
+        currentMindPos = 0.2f;
+        currentMindState = 0.2f;
+
+        posMind = new Vector2(Screen.width * currentMindPos, Screen.height * 0.8f);
         posBody = new Vector2(Screen.width * 0.4f, Screen.height * 0.8f);
         posSoul = new Vector2(Screen.width * 0.599f, Screen.height * 0.8f);
 
-        sizeMind = new Vector2(Screen.width * 0.2f, Screen.height * 0.1f);
+        sizeMind = new Vector2(Screen.width * (currentMindPos - currentMindState), Screen.height * 0.1f);
         sizeBody = new Vector2(Screen.width * 0.2f, Screen.height * 0.1f);
         sizeSoul = new Vector2(Screen.width * 0.2f, Screen.height * 0.1f);
     }
@@ -35,7 +40,7 @@ public class MeterScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //barDisplay = Time.deltaTime * 0.5f;
+        MoveMindBar(newMindPosVal);
     }
 
     void OnGUI()
@@ -57,9 +62,15 @@ public class MeterScript : MonoBehaviour
         GUI.EndGroup();
     }
 
-    public void SetMindBar(float newXVal)
+    public void MoveMindBar(float newMindPos)
     {
-        posMind = new Vector2(Screen.width * (0.2f + newXVal), Screen.height * 0.8f);
-        sizeMind = new Vector2(Screen.width * (posBody.x - 0.2f), Screen.height * 0.1f);
+        currentMindPos -= newMindPos;
+        posMind = new Vector2(Screen.width * currentMindPos, Screen.height * 0.8f);
+        sizeMind = new Vector2(Screen.width * currentMindState, Screen.height * 0.1f);
+    }
+
+    public void ChangeStateOfMind(float newMindState)
+    {
+
     }
 }
