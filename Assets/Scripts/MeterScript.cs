@@ -27,8 +27,7 @@ public class MeterScript : MonoBehaviour
     public Texture2D progressBarEmpty;
     //public Texture2D progressBarFull;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         currentMindPos = 0.2f;
         currentMindState = 0.2f;
@@ -44,6 +43,12 @@ public class MeterScript : MonoBehaviour
         currentSoulState = 0.2f;
         posSoul = new Vector2(Screen.width * currentSoulPos, Screen.height * 0.8f);
         sizeSoul = new Vector2(Screen.width * currentSoulState, Screen.height * 0.1f);
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
     }
 
     // Update is called once per frame
@@ -73,21 +78,41 @@ public class MeterScript : MonoBehaviour
         GUI.EndGroup();
     }
 
-    public void MoveMindBar(float newMindPos)
+    //Mind methods
+    public void SetNewStateOfMind(float newMindState)
     {
-        currentMindPos -= newMindPos;
-        posMind = new Vector2(Screen.width * currentMindPos, Screen.height * 0.8f);
-        //sizeMind = new Vector2(Screen.width * currentMindState, Screen.height * 0.1f);
+        MoveMindBar(newMindState - currentMindPos);
+        currentMindState = newMindState;
+        sizeMind = new Vector2(Screen.width * currentMindState, Screen.height * 0.1f);
     }
 
-    public void ChangeStateOfMind(float newMindState)
+    public void UpdateStateOfMind(float newMindState)
     {
         currentMindState += newMindState;
         sizeMind = new Vector2(Screen.width * currentMindState, Screen.height * 0.1f);
         MoveMindBar(newMindState);
     }
 
-    public void ChangeStateOfBody(float newBodyState)
+    private void MoveMindBar(float newMindPos)
+    {
+        currentMindPos -= newMindPos;
+        posMind = new Vector2(Screen.width * currentMindPos, Screen.height * 0.8f);
+    }
+
+    //Body methods
+    public void SetNewStateOfBody(float newBodyState)
+    {
+        float halfNewBodyPos = (newBodyState * -0.5f);
+        MoveMindBar(halfNewBodyPos);
+        MoveSoulBar(halfNewBodyPos);
+
+        currentBodyState = newBodyState;
+        currentBodyPos -= halfNewBodyPos;
+        posBody = new Vector2(Screen.width * currentBodyPos, Screen.height * 0.8f);
+        sizeBody = new Vector2(Screen.width * currentBodyState, Screen.height * 0.1f);
+    }
+
+    public void UpdateStateOfBody(float newBodyState)
     {
         currentBodyState += newBodyState;
         float halfNewBodyState = newBodyState * 0.5f;
@@ -100,13 +125,21 @@ public class MeterScript : MonoBehaviour
         MoveSoulBar(halfNewBodyState);
     }
 
+    //Soul methods
+    public void SetNewStateOfSoul(float newSoulState)
+    {
+        //MoveSoulBar(currentSoulPos - newSoulState);
+        currentSoulState = newSoulState;
+        sizeSoul = new Vector2(Screen.width * currentSoulState, Screen.height * 0.1f);
+    }
+
     public void MoveSoulBar(float newSoulPos)
     {
         currentSoulPos += newSoulPos;
         posSoul = new Vector2(Screen.width * currentSoulPos, Screen.height * 0.8f);
     }
 
-    public void ChangeStateOfSoul(float newSoulState)
+    public void UpdateStateOfSoul(float newSoulState)
     {
         currentSoulState += newSoulState;
         sizeSoul = new Vector2(Screen.width * currentSoulState, Screen.height * 0.1f);

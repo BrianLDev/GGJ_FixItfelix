@@ -11,13 +11,18 @@ public class PlayerStatsScript : MonoBehaviour
     private float mySoul;
     private MeterScript meterScript;
 
+    void Awake()
+    {
+        myMind = 100.0f;
+        myBody = 100.0f;
+        mySoul = 100.0f;
+        meterScript = meter.GetComponent<MeterScript>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        myMind = 2.0f;
-        myBody = 5.0f;
-        mySoul = 3.0f;
-        meterScript = meter.GetComponent<MeterScript>();
+        
     }
 
     // Update is called once per frame
@@ -26,21 +31,46 @@ public class PlayerStatsScript : MonoBehaviour
         
     }
 
+    //set a new starting statistic for the mind bar
+    public void SetMind(float newMind)
+    {
+        myMind = newMind;
+        meterScript.SetNewStateOfMind(ConvertInputtoPercentage(newMind));
+    }
+
+    //add to or subtract from the mind bar
     public void UpdateMind(float addToMind)
     {
         myMind += addToMind;
-        meterScript.ChangeStateOfMind(addToMind / 100.0f);
+        meterScript.UpdateStateOfMind(ConvertInputtoPercentage(addToMind));
+    }
+
+    public void SetBody(float newBody)
+    {
+        myBody = newBody;
+        meterScript.SetNewStateOfBody(ConvertInputtoPercentage(newBody));
     }
 
     public void UpdateBody(float addToBody)
     {
         myBody += addToBody;
-        meterScript.ChangeStateOfBody(addToBody / 100.0f);
+        meterScript.UpdateStateOfBody(ConvertInputtoPercentage(addToBody));
+    }
+
+    public void SetSoul(float newSoul)
+    {
+        mySoul = newSoul;
+        meterScript.SetNewStateOfSoul(ConvertInputtoPercentage(newSoul));
     }
 
     public void UpdateSoul(float addToSoul)
     {
         mySoul += addToSoul;
-        meterScript.ChangeStateOfSoul(addToSoul / 100.0f);
+        meterScript.UpdateStateOfSoul(ConvertInputtoPercentage(addToSoul));
+    }
+
+    private float ConvertInputtoPercentage(float input)
+    {
+        return input * 0.0002f;
     }
 }
