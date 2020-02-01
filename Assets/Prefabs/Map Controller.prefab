@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6570c75fbe6beeb41914f0f47e75f48a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MapController: {fileID: 4153731611703777954}
+  BuildingManager: {fileID: 4153731611703777954}
 --- !u!1001 &4153731611062213083
 PrefabInstance:
   m_ObjectHideFlags: 0
