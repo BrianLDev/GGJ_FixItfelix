@@ -309,7 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_DemonType: Mind
-  m_game_Manager: {fileID: 0}
+  m_game_Manager: {fileID: 1096099879}
 --- !u!212 &481122584
 SpriteRenderer:
   m_ObjectHideFlags: 0
