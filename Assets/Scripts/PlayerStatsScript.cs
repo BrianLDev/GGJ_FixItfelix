@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PlayerStatsScript : MonoBehaviour
 {
-    public MeterScript meter;
+    public GameObject meter;
 
     private float myMind;
     private float myBody;
     private float mySoul;
+    private MeterScript meterScript;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,7 @@ public class PlayerStatsScript : MonoBehaviour
         myMind = 2.0f;
         myBody = 5.0f;
         mySoul = 3.0f;
+        meterScript = meter.GetComponent<MeterScript>();
     }
 
     // Update is called once per frame
@@ -27,6 +29,18 @@ public class PlayerStatsScript : MonoBehaviour
     public void UpdateMind(float addToMind)
     {
         myMind += addToMind;
-        meter.ChangeStateOfMind(addToMind / 10.0f);
+        meterScript.ChangeStateOfMind(addToMind / 100.0f);
+    }
+
+    public void UpdateBody(float addToBody)
+    {
+        myBody += addToBody;
+        meterScript.ChangeStateOfBody(addToBody / 100.0f);
+    }
+
+    public void UpdateSoul(float addToSoul)
+    {
+        mySoul += addToSoul;
+        meterScript.ChangeStateOfSoul(addToSoul / 100.0f);
     }
 }

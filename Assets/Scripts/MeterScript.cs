@@ -21,9 +21,9 @@ public class MeterScript : MonoBehaviour
     private float currentSoulState;
     private float currentSoulPos;
 
-    public float newMindVal;
-    public float newBodyVal;
-    public float newSoulVal;
+    //public float newMindVal;
+    //public float newBodyVal;
+    //public float newSoulVal;
     public Texture2D progressBarEmpty;
     //public Texture2D progressBarFull;
 
