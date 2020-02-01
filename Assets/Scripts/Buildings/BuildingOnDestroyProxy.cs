@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-public class MapControllerOnDestroyProxy : MonoBehaviour
+public class BuildingOnDestroyProxy : MonoBehaviour
 {
 	[HideInInspector]
 	public UnityEvent OnDestroyEvent = new UnityEvent();

@@ -9,7 +9,7 @@ public struct ConstructionSpace
 	public ConstructionSpaceData Data;
 }
 
-public class MapController : MonoBehaviour
+public class BuildingManager : MonoBehaviour
 {
 	public Tilemap Map;
 
@@ -66,7 +66,7 @@ public class MapController : MonoBehaviour
 			GameObject buildingLogic = Instantiate(repairOption.LogicPrefab);
 			buildingLogic.transform.position = Map.GetCellCenterWorld(position);
 
-			MapControllerOnDestroyProxy proxy = buildingLogic.AddComponent<MapControllerOnDestroyProxy>();
+			BuildingOnDestroyProxy proxy = buildingLogic.AddComponent<BuildingOnDestroyProxy>();
 			proxy.OnDestroyEvent.AddListener(() => ReturnToRuin(space));
 		}
 	}
