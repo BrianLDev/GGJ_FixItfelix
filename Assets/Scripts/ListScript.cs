@@ -8,7 +8,7 @@ public class ListScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Tilemap2DArray = null;
+        
     }
 
     // Update is called once per frame
