@@ -55,6 +55,11 @@ public class MapController : MonoBehaviour
 		{
 			Vector2Int tilePosition = slot.Center + tile.Offset;
 			Map.SetTile(new Vector3Int(tilePosition.x, tilePosition.y, 0), tile.RepairedTile);
-		}
-	}
+            
+
+        }
+        GameObject newGameObject = new GameObject("newGameObject");
+        newGameObject.tag = "Mind";
+        newGameObject.transform.position = Map.CellToWorld(new Vector3Int(position.x, position.y, 0));
+    }
 }
