@@ -5,7 +5,7 @@ using UnityEditor;
 // A building space represents a certain size of ruins that you can replace with a building
 // e.g. A 2x2 ruin that can be replaced by either a house or a library
 [CreateAssetMenu(menuName = "Scriptable Objects/Building Space")]
-public class BuildingSpace : ScriptableObject
+public class ConstructionSpace : ScriptableObject
 {
 	public Tilemap RuinShape;
 	public BuildingData[] RepairOptions;
@@ -16,8 +16,8 @@ public class BuildingSpace : ScriptableObject
 	}
 }
 
-[CustomEditor(typeof(BuildingSpace))]
-public class BuildingSpaceEditor : Editor
+[CustomEditor(typeof(ConstructionSpace))]
+public class ConstructionSpaceEditor : Editor
 {
 	public override void OnInspectorGUI()
 	{
@@ -26,7 +26,7 @@ public class BuildingSpaceEditor : Editor
 		GUIStyle errorStyle = new GUIStyle(EditorStyles.label);
 		errorStyle.normal.textColor = Color.red;
 
-		BuildingSpace buildingSpace = target as BuildingSpace;
+		ConstructionSpace buildingSpace = target as ConstructionSpace;
 		if (buildingSpace.RuinShape == null)
 		{
 			EditorGUILayout.LabelField("Building space does not have ruin shape", errorStyle);
