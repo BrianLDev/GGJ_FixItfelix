@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 059c0e7b1db5b804ab69e4d9b8c3ae93, type: 3}
   m_Name: House
   m_EditorClassIdentifier: 
-  BuildingShape: {fileID: 0}
+  BuildingShape: {fileID: 8540248909465465489, guid: eeb80dac6810e8845ac1828d7d766c35,
+    type: 3}
