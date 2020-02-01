@@ -636,6 +636,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1972599227 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 4153731612830960118}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cb207a09f45860499b39a71b3e67ade, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4153731612830960118
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -745,6 +757,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Map Controller
       objectReference: {fileID: 0}
+    - target: {fileID: 4153731612643171545, guid: 39ee57a99ae66e740ad854bc4c0806f2,
+        type: 3}
+      propertyPath: BuildingManager
+      value: 
+      objectReference: {fileID: 1972599227}
     - target: {fileID: 4237692984672523431, guid: 39ee57a99ae66e740ad854bc4c0806f2,
         type: 3}
       propertyPath: m_IsActive
