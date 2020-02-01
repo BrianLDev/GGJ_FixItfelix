@@ -102,14 +102,20 @@ public class MeterScript : MonoBehaviour
     //Body methods
     public void SetNewStateOfBody(float newBodyState)
     {
-        float halfNewBodyPos = (newBodyState * -0.5f);
-        MoveMindBar(halfNewBodyPos);
-        MoveSoulBar(halfNewBodyPos);
 
+        //MoveMindBar(halfNewBodyPos);
+        //MoveSoulBar(halfNewBodyPos);
+
+        float halfNewBodyPos = newBodyState * 0.5f;
         currentBodyState = newBodyState;
-        currentBodyPos -= halfNewBodyPos;
+        currentBodyPos = 0.5f - halfNewBodyPos;
         posBody = new Vector2(Screen.width * currentBodyPos, Screen.height * 0.8f);
         sizeBody = new Vector2(Screen.width * currentBodyState, Screen.height * 0.1f);
+
+        currentMindPos = currentBodyPos - currentMindState;
+        posMind = new Vector2(Screen.width * currentMindPos, Screen.height * 0.8f);
+        currentSoulPos = currentBodyPos + currentBodyState;
+        posSoul = new Vector2(Screen.width * currentSoulPos, Screen.height * 0.8f);
     }
 
     public void UpdateStateOfBody(float newBodyState)

@@ -623,7 +623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startPlayerMind: 500
-  startPlayerBody: 500
+  startPlayerBody: 2000
   startPlayerSoul: 500
   playerStatsObj: {fileID: 364599978}
 --- !u!4 &755571642
