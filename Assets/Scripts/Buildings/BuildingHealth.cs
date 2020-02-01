@@ -10,7 +10,7 @@ public class BuildingHealth : MonoBehaviour
 	{
 		BuildingInfo info = GetComponent<BuildingInfo>();
 
-		MaxHealth = info.BaseMaxHealth; // TODO query GameManager for health multiplier
+		MaxHealth = info.BaseT1MaxHealth; // TODO query GameManager for health multiplier
 		CurrentHealth = MaxHealth;
 	}
 
