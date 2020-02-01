@@ -39,19 +39,22 @@ public class MapController : MonoBehaviour
 		}
 	}
 
-	public void RepairTile(Vector2Int mapPosition)
+	public void RepairTile(Vector3Int position)
 	{
+		Vector2Int mapPosition = new Vector2Int(position.x, position.y);
+
 		if (!_ruinRestoreData.ContainsKey(mapPosition))
 		{
 			Debug.LogError($"Position {mapPosition} does not have a ruined building to restore");
+			return;
 		}
 
 		BuildingSlot slot = _ruinRestoreData[mapPosition];
 
 		foreach (BuildingTile tile in slot.Tiles)
 		{
-			Vector2Int position = slot.Center + tile.Offset;
-			Map.SetTile(new Vector3Int(position.x, position.y, 0), tile.RepairedTile);
+			Vector2Int tilePosition = slot.Center + tile.Offset;
+			Map.SetTile(new Vector3Int(tilePosition.x, tilePosition.y, 0), tile.RepairedTile);
 		}
 	}
 }
