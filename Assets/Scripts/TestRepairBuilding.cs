@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class TestRepairBuilding : MonoBehaviour, IPointerClickHandler
 {
-	public MapController MapController;
+	public BuildingManager BuildingManager;
 
 	public void OnPointerClick(PointerEventData data)
 	{
@@ -14,6 +14,6 @@ public class TestRepairBuilding : MonoBehaviour, IPointerClickHandler
 
 		Vector3Int mapPosition = map.WorldToCell(data.pointerCurrentRaycast.worldPosition);
 
-		MapController.RepairTile(mapPosition, MapController.GetRepairOptions(mapPosition)[0]);
+		BuildingManager.RepairTile(mapPosition, BuildingManager.GetRepairOptions(mapPosition)[0]);
 	}
 }
