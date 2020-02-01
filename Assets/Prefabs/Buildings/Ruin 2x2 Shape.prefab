@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4517206938980142411}
   - component: {fileID: 4517206938980142410}
   m_Layer: 0
-  m_Name: Ruin 2x2
+  m_Name: Ruin 2x2 Shape
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

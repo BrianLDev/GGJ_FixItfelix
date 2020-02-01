@@ -17,4 +17,3 @@ MonoBehaviour:
   RepairOptions:
   - {fileID: 11400000, guid: ec0e88f3c27f2af408d7449be43df20b, type: 2}
   - {fileID: 11400000, guid: e2f981f7f614a984cb4db608923a7115, type: 2}
-  - {fileID: 11400000, guid: eb94d77cd81ba614d9962de01ebedefe, type: 2}
