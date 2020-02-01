@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 267d3aa96054e024b98c87d3d55d160f, type: 3}
-  m_Name: 2x2 Space
+  m_Name: 2x2 Construction Space
   m_EditorClassIdentifier: 
   RuinShape: {fileID: 4517206938980142411, guid: 398b6c66fc77d88448ba557ed8febc03,
     type: 3}
   RepairOptions:
   - {fileID: 11400000, guid: ec0e88f3c27f2af408d7449be43df20b, type: 2}
   - {fileID: 11400000, guid: e2f981f7f614a984cb4db608923a7115, type: 2}
+  - {fileID: 11400000, guid: eb94d77cd81ba614d9962de01ebedefe, type: 2}

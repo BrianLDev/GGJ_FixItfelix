@@ -12,6 +12,8 @@ public class TestRepairBuilding : MonoBehaviour, IPointerClickHandler
 	{
 		Tilemap map = GetComponent<Tilemap>();
 
-		MapController.RepairTile(map.WorldToCell(data.pointerCurrentRaycast.worldPosition));
+		Vector3Int mapPosition = map.WorldToCell(data.pointerCurrentRaycast.worldPosition);
+
+		MapController.RepairTile(mapPosition, MapController.GetRepairOptions(mapPosition)[0]);
 	}
 }

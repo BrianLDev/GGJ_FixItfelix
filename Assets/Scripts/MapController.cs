@@ -3,63 +3,96 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [System.Serializable]
-public struct BuildingTile
+public struct ConstructionSpace
 {
-	public Vector2Int Offset;
-	public TileBase RepairedTile;
-}
-
-[System.Serializable]
-public struct BuildingSlot
-{
-	public Vector2Int Center;
-	public BuildingTile[] Tiles;
+	public Vector3Int LocalOrigin;
+	public ConstructionSpaceData Data;
 }
 
 public class MapController : MonoBehaviour
 {
 	public Tilemap Map;
-	public TileBase RuinTile;
-	public BuildingSlot[] BuildingSlots;
 
-	private Dictionary<Vector2Int, BuildingSlot> _ruinRestoreData;
+	public ConstructionSpace[] ConstructionSpaces;
+
+	private Dictionary<Vector3Int, ConstructionSpace> _positionToConstructionSpace;
 
 	private void Start()
 	{
-		_ruinRestoreData = new Dictionary<Vector2Int, BuildingSlot>();
+		_positionToConstructionSpace = new Dictionary<Vector3Int, ConstructionSpace>();
 
-		foreach (BuildingSlot slot in BuildingSlots)
+		foreach (var space in ConstructionSpaces)
 		{
-			foreach (BuildingTile tile in slot.Tiles)
+			Tilemap ruinShape = space.Data.RuinShape;
+			foreach (Vector3Int ruinShapePosition in ruinShape.cellBounds.allPositionsWithin)
 			{
-				Vector2Int position = slot.Center + tile.Offset;
-				Map.SetTile(new Vector3Int(position.x, position.y, 0), RuinTile);
-				_ruinRestoreData.Add(position, slot);
+				Vector3Int mapPosition = space.LocalOrigin + ruinShapePosition;
+				Map.SetTile(mapPosition, ruinShape.GetTile(ruinShapePosition));
+				_positionToConstructionSpace.Add(mapPosition, space);
 			}
 		}
 	}
 
-	public void RepairTile(Vector3Int position)
+	public BuildingData[] GetRepairOptions(Vector3Int position)
 	{
-		Vector2Int mapPosition = new Vector2Int(position.x, position.y);
-
-		if (!_ruinRestoreData.ContainsKey(mapPosition))
+		if (!_positionToConstructionSpace.ContainsKey(position))
 		{
-			Debug.LogError($"Position {mapPosition} does not have a ruined building to restore");
+			Debug.LogError($"Position {position} does not have a ruined building to restore");
+			return null;
+		}
+
+		return _positionToConstructionSpace[position].Data.RepairOptions;
+	}
+
+	public void RepairTile(Vector3Int position, BuildingData repairOption)
+	{
+		if (!_positionToConstructionSpace.ContainsKey(position))
+		{
+			Debug.LogError($"Position {position} does not have a ruined building to restore");
 			return;
 		}
 
-		BuildingSlot slot = _ruinRestoreData[mapPosition];
+		ConstructionSpace space = _positionToConstructionSpace[position];
+		Tilemap buildingShape = repairOption.BuildingShape;
 
-		foreach (BuildingTile tile in slot.Tiles)
+		foreach (Vector3Int buildingPosition in buildingShape.cellBounds.allPositionsWithin)
 		{
-			Vector2Int tilePosition = slot.Center + tile.Offset;
-			Map.SetTile(new Vector3Int(tilePosition.x, tilePosition.y, 0), tile.RepairedTile);
-            
+			Vector3Int mapPosition = space.LocalOrigin + buildingPosition;
+			Map.SetTile(mapPosition, buildingShape.GetTile(buildingPosition));
+		}
 
-        }
-        GameObject newGameObject = new GameObject("newGameObject");
-        newGameObject.tag = "Mind";
-        newGameObject.transform.position = Map.CellToWorld(new Vector3Int(position.x, position.y, 0));
-    }
+		if (repairOption.LogicPrefab != null)
+		{
+			GameObject buildingLogic = Instantiate(repairOption.LogicPrefab);
+			buildingLogic.transform.position = Map.GetCellCenterWorld(position);
+
+			MapControllerOnDestroyProxy proxy = buildingLogic.AddComponent<MapControllerOnDestroyProxy>();
+			proxy.OnDestroyEvent.AddListener(() => ReturnToRuin(space));
+		}
+	}
+
+	private void ReturnToRuin(ConstructionSpace space)
+	{
+		Tilemap ruinShape = space.Data.RuinShape;
+
+		foreach (Vector3Int ruinShapePosition in ruinShape.cellBounds.allPositionsWithin)
+		{
+			Vector3Int mapPosition = space.LocalOrigin + ruinShapePosition;
+			Map.SetTile(mapPosition, ruinShape.GetTile(ruinShapePosition));
+		}
+	}
+
+	private void OnDrawGizmos()
+	{
+		Gizmos.color = Color.yellow;
+		foreach (ConstructionSpace space in ConstructionSpaces)
+		{
+			if (space.Data == null || space.Data.RuinShape == null) continue;
+			BoundsInt bounds = space.Data.RuinShape.cellBounds;
+			Vector3 min = Map.CellToWorld(space.LocalOrigin + bounds.min);
+			Vector3 max = Map.CellToWorld(space.LocalOrigin + bounds.max);
+
+			Gizmos.DrawCube((min + max) / 2, max - min);
+		}
+	}
 }

@@ -10,7 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 059c0e7b1db5b804ab69e4d9b8c3ae93, type: 3}
-  m_Name: House
+  m_Name: Library Data
   m_EditorClassIdentifier: 
-  BuildingShape: {fileID: 8540248909465465489, guid: eeb80dac6810e8845ac1828d7d766c35,
+  BuildingShape: {fileID: 6701906410631213038, guid: 72169f5f34ae02e47be13921adfc772d,
+    type: 3}
+  LogicPrefab: {fileID: 1832658165143930251, guid: c6f6eacfb3cec054eacb88e4a657d811,
     type: 3}
