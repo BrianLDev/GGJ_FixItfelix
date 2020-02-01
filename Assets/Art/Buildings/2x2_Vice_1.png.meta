@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 42ea6710b4bdd304c8f24d2137d58745
+guid: 93b775d939fc0e44892a7e17bc016a45
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -767894131665621688
-    second: 2x2_Ampitheater_1_0
+      213: -2688400329808516143
+    second: 2x2_Vice_1_0
   - first:
-      213: -918843604467124018
-    second: 2x2_Ampitheater_1_1
+      213: 7660453762336520701
+    second: 2x2_Vice_1_1
   - first:
-      213: 654430581233763750
-    second: 2x2_Ampitheater_1_2
+      213: -8677120896248446605
+    second: 2x2_Vice_1_2
   - first:
-      213: 6028609931013832503
-    second: 2x2_Ampitheater_1_3
+      213: -7004503582344101073
+    second: 2x2_Vice_1_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -98,7 +98,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 2x2_Ampitheater_1_0
+      name: 2x2_Vice_1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -112,14 +112,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84da6f01b54e755f0800000000000000
-      internalID: -767894131665621688
+      spriteID: 1db68bfc422e0bad0800000000000000
+      internalID: -2688400329808516143
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2x2_Ampitheater_1_1
+      name: 2x2_Vice_1_1
       rect:
         serializedVersion: 2
         x: 128
@@ -133,14 +133,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec8f8972c9c9f33f0800000000000000
-      internalID: -918843604467124018
+      spriteID: df97f5a2c166f4a60800000000000000
+      internalID: 7660453762336520701
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2x2_Ampitheater_1_2
+      name: 2x2_Vice_1_2
       rect:
         serializedVersion: 2
         x: 0
@@ -154,14 +154,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a547947521051900800000000000000
-      internalID: 654430581233763750
+      spriteID: 3710ef9a48ca49780800000000000000
+      internalID: -8677120896248446605
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 2x2_Ampitheater_1_3
+      name: 2x2_Vice_1_3
       rect:
         serializedVersion: 2
         x: 128
@@ -175,8 +175,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73fb8739acce9a350800000000000000
-      internalID: 6028609931013832503
+      spriteID: f23cd627a110bce90800000000000000
+      internalID: -7004503582344101073
       vertices: []
       indices: 
       edges: []
