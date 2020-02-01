@@ -21,7 +21,9 @@ public class MeterScript : MonoBehaviour
     private float currentSoulState;
     private float currentSoulPos;
 
-    public float newTestVal;
+    public float newMindVal;
+    public float newBodyVal;
+    public float newSoulVal;
     public Texture2D progressBarEmpty;
     //public Texture2D progressBarFull;
 
@@ -47,7 +49,9 @@ public class MeterScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ChangeStateOfMind(newTestVal);
+        ChangeStateOfMind(newMindVal);
+        ChangeStateOfBody(newBodyVal);
+        ChangeStateOfSoul(newSoulVal);
     }
 
     void OnGUI()
@@ -86,6 +90,14 @@ public class MeterScript : MonoBehaviour
     public void ChangeStateOfBody(float newBodyState)
     {
         currentBodyState += newBodyState;
+        float halfNewBodyState = newBodyState * 0.5f;
+        currentBodyPos -= halfNewBodyState;
+
+        posBody = new Vector2(Screen.width * currentBodyPos, Screen.height * 0.8f);
+        sizeBody = new Vector2(Screen.width * currentBodyState, Screen.height * 0.1f);
+
+        MoveMindBar(halfNewBodyState);
+        MoveSoulBar(halfNewBodyState);
     }
 
     public void MoveSoulBar(float newSoulPos)
