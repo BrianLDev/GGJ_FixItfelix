@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Mind
+  - Building
   layers:
   - Default
   - TransparentFX

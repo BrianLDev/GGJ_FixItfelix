@@ -45,42 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Map: {fileID: 2478529336935065370}
-  RuinTile: {fileID: 11400000, guid: 9ae9361f26d28be44ad857455ce2d19b, type: 2}
-  BuildingSlots:
-  - Center: {x: 0, y: 0}
-    Tiles:
-    - Offset: {x: -1, y: 0}
-      RepairedTile: {fileID: 0}
-    - Offset: {x: 0, y: 0}
-      RepairedTile: {fileID: 0}
-    - Offset: {x: 1, y: 0}
-      RepairedTile: {fileID: 0}
-    - Offset: {x: -1, y: 1}
-      RepairedTile: {fileID: 0}
-    - Offset: {x: 0, y: 1}
-      RepairedTile: {fileID: 0}
-    - Offset: {x: 1, y: 1}
-      RepairedTile: {fileID: 0}
-  - Center: {x: 4, y: 1}
-    Tiles:
-    - Offset: {x: 0, y: 0}
-      RepairedTile: {fileID: 11400000, guid: 0fe25613b5bf9ad4bb26c32750eb048c, type: 2}
-    - Offset: {x: 1, y: 0}
-      RepairedTile: {fileID: 11400000, guid: 31b54660243553b4785800cdf2f06092, type: 2}
-    - Offset: {x: 0, y: 1}
-      RepairedTile: {fileID: 11400000, guid: d2621bb63ff5c6649be53da53fa90aad, type: 2}
-    - Offset: {x: 1, y: 1}
-      RepairedTile: {fileID: 11400000, guid: ad776a71ddce7654cb107ec73fa02beb, type: 2}
-  - Center: {x: -1, y: -3}
-    Tiles:
-    - Offset: {x: 0, y: 0}
-      RepairedTile: {fileID: 11400000, guid: 3358fbf7a16a4a543beee0a10537f108, type: 2}
-    - Offset: {x: 1, y: 0}
-      RepairedTile: {fileID: 11400000, guid: 7ec30e35046dcaf43a720ef0d555dbd8, type: 2}
-    - Offset: {x: 0, y: 1}
-      RepairedTile: {fileID: 11400000, guid: f956ba31d9fd8994eb18e953c376e6eb, type: 2}
-    - Offset: {x: 1, y: 1}
-      RepairedTile: {fileID: 11400000, guid: bdba1dce968d1a345ad84cce71082355, type: 2}
+  ConstructionSpaces:
+  - LocalOrigin: {x: -1, y: -1, z: 0}
+    Data: {fileID: 11400000, guid: 241dbc55acc44fd4084bd81d154a4074, type: 2}
+  - LocalOrigin: {x: 2, y: 2, z: 0}
+    Data: {fileID: 11400000, guid: 241dbc55acc44fd4084bd81d154a4074, type: 2}
 --- !u!114 &4153731612643171545
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -643,6 +643,48 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
+        type: 3}
+      propertyPath: Spaces.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
+        type: 3}
+      propertyPath: NewSlots.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
+        type: 3}
+      propertyPath: NewSlots.Array.data[0].Center.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
+        type: 3}
+      propertyPath: NewSlots.Array.data[0].Center.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
+        type: 3}
+      propertyPath: NewSlots.Array.data[0].Space
+      value: 
+      objectReference: {fileID: 11400000, guid: 241dbc55acc44fd4084bd81d154a4074,
+        type: 2}
+    - target: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
+        type: 3}
+      propertyPath: NewSlots.Array.data[1].Center.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
+        type: 3}
+      propertyPath: NewSlots.Array.data[1].Center.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
+        type: 3}
+      propertyPath: NewSlots.Array.data[1].Space
+      value: 
+      objectReference: {fileID: 11400000, guid: 241dbc55acc44fd4084bd81d154a4074,
+        type: 2}
     - target: {fileID: 4153731611703777955, guid: 39ee57a99ae66e740ad854bc4c0806f2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -702,6 +744,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Map Controller
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237692984672523431, guid: 39ee57a99ae66e740ad854bc4c0806f2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39ee57a99ae66e740ad854bc4c0806f2, type: 3}
