@@ -49,9 +49,9 @@ public class MeterScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ChangeStateOfMind(newMindVal);
-        ChangeStateOfBody(newBodyVal);
-        ChangeStateOfSoul(newSoulVal);
+        //ChangeStateOfMind(newMindVal);
+        //ChangeStateOfBody(newBodyVal);
+        //ChangeStateOfSoul(newSoulVal);
     }
 
     void OnGUI()
@@ -104,13 +104,11 @@ public class MeterScript : MonoBehaviour
     {
         currentSoulPos += newSoulPos;
         posSoul = new Vector2(Screen.width * currentSoulPos, Screen.height * 0.8f);
-        //sizeSoul = new Vector2(Screen.width * currentSoulState, Screen.height * 0.1f);
     }
 
     public void ChangeStateOfSoul(float newSoulState)
     {
         currentSoulState += newSoulState;
         sizeSoul = new Vector2(Screen.width * currentSoulState, Screen.height * 0.1f);
-        //MoveSoulBar(newSoulState);
     }
 }
