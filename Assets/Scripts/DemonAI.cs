@@ -9,7 +9,7 @@ public class DemonAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        List<GameObject> map = m_game_Manager.GetComponent<script>().Tilemap2DArray;
+        List<GameObject> map = m_game_Manager.GetComponent<ListScript>().Tilemap2DArray;
     }
 
     // Update is called once per frame
