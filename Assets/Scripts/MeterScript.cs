@@ -13,34 +13,41 @@ public class MeterScript : MonoBehaviour
 
     private Vector2 posBody;
     private Vector2 sizeBody;
+    private float currentBodyState;
+    private float currentBodyPos;
 
     private Vector2 posSoul;
     private Vector2 sizeSoul;
+    private float currentSoulState;
+    private float currentSoulPos;
 
-    public float newMindPosVal;
+    public float newTestVal;
     public Texture2D progressBarEmpty;
     //public Texture2D progressBarFull;
- 
+
     // Start is called before the first frame update
     void Start()
     {
-        //barDisplay = 0.5f;
         currentMindPos = 0.2f;
         currentMindState = 0.2f;
-
         posMind = new Vector2(Screen.width * currentMindPos, Screen.height * 0.8f);
-        posBody = new Vector2(Screen.width * 0.4f, Screen.height * 0.8f);
-        posSoul = new Vector2(Screen.width * 0.599f, Screen.height * 0.8f);
+        sizeMind = new Vector2(Screen.width * currentMindState, Screen.height * 0.1f);
 
-        sizeMind = new Vector2(Screen.width * (currentMindPos - currentMindState), Screen.height * 0.1f);
-        sizeBody = new Vector2(Screen.width * 0.2f, Screen.height * 0.1f);
-        sizeSoul = new Vector2(Screen.width * 0.2f, Screen.height * 0.1f);
+        currentBodyPos = 0.4f;
+        currentBodyState = 0.2f;
+        posBody = new Vector2(Screen.width * currentBodyPos, Screen.height * 0.8f);
+        sizeBody = new Vector2(Screen.width * currentBodyState, Screen.height * 0.1f);
+
+        currentSoulPos = 0.599f;
+        currentSoulState = 0.2f;
+        posSoul = new Vector2(Screen.width * currentSoulPos, Screen.height * 0.8f);
+        sizeSoul = new Vector2(Screen.width * currentSoulState, Screen.height * 0.1f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        MoveMindBar(newMindPosVal);
+        ChangeStateOfMind(newTestVal);
     }
 
     void OnGUI()
@@ -66,11 +73,32 @@ public class MeterScript : MonoBehaviour
     {
         currentMindPos -= newMindPos;
         posMind = new Vector2(Screen.width * currentMindPos, Screen.height * 0.8f);
-        sizeMind = new Vector2(Screen.width * currentMindState, Screen.height * 0.1f);
+        //sizeMind = new Vector2(Screen.width * currentMindState, Screen.height * 0.1f);
     }
 
     public void ChangeStateOfMind(float newMindState)
     {
+        currentMindState += newMindState;
+        sizeMind = new Vector2(Screen.width * currentMindState, Screen.height * 0.1f);
+        MoveMindBar(newMindState);
+    }
 
+    public void ChangeStateOfBody(float newBodyState)
+    {
+        currentBodyState += newBodyState;
+    }
+
+    public void MoveSoulBar(float newSoulPos)
+    {
+        currentSoulPos += newSoulPos;
+        posSoul = new Vector2(Screen.width * currentSoulPos, Screen.height * 0.8f);
+        //sizeSoul = new Vector2(Screen.width * currentSoulState, Screen.height * 0.1f);
+    }
+
+    public void ChangeStateOfSoul(float newSoulState)
+    {
+        currentSoulState += newSoulState;
+        sizeSoul = new Vector2(Screen.width * currentSoulState, Screen.height * 0.1f);
+        //MoveSoulBar(newSoulState);
     }
 }
