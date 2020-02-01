@@ -26,11 +26,16 @@ public class SceneChanger : MonoBehaviour
 
     public void LoadTitleScreen()
     {
-
+        SceneManager.LoadScene("TitleScreen");
     }
 
     public void LoadEndGame()
     {
 
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
