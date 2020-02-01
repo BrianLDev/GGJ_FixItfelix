@@ -63,17 +63,17 @@ public class MeterScript : MonoBehaviour
     {
 
         //Mind bar
-        GUI.BeginGroup(new Rect(posMind.x, posMind.y, sizeMind.x, sizeMind.y));
+        GUI.BeginGroup(new Rect(posMind.x, posMind.y, sizeMind.x, sizeMind.y), "M");
         GUI.Box(new Rect(0, 0, sizeMind.x, sizeMind.y), progressBarEmpty);
         GUI.EndGroup();
 
         //Body bar
-        GUI.BeginGroup(new Rect(posBody.x, posBody.y, sizeBody.x, sizeBody.y));
+        GUI.BeginGroup(new Rect(posBody.x, posBody.y, sizeBody.x, sizeBody.y), "B");
         GUI.Box(new Rect(0, 0, sizeBody.x, sizeBody.y), progressBarEmpty);
         GUI.EndGroup();
 
         //Soul bar
-        GUI.BeginGroup(new Rect(posSoul.x, posSoul.y, sizeSoul.x, sizeSoul.y));
+        GUI.BeginGroup(new Rect(posSoul.x, posSoul.y, sizeSoul.x, sizeSoul.y), "S");
         GUI.Box(new Rect(0, 0, sizeSoul.x, sizeSoul.y), progressBarEmpty);
         GUI.EndGroup();
     }
