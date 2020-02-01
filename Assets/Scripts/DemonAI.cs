@@ -36,8 +36,9 @@ public class DemonAI : MonoBehaviour
                     currentTarget = map[i];
                 }
             }
-            transform.LookAt(currentTarget.transform);
-            transform.Translate(new Vector2(speed* Time.deltaTime, 0));
+            Vector3 direction = (currentTarget.transform.position - transform.position);
+            direction.Normalize();
+            transform.Translate(direction*speed * Time.deltaTime);
 
         }
 
