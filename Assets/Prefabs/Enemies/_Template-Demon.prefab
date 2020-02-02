@@ -99,11 +99,11 @@ MonoBehaviour:
   m_DemonType: Mind
   m_game_Manager: {fileID: 7853676670548248068, guid: 341cf9f3054b545b58e66d0351d70222,
     type: 3}
-  firePrefab: {fileID: 0}
   demonState: 0
-  speedNormal: 8
-  speedExit: 16
-  idleCountdown: 3
+  speedNormal: 5
+  speedExit: 10
+  idleCountdown: 2
+  damage: 10
 --- !u!111 &164610643744139462
 Animation:
   m_ObjectHideFlags: 0

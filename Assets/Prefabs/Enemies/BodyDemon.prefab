@@ -19,11 +19,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 164610643744139462, guid: 0882aaaabda26417fbdc0a36ef394170,
         type: 3}
-      propertyPath: m_Animation
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 164610643744139462, guid: 0882aaaabda26417fbdc0a36ef394170,
-        type: 3}
       propertyPath: m_Animations.Array.data[0]
       value: 
       objectReference: {fileID: 7400000, guid: 77173f3a92b39a14b9d7b750478840cf, type: 2}
@@ -32,6 +27,11 @@ PrefabInstance:
       propertyPath: m_Animations.Array.data[1]
       value: 
       objectReference: {fileID: 7400000, guid: 158bf6c69e789184eb44e443280ae139, type: 2}
+    - target: {fileID: 6747936968170963426, guid: 0882aaaabda26417fbdc0a36ef394170,
+        type: 3}
+      propertyPath: m_DemonType
+      value: Body
+      objectReference: {fileID: 0}
     - target: {fileID: 6747936968170963427, guid: 0882aaaabda26417fbdc0a36ef394170,
         type: 3}
       propertyPath: m_Name
