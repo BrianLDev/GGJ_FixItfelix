@@ -145,9 +145,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Map: {fileID: 2478529336935065370}
   ConstructionSpaces:
-  - LocalOrigin: {x: -1, y: -1, z: 0}
+  - LocalOrigin: {x: -3, y: -5, z: 0}
     Data: {fileID: 11400000, guid: 241dbc55acc44fd4084bd81d154a4074, type: 2}
-  - LocalOrigin: {x: 2, y: 2, z: 0}
+  - LocalOrigin: {x: 0, y: -2, z: 0}
+    Data: {fileID: 11400000, guid: 241dbc55acc44fd4084bd81d154a4074, type: 2}
+  - LocalOrigin: {x: -5, y: -1, z: 0}
+    Data: {fileID: 11400000, guid: 241dbc55acc44fd4084bd81d154a4074, type: 2}
+  - LocalOrigin: {x: -5, y: -6, z: 0}
+    Data: {fileID: 11400000, guid: 241dbc55acc44fd4084bd81d154a4074, type: 2}
+  - LocalOrigin: {x: -6, y: -3, z: 0}
+    Data: {fileID: 11400000, guid: 241dbc55acc44fd4084bd81d154a4074, type: 2}
+  - LocalOrigin: {x: -10, y: 1, z: 0}
+    Data: {fileID: 11400000, guid: 241dbc55acc44fd4084bd81d154a4074, type: 2}
+  - LocalOrigin: {x: -7, y: 1, z: 0}
+    Data: {fileID: 11400000, guid: 241dbc55acc44fd4084bd81d154a4074, type: 2}
+  - LocalOrigin: {x: -4, y: 1, z: 0}
+    Data: {fileID: 11400000, guid: 241dbc55acc44fd4084bd81d154a4074, type: 2}
+  - LocalOrigin: {x: -1, y: 1, z: 0}
+    Data: {fileID: 11400000, guid: 241dbc55acc44fd4084bd81d154a4074, type: 2}
+  - LocalOrigin: {x: -10, y: -2, z: 0}
+    Data: {fileID: 11400000, guid: 241dbc55acc44fd4084bd81d154a4074, type: 2}
+  - LocalOrigin: {x: -10, y: -6, z: 0}
+    Data: {fileID: 11400000, guid: 241dbc55acc44fd4084bd81d154a4074, type: 2}
+  - LocalOrigin: {x: -8, y: -5, z: 0}
+    Data: {fileID: 11400000, guid: 241dbc55acc44fd4084bd81d154a4074, type: 2}
+  - LocalOrigin: {x: 0, y: -6, z: 0}
+    Data: {fileID: 11400000, guid: 241dbc55acc44fd4084bd81d154a4074, type: 2}
+  - LocalOrigin: {x: -1, y: -4, z: 0}
     Data: {fileID: 11400000, guid: 241dbc55acc44fd4084bd81d154a4074, type: 2}
   RepairCosts:
   - HealthNumerator: 1
@@ -162,6 +186,7 @@ MonoBehaviour:
     HealthDenominator: 1
     CostNumerator: 2
     CostDenominator: 3
+  audioManager: {fileID: 0}
 --- !u!114 &8446339868985873200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,14 +203,15 @@ MonoBehaviour:
   Canvas: {fileID: 6793098214468575358}
   SelectionCoinPrefab: {fileID: 5142249838564095337, guid: 4a54ba3f55f201145af582151150fb56,
     type: 3}
+  DayNightCycle: {fileID: 0}
   CoinsExpandTime: 0.5
   CoinNormalRange: 200
   CoinHighlightScale: 1.5
   CoinHighlightTime: 0.2
-  RepairSprite: {fileID: 21300000, guid: 184f588db49c8c74cacd6a81bc8c116e, type: 3}
-  UpgradeHealthSprite: {fileID: 21300000, guid: 8911875627673d04b84fbf8ac5c1aa7c,
+  RepairSprite: {fileID: 21300000, guid: 1adc9d35af4ba43dbb24a2309c5dcb8a, type: 3}
+  UpgradeHealthSprite: {fileID: 21300000, guid: 882442a2cde4648b0a19e66607c6a27e,
     type: 3}
-  UpgradeProductionSprite: {fileID: 21300000, guid: 298d6a06d0e5f6b40b24cf0bb024de82,
+  UpgradeProductionSprite: {fileID: 21300000, guid: cdb06667d72934ad29bde3fb5a372842,
     type: 3}
 --- !u!1001 &4153731611062213083
 PrefabInstance:

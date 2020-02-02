@@ -45,7 +45,7 @@ public class LevelStateScript : MonoBehaviour
                 playingGame = false;
                 LoseGame();
             }
-            else if (pss.GetSoul() >= 2000)
+            else if (pss.GetSoul() >= 1000)
             {
                 playingGame = false;
                 WinGame();

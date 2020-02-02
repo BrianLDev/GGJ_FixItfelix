@@ -59,6 +59,7 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerClickHandler
         StartCoroutine(DoSelectMenu(
             mapPosition,
             () => BuildingManager.GetConstructionOptions(mapPosition),
+			BuildingManager.CanAffordConstruction,
             data => data.PreviewSprite,
             (index, buildingData) => BuildingManager.ConstructBuildingOnTile(mapPosition, buildingData),
             (coinController, option) => ApplyTooltip(coinController, option)
@@ -97,6 +98,7 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerClickHandler
 		StartCoroutine(DoSelectMenu(
 			mapPosition,
 			() => BuildingManager.GetBuildingActionOptions(mapPosition),
+			action => BuildingManager.CanAffordBuildingAction(mapPosition, action),
 			action =>
 			{
 				switch (action)
@@ -125,6 +127,7 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerClickHandler
 	private IEnumerator DoSelectMenu<TOption>(
 		Vector3Int mapPosition,
 		Func<TOption[]> getOptions,
+		Predicate<TOption> canAfford,
 		Func<TOption, Sprite> getPreviewSprite,
 		Action<int, TOption> executeSelection,
         Action<SelectionCoinController, TOption> applyTooltip

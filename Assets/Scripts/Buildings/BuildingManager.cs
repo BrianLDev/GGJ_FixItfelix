@@ -90,6 +90,11 @@ public class BuildingManager : MonoBehaviour
 		return _positionToConstructionSpace[position].Data.RepairOptions;
 	}
 
+	public bool CanAffordConstruction(BuildingData data)
+	{
+		return playerStats.GetMind() >= data.LogicPrefab.GetComponent<BuildingInfo>().BaseCost;
+	}
+
 	public void ConstructBuildingOnTile(Vector3Int position, BuildingData buildingOption)
 	{
 		if (!HasRuin(position))
@@ -197,6 +202,26 @@ public class BuildingManager : MonoBehaviour
 		return options.ToArray();
 	}
 
+	public bool CanAffordBuildingAction(Vector3Int position, BuildingAction action)
+	{
+		GameObject buildingLogic = _positionToBuildingLogic[position];
+		float playerMind = playerStats.GetMind();
+
+		switch (action)
+		{
+			case BuildingAction.REPAIR:
+				return playerMind >= GetRepairCost(buildingLogic.GetComponent<BuildingHealth>());
+			case BuildingAction.UPGRADE_HEALTH:
+				return playerMind >= GetHealthUpgradeCost(buildingLogic.GetComponent<BuildingHealth>());
+			case BuildingAction.UPGRADE_PRODUCTION:
+				return playerMind >= GetProductionUpgradeCost(buildingLogic.GetComponent<BuildingLogicBase>());
+			default:
+				Debug.LogError("Unexpected branch in CanAffordBuildingAction");
+				Debug.LogError($"Action {action}");
+				return false;
+		}
+	}
+
 	public int GetRepairCost(BuildingHealth health)
 	{
 		int healthLost = health.MaxHealth - health.CurrentHealth;
@@ -258,6 +283,7 @@ public class BuildingManager : MonoBehaviour
 				int healthUpgradeCost = GetHealthUpgradeCost(health);
 				if (healthUpgradeCost > playerStats.GetMind())
 				{
+					Debug.Log("Upgrade health failed");
 					return;
 				}
 				health.DoUpgradeHealth();
@@ -285,6 +311,7 @@ public class BuildingManager : MonoBehaviour
 				int productionUpgradeCost = GetProductionUpgradeCost(logic);
 				if (productionUpgradeCost > playerStats.GetMind())
 				{
+					Debug.Log("Upgrade production failed");
 					return;
 				}
 				logic.DoUpgradeProduction();
@@ -313,6 +340,7 @@ public class BuildingManager : MonoBehaviour
 				int repairCost = GetRepairCost(health);
 				if (repairCost > playerStats.GetMind())
 				{
+					Debug.Log("Repair failed");
 					return;
 				}
 				health.DoRepair();

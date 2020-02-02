@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 267d3aa96054e024b98c87d3d55d160f, type: 3}
   m_Name: 2x2 Construction Space
   m_EditorClassIdentifier: 
-  RuinShape: {fileID: 4517206938980142411, guid: 398b6c66fc77d88448ba557ed8febc03,
+  RuinShape: {fileID: 4879238646521378288, guid: c08927eaef140154eb766035eb3c44ad,
     type: 3}
   RuinLogicPrefab: {fileID: 7900815841909067651, guid: 05a825c2bcb3efc4ea5ef3a2e8f314e9,
     type: 3}
