@@ -409,9 +409,12 @@ public class BuildingManager : MonoBehaviour
 
 	private void OnDrawGizmos()
 	{
-		Gizmos.color = Color.yellow;
-		foreach (ConstructionSpace space in ConstructionSpaces)
+		for (int i = 0; i < ConstructionSpaces.Length; i++)
 		{
+			ConstructionSpace space = ConstructionSpaces[i];
+
+			Gizmos.color = Color.HSVToRGB(Mathf.Repeat(i / Mathf.PI / 2, 1), 1, 1);
+
 			if (space.Data == null || space.Data.RuinShape == null) continue;
 			BoundsInt bounds = space.Data.RuinShape.cellBounds;
 			Vector3 min = Map.CellToWorld(space.LocalOrigin + bounds.min);
