@@ -226,6 +226,58 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 465144157, guid: 341cf9f3054b545b58e66d0351d70222, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 498969622, guid: 341cf9f3054b545b58e66d0351d70222, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 498969625, guid: 341cf9f3054b545b58e66d0351d70222, type: 3}
+      propertyPath: m_SortingOrder
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 753193329, guid: 341cf9f3054b545b58e66d0351d70222, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 800950011, guid: 341cf9f3054b545b58e66d0351d70222, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 945703380, guid: 341cf9f3054b545b58e66d0351d70222, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1195275112, guid: 341cf9f3054b545b58e66d0351d70222, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1286896617, guid: 341cf9f3054b545b58e66d0351d70222, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1389613624, guid: 341cf9f3054b545b58e66d0351d70222, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1389613625, guid: 341cf9f3054b545b58e66d0351d70222, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1389613625, guid: 341cf9f3054b545b58e66d0351d70222, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548504521, guid: 341cf9f3054b545b58e66d0351d70222, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2004157481, guid: 341cf9f3054b545b58e66d0351d70222, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3930784277232875444, guid: 341cf9f3054b545b58e66d0351d70222,
         type: 3}
       propertyPath: startPlayerBody

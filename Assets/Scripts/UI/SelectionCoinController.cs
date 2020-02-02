@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SelectionCoinController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class SelectionCoinController : TooltipListener, IPointerClickHandler
 {
 	[HideInInspector]
 	public BuildingRadialMenu MenuController;
@@ -21,14 +21,14 @@ public class SelectionCoinController : MonoBehaviour, IPointerEnterHandler, IPoi
 
     void Start()
     {
-       audioManager = GameObject.Find("AudioManager").GetComponent<AudioManagerScript>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManagerScript>();
     }
 
-
-    public void OnPointerEnter(PointerEventData data)
+    public override void OnPointerEnter(PointerEventData data)
 	{
+        base.OnPointerEnter(data);
         audioManager.PlaySwitchCoin();
-		_hover = true;
+        _hover = true;
 	}
 
 	private void Update()
@@ -50,10 +50,12 @@ public class SelectionCoinController : MonoBehaviour, IPointerEnterHandler, IPoi
 	public void OnPointerClick(PointerEventData data)
 	{
 		MenuController.SelectedIndex = OptionIndex;
+        Tooltip.HideTooltip();
 	}
 
-	public void OnPointerExit(PointerEventData data)
+	public override void OnPointerExit(PointerEventData data)
 	{
-		_hover = false;
+        base.OnPointerExit(data);
+        _hover = false;
 	}
 }
