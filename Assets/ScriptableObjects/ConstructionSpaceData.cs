@@ -36,7 +36,7 @@ public class ConstructionSpaceEditor : Editor
 
 			if (buildingData == null) continue;
 
-			string errorMessage = $"Option {buildingData} (index {i}) has issue:";
+			string errorMessage = $"Option {buildingData} (index {i}) error";
 
 			if (buildingData.BuildingShape == null)
 			{
@@ -47,21 +47,10 @@ public class ConstructionSpaceEditor : Editor
 
 			BoundsInt buildingBounds = buildingData.BuildingShape.cellBounds;
 
-			if (buildingBounds.size != ruinBounds.size && buildingBounds.min != ruinBounds.min)
-			{
-				EditorGUILayout.LabelField(errorMessage, errorStyle);
-				EditorGUILayout.LabelField($"It does not have the correct size or position.", errorStyle);
-			}
-			else if (buildingBounds.size != ruinBounds.size)
+			if (buildingBounds.size != ruinBounds.size)
 			{
 				EditorGUILayout.LabelField(errorMessage, errorStyle);
 				EditorGUILayout.LabelField($"It does not have the correct size.", errorStyle);
-			}
-			else if (buildingBounds.min != ruinBounds.min)
-			{
-				EditorGUILayout.LabelField(errorMessage, errorStyle);
-				EditorGUILayout.LabelField($"It does not have the correct position.", errorStyle);
-				EditorGUILayout.LabelField($"It is offset by {buildingBounds.min - ruinBounds.min}.", errorStyle);
 			}
 		}
 	}

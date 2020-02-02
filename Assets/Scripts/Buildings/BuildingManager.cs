@@ -69,9 +69,12 @@ public class BuildingManager : MonoBehaviour
 			proxy.OnDestroyEvent.AddListener(() => ReturnToRuin(space));
 		}
 
+		BoundsInt ruinBounds = _positionToConstructionSpace[position].Data.RuinShape.cellBounds;
+
 		foreach (Vector3Int buildingPosition in buildingShape.cellBounds.allPositionsWithin)
 		{
-			Vector3Int mapPosition = space.LocalOrigin + buildingPosition;
+			Vector3Int buildingOffsetCompensation = ruinBounds.min - buildingShape.cellBounds.min;
+			Vector3Int mapPosition = space.LocalOrigin + buildingOffsetCompensation + buildingPosition;
 			Map.SetTile(mapPosition, buildingShape.GetTile(buildingPosition));
 			_activeBuildingLogic.Add(mapPosition, buildingLogic);
 		}
