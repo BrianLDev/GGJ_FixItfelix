@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class DemonAI : MonoBehaviour
 {
-    public enum DemonState { off_screen, idle, targeting, moving, attacking, vice, exiting }
+    public enum DemonState { off_screen, idle, targeting, moving, attacking, exiting }
 
     [SerializeField] string m_DemonType;
     [SerializeField] GameObject m_game_Manager;
-    [SerializeField] int speed = 10;
+    [SerializeField] int speedNormal = 8;
+    [SerializeField] int speedExit = 16;
     [SerializeField] DemonState demonState = DemonState.off_screen;
 
     private GameObject[] bldgList;
-
+    private int speed;
     private GameObject currentTarget = null;
 
     // Start is called before the first frame update
@@ -48,9 +49,6 @@ public class DemonAI : MonoBehaviour
             case DemonState.attacking:
                 Attacking();
                 break;
-            case DemonState.vice:
-                Vice();
-                break;
             case DemonState.exiting:
                 // TODO: Add any code if needed here
                 break;
@@ -66,7 +64,7 @@ public class DemonAI : MonoBehaviour
     }
 
     public void SpawnDemon() {
-        // TODO: update this later to initialize and spawn the demon
+        speed = speedNormal;
         m_DemonType = "Building";
         demonState = DemonState.targeting;
     }
@@ -99,10 +97,9 @@ public class DemonAI : MonoBehaviour
             direction.Normalize();
             transform.Translate(direction*speed * Time.fixedDeltaTime); 
         }
-
     }
 
-    public void Attacking() {
+    private void Attacking() {
         //  TODO: Smash building
         currentTarget.GetComponentInChildren<BuildingHealth>().DealDamage(5);
         if (currentTarget.GetComponentInChildren<BuildingHealth>().CurrentHealth <= 0) {
@@ -111,11 +108,19 @@ public class DemonAI : MonoBehaviour
         }
     }
 
-    public void Vice() {
-        //  TODO: All of the vices
+    public void EndNightPhase() {
+        Debug.Log("DemonAI ending night phase...");
+        demonState = DemonState.exiting;
+        speed = speedExit;
+        currentTarget = new GameObject();
+        currentTarget.transform.position = new Vector3(999, 999, 0);
+        Destroy(this, 5f);
     }
 
-    public void EndNightPhase() {
-        // TODO: add code here for demon to leave the scene
+    private void Exiting() {
+        Debug.Log("DemonAI exiting...");
+        Vector3 direction = (currentTarget.transform.position - transform.position);
+        direction.Normalize();
+        transform.Translate(direction*speed * Time.fixedDeltaTime); 
     }
 }

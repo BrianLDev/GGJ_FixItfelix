@@ -1,15 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class BuildingRadialMenu : MonoBehaviour, IInitializePotentialDragHandler, IDragHandler, IEndDragHandler
+public class BuildingRadialMenu : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
 	public BuildingManager BuildingManager;
 	public Canvas Canvas;
 	public GameObject SelectionCoinPrefab;
 
-	private bool _waitingUserSelection = false;
+	private bool _active = false;
+	private bool _mouseDown = false;
 	public int? SelectedIndex;
 
 	public float CoinsExpandTime;
@@ -17,15 +19,15 @@ public class BuildingRadialMenu : MonoBehaviour, IInitializePotentialDragHandler
 	public float CoinHighlightScale;
 	public float CoinHighlightTime;
 
-	public void OnInitializePotentialDrag(PointerEventData data)
+	public void OnPointerDown(PointerEventData data)
 	{
-		Debug.Log("Init Potential Drag");
+		if (_active) return;
 
 		Vector3Int mapPosition = BuildingManager.Map.WorldToCell(data.pointerCurrentRaycast.worldPosition);
 
 		if (BuildingManager.HasRuin(mapPosition))
 		{
-			StartCoroutine(SelectBuildingMenu(mapPosition));
+			SelectBuildingMenu(mapPosition);
 		}
 		else if (BuildingManager.HasActiveBuilding(mapPosition))
 		{
@@ -39,13 +41,30 @@ public class BuildingRadialMenu : MonoBehaviour, IInitializePotentialDragHandler
 			   * Canvas.GetComponent<RectTransform>().rect.size;
 	}
 
-	private IEnumerator SelectBuildingMenu(Vector3Int mapPosition)
+	private void SelectBuildingMenu(Vector3Int mapPosition)
 	{
+		StartCoroutine(DoSelectMenu(
+			mapPosition,
+			() => BuildingManager.GetRepairOptions(mapPosition),
+			data => data.PreviewSprite,
+			(index, buildingData) => BuildingManager.RepairTile(mapPosition, buildingData)
+		));
+	}
+
+	private IEnumerator DoSelectMenu<TOption>(
+		Vector3Int mapPosition,
+		Func<TOption[]> getOptions,
+		Func<TOption, Sprite> getPreviewSprite,
+		Action<int, TOption> executeSelection
+	)
+	{
+		_active = true;
+		_mouseDown = true;
+
 		Vector3 worldPosition = BuildingManager.Map.GetCellCenterWorld(mapPosition);
 		Vector3 canvasPosition = WorldToCanvasPosition(worldPosition);
-		Debug.Log(canvasPosition);
 
-		BuildingData[] options = BuildingManager.GetRepairOptions(mapPosition);
+		TOption[] options = getOptions();
 
 		GameObject[] coins = new GameObject[options.Length];
 		Coroutine[] animations = new Coroutine[options.Length];
@@ -54,7 +73,8 @@ public class BuildingRadialMenu : MonoBehaviour, IInitializePotentialDragHandler
 			coins[i] = Instantiate(SelectionCoinPrefab, Canvas.transform);
 
 			Image previewImage = coins[i].transform.GetChild(0).GetChild(0).GetComponent<Image>();
-			previewImage.sprite = options[i].PreviewSprite;
+			previewImage.sprite = getPreviewSprite(options[i]);
+			coins[i].GetComponent<Image>().raycastTarget = false;
 
 			coins[i].GetComponent<RectTransform>().anchoredPosition = canvasPosition;
 
@@ -68,19 +88,22 @@ public class BuildingRadialMenu : MonoBehaviour, IInitializePotentialDragHandler
 			yield return coroutine;
 		}
 
-		for (int i = 0; i < coins.Length; i++)
-		{
-			SelectionCoinController coinController = coins[i].AddComponent<SelectionCoinController>();
-			coinController.MenuController = this;
-			coinController.OptionIndex = i;
-			coinController.HighlightScale = CoinHighlightScale;
-			coinController.HighlightTime = CoinHighlightTime;
-		}
-
-		_waitingUserSelection = true;
 		SelectedIndex = null;
+		if (_mouseDown)
+		{
+			for (int i = 0; i < coins.Length; i++)
+			{
+				SelectionCoinController coinController = coins[i].AddComponent<SelectionCoinController>();
+				coinController.MenuController = this;
+				coinController.OptionIndex = i;
+				coinController.HighlightScale = CoinHighlightScale;
+				coinController.HighlightTime = CoinHighlightTime;
 
-		yield return new WaitWhile(() => _waitingUserSelection);
+				coins[i].GetComponent<Image>().raycastTarget = true;
+			}
+
+			yield return new WaitWhile(() => _mouseDown);
+		}
 
 		for (int i = 0; i < coins.Length; i++)
 		{
@@ -100,14 +123,17 @@ public class BuildingRadialMenu : MonoBehaviour, IInitializePotentialDragHandler
 
 		if (SelectedIndex.HasValue)
 		{
-			BuildingManager.RepairTile(mapPosition, options[SelectedIndex.Value]);
-			yield return StartCoroutine(RetractCoin(coins[SelectedIndex.Value], coins[SelectedIndex.Value].GetComponent<RectTransform>().anchoredPosition));
+			int index = SelectedIndex.Value;
+			executeSelection(index, options[index]);
+			yield return StartCoroutine(RetractCoin(coins[index], coins[index].GetComponent<RectTransform>().anchoredPosition));
 		}
 
 		for (int i = 0; i < coins.Length; i++)
 		{
 			Destroy(coins[i]);
 		}
+
+		_active = false;
 	}
 
 	private IEnumerator ExtendCoin(GameObject coin, float angle)
@@ -151,12 +177,18 @@ public class BuildingRadialMenu : MonoBehaviour, IInitializePotentialDragHandler
 		}
 	}
 
-	// For some reason drag events stopped working if the component does not implement IDragHandler
-	public void OnDrag(PointerEventData data)
-	{ }
 
-	public void OnEndDrag(PointerEventData data)
+	public void OnPointerUp(PointerEventData data)
 	{
-		_waitingUserSelection = false;
+		Debug.Log("Pointer Up");
+		EndUserSelection();
+	}
+
+	private void EndUserSelection()
+	{
+		if (_active)
+		{
+			_mouseDown = false;
+		}
 	}
 }
