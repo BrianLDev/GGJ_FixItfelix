@@ -12,7 +12,7 @@ public class MeterScript : MonoBehaviour
     public string soulTitle = "Soul";
     public string mindTooltipText = "Spend mind to repair buildings and upgrade buildings. (Library)";
     public string bodyTooltipText = "Restore and repair buildings to increase body. (All buildings, Gym)";
-    public string soulTooltipText = "Increase your soul value to repair your life. (Ampitheater)";
+    public string soulTooltipText = "Increase your soul value to repair your life and win. (Ampitheater)";
 
     private Vector2 posMind;
     private Vector2 sizeMind;

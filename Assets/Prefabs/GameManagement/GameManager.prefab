@@ -460,10 +460,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33d9380e4335ce64a84c22f923425f09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lysSprite: {fileID: 2800000, guid: 939f70c784cc0c843a4bd853be245674, type: 3}
-  jacqueSprite: {fileID: 2800000, guid: 939f70c784cc0c843a4bd853be245674, type: 3}
+  lysSprite: {fileID: 2800000, guid: 1ccf6e6ebe5788243b87b001376974bf, type: 3}
+  jacqueSprite: {fileID: 2800000, guid: bbb2eecf7c0d6444ebb065dba589446f, type: 3}
   steelSprite: {fileID: 2800000, guid: 939f70c784cc0c843a4bd853be245674, type: 3}
-  angelSprite: {fileID: 2800000, guid: 939f70c784cc0c843a4bd853be245674, type: 3}
+  angelSprite: {fileID: 2800000, guid: 0f2ce7477c83c1b438406f2b77bd18a0, type: 3}
   characterID: 0
   characterImage: {fileID: 0}
   characterCanvas: {fileID: 0}
@@ -929,9 +929,9 @@ RectTransform:
   m_Father: {fileID: 1785793775}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -114, y: -411}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 80, y: 25}
   m_SizeDelta: {x: 160, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1212880131
@@ -1304,9 +1304,9 @@ RectTransform:
   m_Father: {fileID: 1785793775}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 113, y: -411}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -80, y: 25}
   m_SizeDelta: {x: 160, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1510648752
@@ -1649,10 +1649,10 @@ RectTransform:
   m_Father: {fileID: 1785793775}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2044897213
 CanvasRenderer:
@@ -2874,6 +2874,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7853676670548248068
 GameObject:
   m_ObjectHideFlags: 0
@@ -3054,12 +3065,17 @@ PrefabInstance:
     - target: {fileID: 2508849157969283544, guid: b85895783d1c81b4aae1f150c69ac993,
         type: 3}
       propertyPath: startPlayerMind
-      value: 1000
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 2508849157969283544, guid: b85895783d1c81b4aae1f150c69ac993,
         type: 3}
       propertyPath: startPlayerBody
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2508849157969283544, guid: b85895783d1c81b4aae1f150c69ac993,
+        type: 3}
+      propertyPath: startPlayerSoul
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2508849157969283545, guid: b85895783d1c81b4aae1f150c69ac993,
         type: 3}
@@ -3160,7 +3176,7 @@ PrefabInstance:
     - target: {fileID: 5041827085205920604, guid: 5933dad41e3a4474faa791aa066db87b,
         type: 3}
       propertyPath: soulTooltipText
-      value: Increase your soul value to repair your life. (Ampitheater)
+      value: Increase your soul value to repair your life and win. (Ampitheater)
       objectReference: {fileID: 0}
     - target: {fileID: 5041827085205920604, guid: 5933dad41e3a4474faa791aa066db87b,
         type: 3}
@@ -3171,27 +3187,27 @@ PrefabInstance:
         type: 3}
       propertyPath: centerBar
       value: 
-      objectReference: {fileID: 2800000, guid: bf5cd447c8f234fb9a9eb66db20ae1f3, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 5041827085205920604, guid: 5933dad41e3a4474faa791aa066db87b,
         type: 3}
       propertyPath: rightLeftBar
       value: 
-      objectReference: {fileID: 2800000, guid: d5296e4a09bd57e40ac5a247e42b109b, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 5041827085205920604, guid: 5933dad41e3a4474faa791aa066db87b,
         type: 3}
       propertyPath: leftRightBar
       value: 
-      objectReference: {fileID: 2800000, guid: d5296e4a09bd57e40ac5a247e42b109b, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 5041827085205920604, guid: 5933dad41e3a4474faa791aa066db87b,
         type: 3}
       propertyPath: leftHand
       value: 
-      objectReference: {fileID: 2800000, guid: ef60e9d52cfaa482a9f20ae1998be38d, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 5041827085205920604, guid: 5933dad41e3a4474faa791aa066db87b,
         type: 3}
       propertyPath: rightHand
       value: 
-      objectReference: {fileID: 2800000, guid: b180262954df54674b44d684b2954a30, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 5041827085205920605, guid: 5933dad41e3a4474faa791aa066db87b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3332,7 +3348,7 @@ PrefabInstance:
     - target: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
         type: 3}
       propertyPath: ConstructionSpaces.Array.data[2].LocalOrigin.y
-      value: 1
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
         type: 3}
@@ -3347,22 +3363,22 @@ PrefabInstance:
     - target: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
         type: 3}
       propertyPath: ConstructionSpaces.Array.data[5].LocalOrigin.y
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
         type: 3}
       propertyPath: ConstructionSpaces.Array.data[6].LocalOrigin.y
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
         type: 3}
       propertyPath: ConstructionSpaces.Array.data[7].LocalOrigin.y
-      value: 3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
         type: 3}
       propertyPath: ConstructionSpaces.Array.data[8].LocalOrigin.y
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
         type: 3}
@@ -3383,6 +3399,31 @@ PrefabInstance:
         type: 3}
       propertyPath: ConstructionSpaces.Array.data[11].LocalOrigin.y
       value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
+        type: 3}
+      propertyPath: ConstructionSpaces.Array.data[1].LocalOrigin.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
+        type: 3}
+      propertyPath: ConstructionSpaces.Array.data[2].LocalOrigin.x
+      value: -9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
+        type: 3}
+      propertyPath: ConstructionSpaces.Array.data[3].LocalOrigin.x
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
+        type: 3}
+      propertyPath: ConstructionSpaces.Array.data[7].LocalOrigin.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
+        type: 3}
+      propertyPath: ConstructionSpaces.Array.data[10].LocalOrigin.x
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 4153731611703777955, guid: 39ee57a99ae66e740ad854bc4c0806f2,
         type: 3}

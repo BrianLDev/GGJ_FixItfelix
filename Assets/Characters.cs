@@ -157,7 +157,7 @@ public class Characters : NightTimeListener
                 random = random + 1;
             }
 
-            
+
             if (!angelEnabled && random >= 3)
             {
                 characterID = angelID;
@@ -173,6 +173,10 @@ public class Characters : NightTimeListener
             else if (!jacqueEnabled)
             {
                 characterID = jacqueID;
+            }
+            else
+            {
+                characterID = 0;
             }
         }
     }
