@@ -74,10 +74,12 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerClickHandler
             case BuildingManager.BuildingAction.UPGRADE_HEALTH:
                 coinController.titleText = "Upgrade: Add Walls";
                 coinController.bodyText = "Add walls to the building, upgrading its health.";
+				coinController.cost = BuildingManager.GetHealthUpgradeCost(health);
                 return;
             case BuildingManager.BuildingAction.UPGRADE_PRODUCTION:
                 coinController.titleText = "Upgrade: Renovate Building";
                 coinController.bodyText = "Improve the efficiency of this building.";
+				coinController.cost = BuildingManager.GetProductionUpgradeCost(logic);
                 return;
             case BuildingManager.BuildingAction.REPAIR:
                 coinController.titleText = "Repair";
