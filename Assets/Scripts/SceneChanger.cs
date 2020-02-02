@@ -29,9 +29,14 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene("TitleScreen");
     }
 
-    public void LoadEndGame()
+    public void LoadWinGame()
     {
+        SceneManager.LoadScene("GameWin");
+    }
 
+    public void LoadLoseGame()
+    {
+        SceneManager.LoadScene("GameEnd");
     }
 
     public void QuitGame()

@@ -45,6 +45,11 @@ public class PlayerStatsScript : MonoBehaviour
         meterScript.UpdateStateOfMind(ConvertInputtoPercentage(addToMind));
     }
 
+    public float GetMind()
+    {
+        return myMind;
+    }
+
     public void SetBody(float newBody)
     {
         myBody = newBody;
@@ -57,6 +62,11 @@ public class PlayerStatsScript : MonoBehaviour
         meterScript.UpdateStateOfBody(ConvertInputtoPercentage(addToBody));
     }
 
+    public float GetBody()
+    {
+        return myBody;
+    }
+
     public void SetSoul(float newSoul)
     {
         mySoul = newSoul;
@@ -67,6 +77,11 @@ public class PlayerStatsScript : MonoBehaviour
     {
         mySoul += addToSoul;
         meterScript.UpdateStateOfSoul(ConvertInputtoPercentage(addToSoul));
+    }
+
+    public float GetSoul()
+    {
+        return mySoul;
     }
 
     private float ConvertInputtoPercentage(float input)
