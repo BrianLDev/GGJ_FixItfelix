@@ -28,8 +28,11 @@ public class BuildingManager : MonoBehaviour
 
 	public RepairConfig[] RepairCosts;
 
+	public GameObject WallPrefab;
+
 	private Dictionary<Vector3Int, ConstructionSpace> _positionToConstructionSpace;
 	private Dictionary<ConstructionSpace, GameObject> _constructionSpaceToRuinLogic;
+	private Dictionary<ConstructionSpace, GameObject> _constructionSpaceToWallSprite;
 	public Dictionary<Vector3Int, GameObject> _positionToBuildingLogic;
 	private HashSet<GameObject> _activeBuildingLogic;
 	private PlayerStatsScript playerStats;
@@ -69,6 +72,7 @@ public class BuildingManager : MonoBehaviour
 
 		_positionToBuildingLogic = new Dictionary<Vector3Int, GameObject>();
 		_activeBuildingLogic = new HashSet<GameObject>();
+		_constructionSpaceToWallSprite = new Dictionary<ConstructionSpace, GameObject>();
 
 		playerStats = this.transform.parent.gameObject.GetComponentInChildren<PlayerStatsScript>();
 		audioManager = this.transform.parent.gameObject.GetComponentInChildren<AudioManagerScript>();
@@ -198,6 +202,12 @@ public class BuildingManager : MonoBehaviour
 			OnHealthBonusMayHaveChanged();
 		}
 
+		if (_constructionSpaceToWallSprite.ContainsKey(space))
+		{
+			Destroy(_constructionSpaceToWallSprite[space]);
+			_constructionSpaceToWallSprite.Remove(space);
+		}
+
 		GameObject ruinLogic = _constructionSpaceToRuinLogic[space];
 		if (ruinLogic != null) ruinLogic.SetActive(true);
 	}
@@ -321,6 +331,16 @@ public class BuildingManager : MonoBehaviour
 				}
 				health.DoUpgradeHealth();
 				playerStats.UpdateMind(-healthUpgradeCost);
+
+				ConstructionSpace space = _positionToConstructionSpace[position];
+				if (health.WallSprite != null && !_constructionSpaceToWallSprite.ContainsKey(space))
+				{
+					GameObject wallSprite = Instantiate(WallPrefab);
+					wallSprite.GetComponent<SpriteRenderer>().sprite = health.WallSprite;
+					wallSprite.transform.position = GetConstructionSpaceWorldCenter(space) + Vector3.back;
+					_constructionSpaceToWallSprite[space] = wallSprite;
+				}
+
 				switch (logic.GetBuildingType())
 				{
 					case "library":

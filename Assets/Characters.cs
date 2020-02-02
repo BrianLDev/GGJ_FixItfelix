@@ -28,12 +28,16 @@ public class Characters : NightTimeListener
     public float dayTime = 0.0f;
     public bool startedCharacter = false;
 
+    private AudioManagerScript audioManager;
+
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
         characterCanvas = transform.Find("CharacterCanvas").gameObject;
         characterImage = characterCanvas.transform.Find("Image").GetComponent<RawImage>();
+
+        audioManager = this.transform.parent.GetComponentInChildren<AudioManagerScript>();
     }
 
     public void FixedUpdate()
@@ -60,6 +64,7 @@ public class Characters : NightTimeListener
         if (idToStart == lysID)
         {
             characterImage.texture = lysSprite;
+            
         }
         else if (idToStart == jacqueID)
         {

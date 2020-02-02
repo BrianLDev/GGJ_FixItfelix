@@ -14,6 +14,7 @@ public class AudioManagerScript : MonoBehaviour
     private AudioSource dayToNightTrans;
     private AudioSource nightToDayTrans;
     private AudioSource demonSounds;
+    private AudioSource dayAmbiance;
 
     private AudioSource buildingBuilt;
     private AudioSource buildingDestroyed;
@@ -23,6 +24,11 @@ public class AudioManagerScript : MonoBehaviour
     private AudioSource upgradeVice;
     private AudioSource upgradeAmp;
     private AudioSource upgradeMarket;
+
+    private AudioSource angelTheme;
+    private AudioSource steelTheme;
+    private AudioSource jacqueTheme;
+    private AudioSource lysTheme;
 
     private float dayToNightTime;
     private float nightToDayTime;
@@ -37,6 +43,7 @@ public class AudioManagerScript : MonoBehaviour
         dayToNightTrans = overworldMusic[2];
         nightToDayTrans = overworldMusic[3];
         demonSounds = overworldMusic[4];
+        dayAmbiance = overworldMusic[5];
 
         soundEffects = this.GetComponents<AudioSource>();
         buildingBuilt = soundEffects[0];
@@ -47,6 +54,7 @@ public class AudioManagerScript : MonoBehaviour
         upgradeAmp = soundEffects[5];
         upgradeGym = soundEffects[6];
         upgradeVice = soundEffects[7];
+
 
 
         dayToNightTime = 0.0f;
@@ -83,6 +91,8 @@ public class AudioManagerScript : MonoBehaviour
                     nightSong.Stop();
                     nightToDayTrans.Stop();
                     daySong.volume = 1.0f;
+                    dayAmbiance.Play();
+                    dayAmbiance.volume = 0.3f;
                 }
             }
         }
@@ -102,6 +112,7 @@ public class AudioManagerScript : MonoBehaviour
         nightSong.Play();
         nightSong.volume = 0.0f;
         dayToNightTrans.Play();
+        dayAmbiance.Stop();
     }
 
     public void TransitionNightToDay()
@@ -151,5 +162,10 @@ public class AudioManagerScript : MonoBehaviour
     public void PlayUpVice()
     {
         upgradeVice.Play();
+    }
+
+    public void PlayAngelTheme()
+    {
+        angelTheme.Play();
     }
 }

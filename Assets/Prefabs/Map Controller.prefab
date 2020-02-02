@@ -187,6 +187,8 @@ MonoBehaviour:
     HealthDenominator: 1
     CostNumerator: 2
     CostDenominator: 3
+  WallPrefab: {fileID: 3168493935422623817, guid: 4530f1531864f494eb752a64e96faf14,
+    type: 3}
   audioManager: {fileID: 0}
 --- !u!114 &5558440592332638242
 MonoBehaviour:
