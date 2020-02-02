@@ -9,4 +9,6 @@ public class GymLogic : BuildingLogicBase
 		base.DoUpgradeProduction();
 		BuildingManager.OnHealthBonusMayHaveChanged();
 	}
+
+    public override string GetBuildingType() => "gym";
 }

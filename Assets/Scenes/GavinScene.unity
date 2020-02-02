@@ -560,6 +560,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1147112637554066565, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b235b40fd81ea4b4b83455177562d1f9, type: 3}
+    - target: {fileID: 4001290750917621330, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: d4fface9e4386d146a9e8d384ef5bbf1, type: 3}
+    - target: {fileID: 5919717303108690686, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c3073f11f6880724caff24a2ce689838, type: 3}
+    - target: {fileID: 6530847615198641279, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8c20fc23f6897534fb234bdadff109ed, type: 3}
     - target: {fileID: 7853676670548248066, guid: 341cf9f3054b545b58e66d0351d70222,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -620,6 +640,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8121608555348145353, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b8b1dbb4844e2134eae0fcc457b74971, type: 3}
     - target: {fileID: 8168540146778961542, guid: 341cf9f3054b545b58e66d0351d70222,
         type: 3}
       propertyPath: theCamera
