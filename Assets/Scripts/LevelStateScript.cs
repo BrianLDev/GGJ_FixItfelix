@@ -46,14 +46,20 @@ public class LevelStateScript : MonoBehaviour
     {
         GameObject[] bldgList = GameObject.FindGameObjectsWithTag("Building");
 
+        
         float totalBldgHealth = 0.0f;
+        //float buildingCost = 0.0f;
         // find building target
         foreach (GameObject bldg in bldgList)
         {
-            totalBldgHealth += bldg.GetComponent<BuildingHealth>().CurrentHealth;
+            BuildingHealth bh = bldg.GetComponent<BuildingHealth>();
+            //BuildingInfo bi = bldg.GetComponent<BuildingInfo>();
+            totalBldgHealth += bh.CurrentHealth;
+            //buildingCost += bi.BaseCost;
         }
 
         pss.SetBody(totalBldgHealth);
+        //pss.SetMind(pss.GetMind() - buildingCost);
     }
 
     public void UpdatePlayerMind(float mindNum)

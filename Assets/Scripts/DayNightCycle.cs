@@ -20,11 +20,17 @@ public class DayNightCycle : MonoBehaviour
     private int randomSoulDemons = 0;
 
     private LevelStateScript lss;
+    private AudioSource daySong;
+    private AudioSource nightSong;
 
     // Start is called before the first frame update
     void Start()
     {
         lss = levelManager.GetComponent<LevelStateScript>();
+        GameObject mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        AudioSource[] overworldMusic = mainCamera.GetComponents<AudioSource>();
+        daySong = overworldMusic[0];
+        nightSong = overworldMusic[1];
     }
 
     // Update is called once per frame
@@ -115,6 +121,8 @@ public class DayNightCycle : MonoBehaviour
         nightTimeLeft = 0.0f;
 
         lss.UpdatePlayerMind(currentDay * 100.0f);
+        nightSong.Stop();
+        daySong.Play();
 
         if (currentDay >= numberOfMindDemons.Length)
         {
@@ -136,6 +144,9 @@ public class DayNightCycle : MonoBehaviour
             Debug.Assert(true);
             return;
         }
+
+        daySong.Stop();
+        nightSong.Play();
 
         if (howLong == 0.0f)
         {
