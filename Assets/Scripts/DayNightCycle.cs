@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class DayNightCycle : MonoBehaviour
 {
@@ -11,6 +12,11 @@ public class DayNightCycle : MonoBehaviour
 
 	public GameObject levelManager;
 	public GameObject audioManager;
+
+    public Sprite DayImage;
+    public Sprite NightImage;
+    public Button Day_NightSwitch;
+
     public Camera theCamera;
     CameraShader shader;
 
@@ -134,6 +140,8 @@ public class DayNightCycle : MonoBehaviour
 		currentDay = currentDay + 1;
 		nightTimeLeft = 0.0f;
         shader.enabled = false;
+
+        Day_NightSwitch.image.sprite = DayImage;
 		ams.TransitionNightToDay();
 
 		if (currentDay >= numberOfMindDemons.Length)
@@ -159,8 +167,9 @@ public class DayNightCycle : MonoBehaviour
 
 		ams.TransitionDayToNight();
         shader.enabled = true;
+        Day_NightSwitch.image.sprite = NightImage;
 
-		if (howLong == 0.0f)
+        if (howLong == 0.0f)
 		{
 			howLong = defaultNightDuration;
 		}

@@ -8,9 +8,11 @@ public class DemonAI : MonoBehaviour
 
     [SerializeField] string m_DemonType;
     [SerializeField] GameObject m_game_Manager;
-    [SerializeField] int speedNormal = 8;
-    [SerializeField] int speedExit = 16;
+    [SerializeField] GameObject firePrefab;
     [SerializeField] DemonState demonState = DemonState.off_screen;
+    [SerializeField] int speedNormal = 5;
+    [SerializeField] int speedExit = 10;
+    [SerializeField] float idleCountdown = 3f;
 
     private GameObject[] bldgList;
     private int speed;
@@ -32,41 +34,50 @@ public class DemonAI : MonoBehaviour
         if (currentTarget == null) {
             demonState = DemonState.targeting;
         }
+    }
+
+    void FixedUpdate() {
 
         switch(demonState) {
             case DemonState.off_screen:
                 // TODO: Add any code if needed here
                 break;
             case DemonState.idle:
-                // TODO: Add any code if needed here
+                DoIdle();
                 break;
             case DemonState.targeting:
                 FindTarget();
                 break;
             case DemonState.moving:
-                // do nothing here.  handled in FixedUpdate
+                if (currentTarget != null) {
+                    MoveTowardsTarget();
+                }
+                else {
+                    demonState = DemonState.targeting;
+                }
                 break;
             case DemonState.attacking:
-                Attacking();
+                DoAttack();
                 break;
             case DemonState.exiting:
-                Exiting();
+                BeGoneDemon();
                 break;
             default:
                 break;
         }
     }
 
-    void FixedUpdate() {
-        if (demonState == DemonState.moving && currentTarget != null) {
-            MoveTowardsTarget();
-        }
-    }
-
     public void SpawnDemon() {
         speed = speedNormal;
         m_DemonType = "Building";
-        demonState = DemonState.targeting;
+        demonState = DemonState.idle;
+    }
+
+    public void DoIdle() {
+        idleCountdown -= Time.fixedDeltaTime;
+        if (idleCountdown <= 0) {
+            demonState = DemonState.targeting;
+        }
     }
 
     public void FindTarget() {
@@ -99,11 +110,12 @@ public class DemonAI : MonoBehaviour
         }
     }
 
-    private void Attacking() {
+    private void DoAttack() {
         //  TODO: Smash building
         currentTarget.GetComponentInChildren<BuildingHealth>().DealDamage(5);
         if (currentTarget.GetComponentInChildren<BuildingHealth>().CurrentHealth <= 0) {
-            // building smashed!  need to retarget
+            // building smashed!  Spawn fire animation and retarget to new building
+
             demonState = DemonState.targeting;
         }
     }
@@ -117,7 +129,7 @@ public class DemonAI : MonoBehaviour
         Destroy(this, 5f);
     }
 
-    private void Exiting() {
+    private void BeGoneDemon() {
         Debug.Log("DemonAI exiting...");
         Vector3 direction = (currentTarget.transform.position - transform.position);
         direction.Normalize();
