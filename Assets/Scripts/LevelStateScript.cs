@@ -83,6 +83,11 @@ public class LevelStateScript : MonoBehaviour
         pss.UpdateMind(mindNum);
     }
 
+    public void UpdatePlayerSoul(float soulNum)
+    {
+        pss.UpdateSoul(soulNum);
+    }
+
     private void WinGame()
     {
         ams.musicCanPlay = false;

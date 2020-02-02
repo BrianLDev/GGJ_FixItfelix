@@ -22,12 +22,14 @@ public class DayNightCycle : MonoBehaviour
 
     private LevelStateScript lss;
     private AudioManagerScript ams;
+    private BuildingManager bm;
 
     // Start is called before the first frame update
     void Start()
     {
         lss = levelManager.GetComponent<LevelStateScript>();
         ams = audioManager.GetComponent<AudioManagerScript>();
+        bm = this.transform.parent.gameObject.GetComponentInChildren<BuildingManager>();
     }
 
     // Update is called once per frame
@@ -129,11 +131,14 @@ public class DayNightCycle : MonoBehaviour
         {
             listener.StartNewDay(this);
         }
+
+        int soulBonus = bm.GetSoulProductionWithBonus();
+        lss.UpdatePlayerSoul(soulBonus);
     }
 
     public void StartNewNight(float howLong = 0.0f)
     {
-        if (nightTimeLeft != 0.0f || !lss.IsPlayingGame())
+        if (nightTimeLeft != 0.0f)
         {
             // Don't start a new night while there's one active!
             Debug.Assert(true);

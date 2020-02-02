@@ -20,6 +20,7 @@ public class BuildingManager : MonoBehaviour
 	private Dictionary<Vector3Int, ConstructionSpace> _positionToConstructionSpace;
 	private Dictionary<Vector3Int, GameObject> _positionToBuildingLogic;
 	private HashSet<GameObject> _activeBuildingLogic;
+    private PlayerStatsScript playerStats;
 
 	private int _healthBonusPercent;
 
@@ -40,6 +41,8 @@ public class BuildingManager : MonoBehaviour
 
 		_positionToBuildingLogic = new Dictionary<Vector3Int, GameObject>();
 		_activeBuildingLogic = new HashSet<GameObject>();
+
+        playerStats = this.transform.parent.gameObject.GetComponentInChildren<PlayerStatsScript>();
 	}
 
 	public BuildingData[] GetRepairOptions(Vector3Int position)
@@ -68,13 +71,24 @@ public class BuildingManager : MonoBehaviour
 		if (repairOption.LogicPrefab != null)
 		{
 			buildingLogic = Instantiate(repairOption.LogicPrefab);
-			buildingLogic.transform.position = Map.GetCellCenterWorld(position);
+            int buildingCost = buildingLogic.GetComponent<BuildingInfo>().BaseCost;
+            if (playerStats.GetMind() - buildingCost >= 0)
+            {
+                buildingLogic.transform.position = Map.GetCellCenterWorld(position);
 
-			_activeBuildingLogic.Add(buildingLogic);
-			OnBuildingsChanged();
+                playerStats.UpdateMind(buildingCost * -1.0f);
 
-			BuildingOnDestroyProxy proxy = buildingLogic.AddComponent<BuildingOnDestroyProxy>();
-			proxy.OnDestroyEvent.AddListener(() => ReturnToRuin(space, buildingLogic));
+                _activeBuildingLogic.Add(buildingLogic);
+                OnBuildingsChanged();
+
+                BuildingOnDestroyProxy proxy = buildingLogic.AddComponent<BuildingOnDestroyProxy>();
+                proxy.OnDestroyEvent.AddListener(() => ReturnToRuin(space, buildingLogic));
+            }
+            else
+            {
+                GameObject.Destroy(buildingLogic);
+                return;
+            }
 		}
 
 		BoundsInt ruinBounds = _positionToConstructionSpace[position].Data.RuinShape.cellBounds;
