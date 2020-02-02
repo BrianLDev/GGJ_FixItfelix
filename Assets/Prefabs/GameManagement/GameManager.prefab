@@ -467,6 +467,8 @@ MonoBehaviour:
   characterID: 0
   characterImage: {fileID: 0}
   characterCanvas: {fileID: 0}
+  dayTime: 0
+  startedCharacter: 0
 --- !u!1 &751322495
 GameObject:
   m_ObjectHideFlags: 0
