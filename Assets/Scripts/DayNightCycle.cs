@@ -9,6 +9,7 @@ public class DayNightCycle : MonoBehaviour
     public int[] numberOfSoulDemons;
 
     public GameObject levelManager;
+    //public GameObject mainCamera;
 
     public float nightDuration = 10.0f;
     private float nightTimeLeft = 0.0f;
