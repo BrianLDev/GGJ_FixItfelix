@@ -345,9 +345,10 @@ MonoBehaviour:
   Canvas: {fileID: 654499381}
   SelectionCoinPrefab: {fileID: 5142249838564095337, guid: 4a54ba3f55f201145af582151150fb56,
     type: 3}
-  CoinsExpandTime: 1
+  CoinsExpandTime: 0.5
   CoinNormalRange: 200
   CoinHighlightScale: 1.5
+  CoinHighlightTime: 0.2
 --- !u!114 &4153731612830960121 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
