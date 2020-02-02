@@ -27,6 +27,11 @@ public class DemonAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // check if the target still exists (other demons can destory the building before it gets there)
+        if (currentTarget == null) {
+            demonState = DemonState.targeting;
+        }
+
         switch(demonState) {
             case DemonState.off_screen:
                 // TODO: Add any code if needed here
