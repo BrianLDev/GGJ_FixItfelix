@@ -172,9 +172,19 @@ public class AudioManagerScript : MonoBehaviour
         angelTheme.Play();
     }
 
+    public void StopAngelTheme()
+    {
+        angelTheme.Stop();
+    }
+
     public void PlaySteelTheme()
     {
         steelTheme.Play();
+    }
+
+    public void StopSteelTheme()
+    {
+        steelTheme.Stop();
     }
 
     public void PlayJacqueTheme()
@@ -182,8 +192,18 @@ public class AudioManagerScript : MonoBehaviour
         jacqueTheme.Play();
     }
 
+    public void StopJacqueTheme()
+    {
+        jacqueTheme.Stop();
+    }
+
     public void PlayLysTheme()
     {
         lysTheme.Play();
+    }
+
+    public void StopLysTheme()
+    {
+        lysTheme.Stop();
     }
 }

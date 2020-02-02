@@ -91,21 +91,25 @@ public class Characters : NightTimeListener
         if (characterID == lysID)
         {
             lysEnabled = true;
+            audioManager.StopLysTheme();
         }
         else if (characterID == jacqueID)
         {
             jacqueEnabled = true;
+            audioManager.StopJacqueTheme();
             BuildingManager.instance.OnHealthBonusMayHaveChanged();
             PlayerStatsScript.instance.UpdateMind(-200f);
         }
         else if (characterID == steelID)
         {
             steelEnabled = true;
+            audioManager.StopSteelTheme();
             PlayerStatsScript.instance.UpdateSoul(-100f);
         }
         else if (characterID == angelID)
         {
             angelEnabled = true;
+            audioManager.StopAngelTheme();
         }
 
         characterCanvas.SetActive(false);
@@ -113,6 +117,22 @@ public class Characters : NightTimeListener
 
     public void DeclineCharacter()
     {
+        if (characterID == lysID)
+        {
+            audioManager.StopLysTheme();
+        }
+        else if (characterID == jacqueID)
+        {
+            audioManager.StopJacqueTheme();
+        }
+        else if (characterID == steelID)
+        {
+            audioManager.StopSteelTheme();
+        }
+        else if (characterID == angelID)
+        {
+            audioManager.StopAngelTheme();
+        }
         characterID = 0;
         characterCanvas.SetActive(false);
     }
