@@ -10,6 +10,8 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerClickHandler
 	public Canvas Canvas;
 	public GameObject SelectionCoinPrefab;
 
+    public GameObject DayNightCycle;
+
 	private bool _active = false;
 	private bool _clickedAgain = false;
 	public int? SelectedIndex;
@@ -33,11 +35,11 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerClickHandler
 
 		Vector3Int mapPosition = BuildingManager.Map.WorldToCell(data.pointerCurrentRaycast.worldPosition);
 
-		if (BuildingManager.HasRuin(mapPosition))
+		if (BuildingManager.HasRuin(mapPosition) && !DayNightCycle.GetComponent<DayNightCycle>().IsNightTime())
 		{
 			SelectConstructBuildingMenu(mapPosition);
 		}
-		else if (BuildingManager.HasActiveBuilding(mapPosition))
+		else if (BuildingManager.HasActiveBuilding(mapPosition) && !DayNightCycle.GetComponent<DayNightCycle>().IsNightTime())
 		{
 			SelectBuildingActionMenu(mapPosition);
 		}
