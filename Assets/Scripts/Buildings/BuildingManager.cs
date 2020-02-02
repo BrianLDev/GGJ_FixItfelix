@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.Events;
+using System.Linq;
 
 [System.Serializable]
 public struct ConstructionSpace
@@ -17,7 +18,8 @@ public class BuildingManager : MonoBehaviour
 	public ConstructionSpace[] ConstructionSpaces;
 
 	private Dictionary<Vector3Int, ConstructionSpace> _positionToConstructionSpace;
-	private Dictionary<Vector3Int, GameObject> _activeBuildingLogic;
+	private Dictionary<Vector3Int, GameObject> _positionToBuildingLogic;
+	private HashSet<GameObject> _activeBuildingLogic;
 
 	private void Start()
 	{
@@ -34,7 +36,8 @@ public class BuildingManager : MonoBehaviour
 			}
 		}
 
-		_activeBuildingLogic = new Dictionary<Vector3Int, GameObject>();
+		_positionToBuildingLogic = new Dictionary<Vector3Int, GameObject>();
+		_activeBuildingLogic = new HashSet<GameObject>();
 	}
 
 	public BuildingData[] GetRepairOptions(Vector3Int position)
@@ -65,8 +68,10 @@ public class BuildingManager : MonoBehaviour
 			buildingLogic = Instantiate(repairOption.LogicPrefab);
 			buildingLogic.transform.position = Map.GetCellCenterWorld(position);
 
+			_activeBuildingLogic.Add(buildingLogic);
+
 			BuildingOnDestroyProxy proxy = buildingLogic.AddComponent<BuildingOnDestroyProxy>();
-			proxy.OnDestroyEvent.AddListener(() => ReturnToRuin(space));
+			proxy.OnDestroyEvent.AddListener(() => ReturnToRuin(space, buildingLogic));
 		}
 
 		BoundsInt ruinBounds = _positionToConstructionSpace[position].Data.RuinShape.cellBounds;
@@ -76,11 +81,11 @@ public class BuildingManager : MonoBehaviour
 			Vector3Int buildingOffsetCompensation = ruinBounds.min - buildingShape.cellBounds.min;
 			Vector3Int mapPosition = space.LocalOrigin + buildingOffsetCompensation + buildingPosition;
 			Map.SetTile(mapPosition, buildingShape.GetTile(buildingPosition));
-			_activeBuildingLogic.Add(mapPosition, buildingLogic);
+			_positionToBuildingLogic.Add(mapPosition, buildingLogic);
 		}
 	}
 
-	private void ReturnToRuin(ConstructionSpace space)
+	private void ReturnToRuin(ConstructionSpace space, GameObject buildingLogic)
 	{
 		Tilemap ruinShape = space.Data.RuinShape;
 
@@ -88,13 +93,23 @@ public class BuildingManager : MonoBehaviour
 		{
 			Vector3Int mapPosition = space.LocalOrigin + ruinShapePosition;
 			Map.SetTile(mapPosition, ruinShape.GetTile(ruinShapePosition));
-			_activeBuildingLogic.Remove(mapPosition);
+			_positionToBuildingLogic.Remove(mapPosition);
 		}
+
+		if (buildingLogic != null)
+		{
+			_activeBuildingLogic.Remove(buildingLogic);
+		}
+	}
+
+	public GameObject[] GetBuildings()
+	{
+		return _activeBuildingLogic.ToArray();
 	}
 
 	public bool HasActiveBuilding(Vector3Int mapPosition)
 	{
-		return _activeBuildingLogic.ContainsKey(mapPosition);
+		return _positionToBuildingLogic.ContainsKey(mapPosition);
 	}
 
 	public bool HasRuin(Vector3Int mapPosition)
