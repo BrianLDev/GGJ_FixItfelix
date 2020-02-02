@@ -409,6 +409,7 @@ MonoBehaviour:
   numberOfMindDemons: 010000000200000002000000
   numberOfBodyDemons: 000000000000000000000000
   numberOfSoulDemons: 000000000000000001000000
+  levelManager: {fileID: 0}
   nightDuration: 10
 --- !u!1 &7272438394493841709
 GameObject:
@@ -772,17 +773,17 @@ PrefabInstance:
     - target: {fileID: 9167563443077632762, guid: 2688338f92ea020449e87361933dda31,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9167563443077632762, guid: 2688338f92ea020449e87361933dda31,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.96
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9167563443077632762, guid: 2688338f92ea020449e87361933dda31,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -33.783813
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9167563443077632762, guid: 2688338f92ea020449e87361933dda31,
         type: 3}

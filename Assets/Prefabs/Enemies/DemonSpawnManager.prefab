@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9167563443077632764}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: -5.96, z: -33.783813}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -43,8 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22a6696a0bdbe564dad070fe3ed8f3dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x_min: -12
-  x_max: 2
-  y_min: -5
-  y_max: 5
-  demonlist: []
+  mindDemonPrefab: {fileID: 1906286520512297273, guid: e8d051738c7b80743837031402b45bc4,
+    type: 3}
+  bodyDemonPrefab: {fileID: 1513930892620590156, guid: 1ee3fd7175ef64453be75d35cc0b2476,
+    type: 3}
+  soulDemonPrefab: {fileID: 6945177937545814430, guid: e0dec5d316bc548129c3b74a0c18aa27,
+    type: 3}
