@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class BuildingRadialMenu : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class BuildingRadialMenu : MonoBehaviour, IPointerClickHandler
 {
 	public BuildingManager BuildingManager;
 	public Canvas Canvas;
 	public GameObject SelectionCoinPrefab;
 
 	private bool _active = false;
-	private bool _mouseDown = false;
+	private bool _clickedAgain = false;
 	public int? SelectedIndex;
 
 	public float CoinsExpandTime;
@@ -19,9 +19,13 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerDownHandler, IPointerUp
 	public float CoinHighlightScale;
 	public float CoinHighlightTime;
 
-	public void OnPointerDown(PointerEventData data)
+	public void OnPointerClick(PointerEventData data)
 	{
-		if (_active) return;
+		if (_active)
+		{
+			_clickedAgain = true;
+			return;
+		}
 
 		Vector3Int mapPosition = BuildingManager.Map.WorldToCell(data.pointerCurrentRaycast.worldPosition);
 
@@ -59,7 +63,7 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerDownHandler, IPointerUp
 	)
 	{
 		_active = true;
-		_mouseDown = true;
+		_clickedAgain = false;
 
 		Vector3 worldPosition = BuildingManager.Map.GetCellCenterWorld(mapPosition);
 		Vector3 canvasPosition = WorldToCanvasPosition(worldPosition);
@@ -74,9 +78,15 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerDownHandler, IPointerUp
 
 			Image previewImage = coins[i].transform.GetChild(0).GetChild(0).GetComponent<Image>();
 			previewImage.sprite = getPreviewSprite(options[i]);
-			coins[i].GetComponent<Image>().raycastTarget = false;
 
 			coins[i].GetComponent<RectTransform>().anchoredPosition = canvasPosition;
+
+			SelectionCoinController coinController = coins[i].AddComponent<SelectionCoinController>();
+			coinController.MenuController = this;
+			coinController.OptionIndex = i;
+			coinController.HighlightScale = CoinHighlightScale;
+			coinController.HighlightTime = CoinHighlightTime;
+			coinController.CanScale = false;
 
 			animations[i] = StartCoroutine(ExtendCoin(
 				coins[i],
@@ -89,21 +99,12 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerDownHandler, IPointerUp
 		}
 
 		SelectedIndex = null;
-		if (_mouseDown)
+		for (int i = 0; i < coins.Length; i++)
 		{
-			for (int i = 0; i < coins.Length; i++)
-			{
-				SelectionCoinController coinController = coins[i].AddComponent<SelectionCoinController>();
-				coinController.MenuController = this;
-				coinController.OptionIndex = i;
-				coinController.HighlightScale = CoinHighlightScale;
-				coinController.HighlightTime = CoinHighlightTime;
-
-				coins[i].GetComponent<Image>().raycastTarget = true;
-			}
-
-			yield return new WaitWhile(() => _mouseDown);
+			coins[i].GetComponent<SelectionCoinController>().CanScale = true;
 		}
+
+		yield return new WaitUntil(() => _clickedAgain || SelectedIndex.HasValue);
 
 		for (int i = 0; i < coins.Length; i++)
 		{
@@ -174,21 +175,6 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerDownHandler, IPointerUp
 			coinTransform.anchoredPosition = Vector3.Lerp(startPosition, endPosition, progress);
 
 			yield return null;
-		}
-	}
-
-
-	public void OnPointerUp(PointerEventData data)
-	{
-		Debug.Log("Pointer Up");
-		EndUserSelection();
-	}
-
-	private void EndUserSelection()
-	{
-		if (_active)
-		{
-			_mouseDown = false;
 		}
 	}
 }

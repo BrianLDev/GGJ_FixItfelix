@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SelectionCoinController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class SelectionCoinController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
 	[HideInInspector]
 	public BuildingRadialMenu MenuController;
@@ -11,19 +11,22 @@ public class SelectionCoinController : MonoBehaviour, IPointerEnterHandler, IPoi
 	public float HighlightScale;
 	[HideInInspector]
 	public float HighlightTime;
+	[HideInInspector]
+	public bool CanScale = false;
 	private bool _hover;
 
 	private float _currentScale = 1;
-	
+
 
 	public void OnPointerEnter(PointerEventData data)
 	{
-		MenuController.SelectedIndex = OptionIndex;
 		_hover = true;
 	}
 
 	private void Update()
 	{
+		if (!CanScale) return;
+
 		if (_hover)
 		{
 			_currentScale = Mathf.Min(_currentScale + Time.deltaTime / HighlightTime, HighlightScale);
@@ -36,12 +39,13 @@ public class SelectionCoinController : MonoBehaviour, IPointerEnterHandler, IPoi
 		transform.localScale = Vector3.one * _currentScale;
 	}
 
+	public void OnPointerClick(PointerEventData data)
+	{
+		MenuController.SelectedIndex = OptionIndex;
+	}
+
 	public void OnPointerExit(PointerEventData data)
 	{
-		if (MenuController.SelectedIndex == OptionIndex)
-		{
-			MenuController.SelectedIndex = null;
-		}
 		_hover = false;
 	}
 }
