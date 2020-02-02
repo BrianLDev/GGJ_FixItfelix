@@ -206,4 +206,14 @@ public class AudioManagerScript : MonoBehaviour
     {
         lysTheme.Stop();
     }
+
+    public void PlayDayTheme()
+    {
+        daySong.Play();
+    }
+
+    public void StopDaySong()
+    {
+        daySong.Stop();
+    }
 }

@@ -82,6 +82,8 @@ public class Characters : NightTimeListener
             audioManager.PlayAngelTheme();
         }
 
+        audioManager.StopDaySong();
+
         characterID = idToStart;
         characterCanvas.SetActive(true);
     }
@@ -111,7 +113,7 @@ public class Characters : NightTimeListener
             angelEnabled = true;
             audioManager.StopAngelTheme();
         }
-
+        audioManager.PlayDayTheme();
         characterCanvas.SetActive(false);
     }
 
@@ -133,6 +135,7 @@ public class Characters : NightTimeListener
         {
             audioManager.StopAngelTheme();
         }
+        audioManager.PlayDayTheme();
         characterID = 0;
         characterCanvas.SetActive(false);
     }
