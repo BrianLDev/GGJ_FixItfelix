@@ -45,19 +45,22 @@ public class Characters : NightTimeListener
         if (idToStart == lysID)
         {
             characterImage.texture = lysSprite;
-            
+            audioManager.PlayLysTheme();
         }
         else if (idToStart == jacqueID)
         {
             characterImage.texture = jacqueSprite;
+            audioManager.PlayJacqueTheme();
         }
         else if (idToStart == steelID)
         {
             characterImage.texture = steelSprite;
+            audioManager.PlaySteelTheme();
         }
         else if (idToStart == angelID)
         {
             characterImage.texture = angelSprite;
+            audioManager.PlayAngelTheme();
         }
 
         characterID = idToStart;

@@ -168,4 +168,19 @@ public class AudioManagerScript : MonoBehaviour
     {
         angelTheme.Play();
     }
+
+    public void PlaySteelTheme()
+    {
+        steelTheme.Play();
+    }
+
+    public void PlayJacqueTheme()
+    {
+        jacqueTheme.Play();
+    }
+
+    public void PlayLysTheme()
+    {
+        lysTheme.Play();
+    }
 }
