@@ -18,6 +18,11 @@ public class AudioManagerScript : MonoBehaviour
     private AudioSource buildingBuilt;
     private AudioSource buildingDestroyed;
     private AudioSource switchCoin;
+    private AudioSource upgradeLibrary;
+    private AudioSource upgradeGym;
+    private AudioSource upgradeVice;
+    private AudioSource upgradeAmp;
+    private AudioSource upgradeMarket;
 
     private float dayToNightTime;
     private float nightToDayTime;
@@ -37,6 +42,12 @@ public class AudioManagerScript : MonoBehaviour
         buildingBuilt = soundEffects[0];
         buildingDestroyed = soundEffects[1];
         switchCoin = soundEffects[2];
+        upgradeLibrary = soundEffects[3];
+        upgradeMarket = soundEffects[4];
+        upgradeAmp = soundEffects[5];
+        upgradeGym = soundEffects[6];
+        upgradeVice = soundEffects[7];
+
 
         dayToNightTime = 0.0f;
         nightToDayTime = 0.0f;
@@ -115,5 +126,30 @@ public class AudioManagerScript : MonoBehaviour
     public void PlaySwitchCoin()
     {
         switchCoin.Play();
+    }
+
+    public void PlayUpLibrary()
+    {
+        upgradeLibrary.Play();
+    }
+
+    public void PlayUpMarket()
+    {
+        upgradeMarket.Play();
+    }
+
+    public void PlayUpAmp()
+    {
+        upgradeAmp.Play();
+    }
+
+    public void PlayUpGym()
+    {
+        upgradeAmp.Play();
+    }
+
+    public void PlayUpVice()
+    {
+        upgradeVice.Play();
     }
 }
