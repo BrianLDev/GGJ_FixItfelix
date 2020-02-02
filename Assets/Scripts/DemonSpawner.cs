@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DemonSpawner : MonoBehaviour
+public class DemonSpawner : NightTimeListener
 {
-    public float x_min, x_max, y_min, y_max;
-    public List<GameObject> demonObjects;
+    [SerializeField] GameObject mindDemonPrefab, bodyDemonPrefab, soulDemonPrefab;
+    private int mindDemons;
+    private int bodyDemons;
+    private int soulDemons;
+    private float timeBetweenSpawns;
+    private float timeToNextSpawn;
 
     private bool isNightPhase = false;
     private float nightDuration;
@@ -19,20 +23,37 @@ public class DemonSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isNightPhase) {
-            spawningDemons();
-        }
+
     }
 
-    public void beginNightPhase() {
+    void FixedUpdate() {
+        if (isNightPhase) {
+            spawningDemons();
+        }    
+    }
+
+    public override void StartNewNight(DayNightCycle cycle) {
         isNightPhase = true;
+        mindDemons = cycle.GetNumMindDemons();
+        bodyDemons = cycle.GetNumBodyDemons();
+        soulDemons = cycle.GetNumSoulDemons();
+        timeBetweenSpawns = cycle.GetNightDuration();
+        timeToNextSpawn = timeBetweenSpawns;
+    }
+
+    public override void StartNewDay(DayNightCycle cycle) {
+        isNightPhase = false;
+        mindDemons = 0;
+        bodyDemons = 0;
+        soulDemons = 0;
     }
 
     private void spawningDemons() {
         // TODO: When day/night manager done, add SpawnDemons initiator
+        timeToNextSpawn -= Time.fixedDeltaTime;
+        if (timeToNextSpawn <= 0) {
+
+        }
     }
 
-    public void endNightPhase() {
-        isNightPhase = false;
-    }
 }
