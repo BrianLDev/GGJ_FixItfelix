@@ -39,7 +39,7 @@ public class DemonSpawner : NightTimeListener
         bodyDemons = cycle.GetNumBodyDemons();
         soulDemons = cycle.GetNumSoulDemons();
         demonCount = mindDemons + bodyDemons + soulDemons;
-        timeBetweenSpawns = cycle.GetNightDuration() / demonCount;
+        timeBetweenSpawns = cycle.GetNightDuration() / (demonCount + 1);
         timeToNextSpawn = timeBetweenSpawns;
     }
 
@@ -55,6 +55,7 @@ public class DemonSpawner : NightTimeListener
         timeToNextSpawn -= Time.fixedDeltaTime;
         if (timeToNextSpawn <= 0 && demonCount > 0) {
             Vector3 spawnLocation = new Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height), 0);
+            spawnLocation = Camera.main.ScreenToWorldPoint(spawnLocation);
             Debug.Log("Spawning demon at..." + spawnLocation);
             Instantiate(mindDemonPrefab, spawnLocation, Quaternion.identity);
             demonCount--;
