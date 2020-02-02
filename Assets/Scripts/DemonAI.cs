@@ -78,7 +78,6 @@ public class DemonAI : MonoBehaviour
         foreach (GameObject bldg in bldgList) {
             if (bldg.tag == m_DemonType) {
                 // target found, start moving towards it
-                Debug.Log("Target found: " + bldg);
                 currentTarget = bldg;
                 demonState = DemonState.moving;
                 break;

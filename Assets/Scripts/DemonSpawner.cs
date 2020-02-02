@@ -33,15 +33,17 @@ public class DemonSpawner : NightTimeListener
     }
 
     public override void StartNewNight(DayNightCycle cycle) {
+        Debug.Log("Demon spawner: enter night mode!");
         isNightPhase = true;
         mindDemons = cycle.GetNumMindDemons();
         bodyDemons = cycle.GetNumBodyDemons();
         soulDemons = cycle.GetNumSoulDemons();
-        timeBetweenSpawns = cycle.GetNightDuration();
+        timeBetweenSpawns = cycle.GetNightDuration() / (mindDemons + bodyDemons + soulDemons);
         timeToNextSpawn = timeBetweenSpawns;
     }
 
     public override void StartNewDay(DayNightCycle cycle) {
+        Debug.Log("Demon spawner: night mode ending");
         isNightPhase = false;
         mindDemons = 0;
         bodyDemons = 0;
@@ -50,9 +52,13 @@ public class DemonSpawner : NightTimeListener
 
     private void spawningDemons() {
         // TODO: When day/night manager done, add SpawnDemons initiator
-        timeToNextSpawn -= Time.fixedDeltaTime;
+        // Debug.Log("TimeToNextSpawn - before subtract: " + timeToNextSpawn);
+        timeToNextSpawn -= Time.fixedDeltaTime * 3;
+        // Debug.Log("TimeToNextSpawn - after subtract: " + timeToNextSpawn);
         if (timeToNextSpawn <= 0) {
-
+            Debug.Log("Spawning demon...");
+            Instantiate(mindDemonPrefab, Vector3.zero, Quaternion.identity);
+            timeToNextSpawn = timeBetweenSpawns;
         }
     }
 
