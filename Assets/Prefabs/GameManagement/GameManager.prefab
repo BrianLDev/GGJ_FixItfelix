@@ -2962,7 +2962,7 @@ PrefabInstance:
     - target: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
         type: 3}
       propertyPath: ConstructionSpaces.Array.data[8].LocalOrigin.y
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
         type: 3}
@@ -2977,7 +2977,12 @@ PrefabInstance:
     - target: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
         type: 3}
       propertyPath: ConstructionSpaces.Array.data[13].LocalOrigin.y
-      value: -2
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153731611703777954, guid: 39ee57a99ae66e740ad854bc4c0806f2,
+        type: 3}
+      propertyPath: ConstructionSpaces.Array.data[11].LocalOrigin.y
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 4153731611703777955, guid: 39ee57a99ae66e740ad854bc4c0806f2,
         type: 3}

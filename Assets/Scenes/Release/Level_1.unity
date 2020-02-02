@@ -313,35 +313,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 867022157190147152, guid: 341cf9f3054b545b58e66d0351d70222,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 867022157190147152, guid: 341cf9f3054b545b58e66d0351d70222,
-        type: 3}
-      propertyPath: m_Interactable
+    - target: {fileID: 1785793771, guid: 341cf9f3054b545b58e66d0351d70222, type: 3}
+      propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3930784277232875444, guid: 341cf9f3054b545b58e66d0351d70222,
-        type: 3}
-      propertyPath: startPlayerBody
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3930784277232875444, guid: 341cf9f3054b545b58e66d0351d70222,
-        type: 3}
-      propertyPath: startPlayerMind
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 3930784277232875444, guid: 341cf9f3054b545b58e66d0351d70222,
-        type: 3}
-      propertyPath: startPlayerSoul
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 5094764131756103048, guid: 341cf9f3054b545b58e66d0351d70222,
-        type: 3}
-      propertyPath: musicCanPlay
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7853676670548248066, guid: 341cf9f3054b545b58e66d0351d70222,
         type: 3}
@@ -405,32 +379,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8168540146778961542, guid: 341cf9f3054b545b58e66d0351d70222,
         type: 3}
-      propertyPath: levelManager
-      value: 
-      objectReference: {fileID: 312915185}
-    - target: {fileID: 8168540146778961542, guid: 341cf9f3054b545b58e66d0351d70222,
-        type: 3}
-      propertyPath: nightDuration
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8168540146778961542, guid: 341cf9f3054b545b58e66d0351d70222,
-        type: 3}
       propertyPath: theCamera
       value: 
       objectReference: {fileID: 1492440007}
-    - target: {fileID: 8168540146778961542, guid: 341cf9f3054b545b58e66d0351d70222,
-        type: 3}
-      propertyPath: defaultNightDuration
-      value: 8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 341cf9f3054b545b58e66d0351d70222, type: 3}
---- !u!1 &312915185 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3930784277232875445, guid: 341cf9f3054b545b58e66d0351d70222,
-    type: 3}
-  m_PrefabInstance: {fileID: 312915184}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &913626381
 GameObject:
   m_ObjectHideFlags: 0

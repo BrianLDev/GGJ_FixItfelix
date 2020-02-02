@@ -129,6 +129,6 @@ public class Characters : NightTimeListener
 
     public override void StartNewNight(DayNightCycle cycle)
     {
-        throw new System.NotImplementedException();
+        // unneeded
     }
 }
