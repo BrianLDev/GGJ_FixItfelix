@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class AudioManagerScript : MonoBehaviour
 {
-    public bool musicCanPlay;
+    public bool musicCanPlay = true;
 
     private AudioSource[] overworldMusic;
+    private AudioSource[] soundEffects;
+
     private AudioSource daySong;
     private AudioSource nightSong;
     private AudioSource dayToNightTrans;
     private AudioSource nightToDayTrans;
     private AudioSource demonSounds;
-    private AudioSource angelTheme;
+
+    private AudioSource buildingBuilt;
+    private AudioSource buildingDestroyed;
 
     private float dayToNightTime;
     private float nightToDayTime;
@@ -27,7 +31,10 @@ public class AudioManagerScript : MonoBehaviour
         dayToNightTrans = overworldMusic[2];
         nightToDayTrans = overworldMusic[3];
         demonSounds = overworldMusic[4];
-        //angelTheme = overworldMusic[5];
+
+        soundEffects = this.GetComponents<AudioSource>();
+        buildingBuilt = soundEffects[0];
+        buildingDestroyed = soundEffects[1];
 
         dayToNightTime = 0.0f;
         nightToDayTime = 0.0f;
@@ -91,5 +98,15 @@ public class AudioManagerScript : MonoBehaviour
         daySong.volume = 0.0f;
         nightToDayTrans.Play();
         demonSounds.Stop();
+    }
+
+    public void PlayBuildingBuilt()
+    {
+        buildingBuilt.Play();
+    }
+
+    public void PlayBuildingDestroyed()
+    {
+        buildingDestroyed.Play();
     }
 }
