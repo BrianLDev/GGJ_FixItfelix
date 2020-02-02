@@ -55,7 +55,10 @@ public class AudioManagerScript : MonoBehaviour
         upgradeGym = soundEffects[6];
         upgradeVice = soundEffects[7];
 
-
+        angelTheme = soundEffects[8];
+        steelTheme = soundEffects[9];
+        jacqueTheme = soundEffects[10];
+        lysTheme = soundEffects[11];
 
         dayToNightTime = 0.0f;
         nightToDayTime = 0.0f;
