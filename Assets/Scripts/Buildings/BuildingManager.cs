@@ -255,7 +255,13 @@ public class BuildingManager : MonoBehaviour
 		switch (action)
 		{
 			case BuildingAction.UPGRADE_HEALTH:
+				int healthUpgradeCost = GetHealthUpgradeCost(health);
+				if (healthUpgradeCost > playerStats.GetMind())
+				{
+					return;
+				}
 				health.DoUpgradeHealth();
+				playerStats.UpdateMind(-healthUpgradeCost);
 				switch (logic.GetBuildingType())
 				{
 					case "library":
@@ -276,7 +282,13 @@ public class BuildingManager : MonoBehaviour
 				}
 				return;
 			case BuildingAction.UPGRADE_PRODUCTION:
+				int productionUpgradeCost = GetProductionUpgradeCost(logic);
+				if (productionUpgradeCost > playerStats.GetMind())
+				{
+					return;
+				}
 				logic.DoUpgradeProduction();
+				playerStats.UpdateMind(-productionUpgradeCost);
 				switch (logic.GetBuildingType())
 				{
 					case "library":
@@ -298,13 +310,13 @@ public class BuildingManager : MonoBehaviour
 				return;
 			case BuildingAction.REPAIR:
 				audioManager.PlayBuildingBuilt();
-				int cost = GetRepairCost(health);
-				if (cost > playerStats.GetMind())
+				int repairCost = GetRepairCost(health);
+				if (repairCost > playerStats.GetMind())
 				{
 					return;
 				}
 				health.DoRepair();
-				playerStats.UpdateMind(-cost);
+				playerStats.UpdateMind(-repairCost);
 				return;
 		}
 	}
