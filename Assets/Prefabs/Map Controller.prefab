@@ -50,7 +50,7 @@ MonoBehaviour:
     Data: {fileID: 11400000, guid: 241dbc55acc44fd4084bd81d154a4074, type: 2}
   - LocalOrigin: {x: 2, y: 2, z: 0}
     Data: {fileID: 11400000, guid: 241dbc55acc44fd4084bd81d154a4074, type: 2}
---- !u!114 &4153731612643171545
+--- !u!114 &8446339868985873200
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -59,10 +59,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 4237692984672523431}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6570c75fbe6beeb41914f0f47e75f48a, type: 3}
+  m_Script: {fileID: 11500000, guid: 836f51b2e2be2104bb0de61f634aed46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   BuildingManager: {fileID: 4153731611703777954}
+  Canvas: {fileID: 0}
+  SelectionCoinPrefab: {fileID: 5142249838564095337, guid: 4a54ba3f55f201145af582151150fb56,
+    type: 3}
+  CoinsExpandTime: 0.5
+  CoinNormalRange: 200
+  CoinHighlightScale: 1.5
+  CoinHighlightTime: 0.2
 --- !u!1001 &4153731611062213083
 PrefabInstance:
   m_ObjectHideFlags: 0
