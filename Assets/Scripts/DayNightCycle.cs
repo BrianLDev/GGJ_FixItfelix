@@ -52,7 +52,6 @@ public class DayNightCycle : MonoBehaviour
 			int soulProduction = bm.GetSoulProductionWithBonus();
 			lss.UpdatePlayerMind(mindProduction * productionTimeFactor);
 			lss.UpdatePlayerSoul(soulProduction * productionTimeFactor);
-			Debug.Log($"Building soul production {soulProduction}");
 		}
 	}
 
