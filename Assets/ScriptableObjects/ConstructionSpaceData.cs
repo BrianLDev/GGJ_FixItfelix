@@ -12,6 +12,7 @@ using UnityEditor;
 public class ConstructionSpaceData : ScriptableObject
 {
 	public Tilemap RuinShape;
+	public GameObject RuinLogicPrefab;
 	public BuildingData[] RepairOptions;
 }
 

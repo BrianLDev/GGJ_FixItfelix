@@ -17,11 +17,18 @@ public class SelectionCoinController : TooltipListener, IPointerClickHandler
 
 	private float _currentScale = 1;
 
+    private AudioManagerScript audioManager;
 
-	public override void OnPointerEnter(PointerEventData data)
+    void Start()
+    {
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManagerScript>();
+    }
+
+    public override void OnPointerEnter(PointerEventData data)
 	{
         base.OnPointerEnter(data);
-		_hover = true;
+        audioManager.PlaySwitchCoin();
+        _hover = true;
 	}
 
 	private void Update()

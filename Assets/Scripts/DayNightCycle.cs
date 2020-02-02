@@ -11,8 +11,11 @@ public class DayNightCycle : MonoBehaviour
 
 	public GameObject levelManager;
 	public GameObject audioManager;
+    public Camera theCamera;
+    CameraShader shader;
 
-	[FormerlySerializedAs("nightDuration")]
+
+    [FormerlySerializedAs("nightDuration")]
 	public float defaultNightDuration = 10.0f;
 	public float totalNightDuration { get; private set; }
 	private float nightTimeLeft = 0.0f;
@@ -30,7 +33,9 @@ public class DayNightCycle : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		lss = levelManager.GetComponent<LevelStateScript>();
+        shader = theCamera.GetComponent<CameraShader>();
+
+        lss = levelManager.GetComponent<LevelStateScript>();
 		ams = audioManager.GetComponent<AudioManagerScript>();
 		bm = this.transform.parent.gameObject.GetComponentInChildren<BuildingManager>();
 	}
@@ -128,7 +133,7 @@ public class DayNightCycle : MonoBehaviour
 	{
 		currentDay = currentDay + 1;
 		nightTimeLeft = 0.0f;
-
+        shader.enabled = false;
 		ams.TransitionNightToDay();
 
 		if (currentDay >= numberOfMindDemons.Length)
@@ -153,6 +158,7 @@ public class DayNightCycle : MonoBehaviour
 		}
 
 		ams.TransitionDayToNight();
+        shader.enabled = true;
 
 		if (howLong == 0.0f)
 		{

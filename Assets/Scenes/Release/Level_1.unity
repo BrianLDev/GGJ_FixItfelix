@@ -368,6 +368,16 @@ PrefabInstance:
       propertyPath: nightDuration
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 8168540146778961542, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: theCamera
+      value: 
+      objectReference: {fileID: 1492440007}
+    - target: {fileID: 8168540146778961542, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: defaultNightDuration
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8372995013838837769, guid: 341cf9f3054b545b58e66d0351d70222,
         type: 3}
       propertyPath: ConstructionSpaces.Array.size
@@ -616,3 +626,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 715caa56995424d9482d587ab34e58f1, type: 3}
+--- !u!20 &1492440007 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 42084615746903163, guid: 715caa56995424d9482d587ab34e58f1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1492440006}
+  m_PrefabAsset: {fileID: 0}
