@@ -165,17 +165,17 @@ public class Characters : NightTimeListener
             {
                 characterID = angelID;
             }
-            else if (!lysEnabled && random >= 2)
+            else if (!jacqueEnabled && random >= 2)
+            {
+                characterID = jacqueID;
+            }
+            else if (!lysEnabled && random >= 1)
             {
                 characterID = lysID;
             }
-            else if (!steelEnabled && random >= 1)
+            else if (!steelEnabled)
             {
                 characterID = steelID;
-            }
-            else if (!jacqueEnabled)
-            {
-                characterID = jacqueID;
             }
             else
             {
