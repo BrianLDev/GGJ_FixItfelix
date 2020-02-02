@@ -33,6 +33,7 @@ public class MeterScript : MonoBehaviour
     //public float newSoulVal;
     public Texture2D centerBar;
     public Texture2D rightLeftBar;
+    public Texture2D leftRightBar;
     //public Texture2D progressBarFull;
 
     void Awake()
@@ -73,8 +74,8 @@ public class MeterScript : MonoBehaviour
         {
             //Mind bar
             GUI.BeginGroup(new Rect(posMind.x, posMind.y, sizeMind.x, sizeMind.y));
-            GUI.Box(new Rect(0, 0, sizeMind.x, sizeMind.y), new GUIContent(rightLeftBar, mindTooltipText));
-            GUI.DrawTexture(new Rect(0, 0, sizeMind.x, sizeMind.y), rightLeftBar);
+            GUI.Box(new Rect(0, 0, sizeMind.x, sizeMind.y), new GUIContent(leftRightBar, mindTooltipText));
+            GUI.DrawTexture(new Rect(0, 0, sizeMind.x, sizeMind.y), leftRightBar);
             GUI.EndGroup();
 
             //Body bar
