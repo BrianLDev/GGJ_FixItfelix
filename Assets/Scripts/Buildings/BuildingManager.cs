@@ -89,11 +89,14 @@ public class BuildingManager : MonoBehaviour
 	{
 		Tilemap ruinShape = space.Data.RuinShape;
 
-		foreach (Vector3Int ruinShapePosition in ruinShape.cellBounds.allPositionsWithin)
+		if (Map != null)
 		{
-			Vector3Int mapPosition = space.LocalOrigin + ruinShapePosition;
-			Map.SetTile(mapPosition, ruinShape.GetTile(ruinShapePosition));
-			_positionToBuildingLogic.Remove(mapPosition);
+			foreach (Vector3Int ruinShapePosition in ruinShape.cellBounds.allPositionsWithin)
+			{
+				Vector3Int mapPosition = space.LocalOrigin + ruinShapePosition;
+				Map.SetTile(mapPosition, ruinShape.GetTile(ruinShapePosition));
+				_positionToBuildingLogic.Remove(mapPosition);
+			}
 		}
 
 		if (buildingLogic != null)
