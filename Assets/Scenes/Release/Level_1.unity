@@ -236,6 +236,11 @@ PrefabInstance:
       propertyPath: startPlayerMind
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: 3930784277232875444, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: startPlayerSoul
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 5094764131756103048, guid: 341cf9f3054b545b58e66d0351d70222,
         type: 3}
       propertyPath: musicCanPlay
