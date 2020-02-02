@@ -26,7 +26,7 @@ public class DayNightCycle : MonoBehaviour
 	public float totalNightDuration { get; private set; }
 	private float nightTimeLeft = 0.0f;
 
-	private int currentDay = 0;
+	public int currentDay = 0;
 
 	private int randomMindDemons = 0;
 	private int randomBodyDemons = 0;

@@ -21,7 +21,6 @@ public class DemonSpawner : NightTimeListener
     // Start is called before the first frame update
     void Start()
     {
-        activeDemons = new List<GameObject>();
         Assert.IsNotNull(mindDemonPrefab);
         Assert.IsNotNull(bodyDemonPrefab);
         Assert.IsNotNull(soulDemonPrefab);
@@ -42,6 +41,7 @@ public class DemonSpawner : NightTimeListener
     public override void StartNewNight(DayNightCycle cycle) {
         Debug.Log("Demon spawner: enter night mode...");
         isNightPhase = true;
+        activeDemons = new List<GameObject>();
         mindDemons = cycle.GetNumMindDemons();
         bodyDemons = cycle.GetNumBodyDemons();
         soulDemons = cycle.GetNumSoulDemons();
@@ -69,9 +69,20 @@ public class DemonSpawner : NightTimeListener
 
             Debug.Log("Spawning demon at: " + spawnLocation);
             // TODO: select mind, body, or soul demon
-            GameObject demon = Instantiate(mindDemonPrefab, spawnLocation, Quaternion.identity);
+            GameObject demon = new GameObject();
+            if (mindDemons > 0) {
+                demon = Instantiate(mindDemonPrefab, spawnLocation, Quaternion.identity);
+                mindDemons--;
+            }
+            else if (bodyDemons > 0) {
+                demon = Instantiate(bodyDemonPrefab, spawnLocation, Quaternion.identity);
+                bodyDemons--;
+            }
+            else if (soulDemons > 0) {
+                demon = Instantiate(soulDemonPrefab, spawnLocation, Quaternion.identity);
+                soulDemons--;
+            }
             activeDemons.Add(demon);
-
             demonsToSpawn--;
             timeToNextSpawn = timeBetweenSpawns;
         }
