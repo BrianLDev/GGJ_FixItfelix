@@ -108,6 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4153731611703777955}
   - component: {fileID: 4153731611703777954}
+  - component: {fileID: 5558440592332638242}
   m_Layer: 0
   m_Name: Map Controller
   m_TagString: Untagged
@@ -187,6 +188,26 @@ MonoBehaviour:
     CostNumerator: 2
     CostDenominator: 3
   audioManager: {fileID: 0}
+--- !u!114 &5558440592332638242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4153731611703777957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1343976d45f4e13489a7db244b5e4284, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Map: {fileID: 2478529336935065370}
+  OptionsPool:
+  - Tile: {fileID: 11400000, guid: 4b48bace4b915944998a0b5c1be56b70, type: 2}
+    Weight: 70
+  - Tile: {fileID: 11400000, guid: 602241633a34d7b4a9eec23a251b2e7c, type: 2}
+    Weight: 20
+  - Tile: {fileID: 11400000, guid: 97e177019858ed94a96c0b2a878e2690, type: 2}
+    Weight: 10
 --- !u!114 &8446339868985873200
 MonoBehaviour:
   m_ObjectHideFlags: 0

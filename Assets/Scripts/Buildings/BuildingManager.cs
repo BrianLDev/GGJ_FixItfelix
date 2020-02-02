@@ -72,6 +72,9 @@ public class BuildingManager : MonoBehaviour
 
 		playerStats = this.transform.parent.gameObject.GetComponentInChildren<PlayerStatsScript>();
 		audioManager = this.transform.parent.gameObject.GetComponentInChildren<AudioManagerScript>();
+
+		MapRandomizer randomizer = GetComponent<MapRandomizer>();
+		if (randomizer != null) randomizer.RandomizeTiles();
 	}
 
 	private Vector3 GetConstructionSpaceWorldCenter(ConstructionSpace space)
