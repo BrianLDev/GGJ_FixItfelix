@@ -39,7 +39,8 @@ public class Tooltip : MonoBehaviour
         benefitText = cost.transform.Find("Text").GetComponent<Text>();
 
         //ShowTooltip("Test Title", "This is a test tooltip", -200, 50);
-        ShowTooltip("Test title 2", "More testing!");
+        //ShowTooltip("Test title 2", "More testing!");
+        this.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -72,6 +73,11 @@ public class Tooltip : MonoBehaviour
         }
 
         tooltip.gameObject.SetActive(true);
+    }
+
+    public static string GetTitle()
+    {
+        return tooltip.title.text;
     }
 
     public static void HideTooltip()

@@ -6,6 +6,9 @@ public class MeterScript : MonoBehaviour
 {
     //private float barDisplay;
 
+    public string mindTitle = "Mind";
+    public string bodyTitle = "Body";
+    public string soulTitle = "Soul";
     public string mindTooltipText = "This is mind";
     public string bodyTooltipText = "This is body";
     public string soulTooltipText = "This is soul";
@@ -83,19 +86,21 @@ public class MeterScript : MonoBehaviour
             GUI.EndGroup();
 
 
+            string tooltipTitle = Tooltip.GetTitle();
+
             if (GUI.tooltip == mindTooltipText)
             {
-                Tooltip.ShowTooltip("Mind", GUI.tooltip);
+                Tooltip.ShowTooltip(mindTitle, GUI.tooltip);
             }
             else if (GUI.tooltip == bodyTooltipText)
             {
-                Tooltip.ShowTooltip("Body", GUI.tooltip);
+                Tooltip.ShowTooltip(bodyTitle, GUI.tooltip);
             }
             else if (GUI.tooltip == soulTooltipText)
             {
-                Tooltip.ShowTooltip("Soul", GUI.tooltip);
+                Tooltip.ShowTooltip(soulTitle, GUI.tooltip);
             }
-            else
+            else if (tooltipTitle == mindTitle || tooltipTitle == bodyTitle || tooltipTitle == soulTitle)
             {
                 Tooltip.HideTooltip();
             }
