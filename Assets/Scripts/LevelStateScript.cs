@@ -55,11 +55,8 @@ public class LevelStateScript : MonoBehaviour
             BuildingHealth bh = bldg.GetComponent<BuildingHealth>();
             //BuildingInfo bi = bldg.GetComponent<BuildingInfo>();
             totalBldgHealth += bh.CurrentHealth;
-            Debug.Log("Building health increment: " + bh.CurrentHealth);
-
             //buildingCost += bi.BaseCost;
         }
-        Debug.Log("Total Building Health: " + totalBldgHealth);
 
         pss.SetBody(totalBldgHealth);
         //pss.SetMind(pss.GetMind() - buildingCost);
