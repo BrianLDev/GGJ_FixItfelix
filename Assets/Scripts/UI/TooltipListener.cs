@@ -12,7 +12,7 @@ public class TooltipListener : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void OnMouseEnter()
     {
-        Tooltip.ShowTooltip(this.gameObject, titleText, bodyText, cost, benefit);
+        Tooltip.ShowTooltip(titleText, bodyText, cost, benefit);
     }
 
     public void OnMouseExit()

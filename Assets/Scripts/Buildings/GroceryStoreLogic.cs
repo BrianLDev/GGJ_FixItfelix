@@ -2,7 +2,7 @@
 
 public class GroceryStoreLogic : BuildingLogicBase
 {
-	public override int GetProductionBonusPercent() => LevelData[_productionLevel];
+	public override int GetProductionBonusPercent() => LevelData[ProductionLevel];
 
     public override string GetBuildingType() => "market";
 }

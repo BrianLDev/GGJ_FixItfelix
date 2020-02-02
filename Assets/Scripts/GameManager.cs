@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
             // Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
             Destroy(gameObject);    
 
-        DontDestroyOnLoad(gameObject);  // Sets this to not be destroyed when reloading scene
+        //DontDestroyOnLoad(gameObject);  // Sets this to not be destroyed when reloading scene
     }
 
     // Start is called before the first frame update
