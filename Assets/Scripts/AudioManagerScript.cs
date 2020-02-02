@@ -8,6 +8,7 @@ public class AudioManagerScript : MonoBehaviour
     private AudioSource nightSong;
     private AudioSource dayToNightTrans;
     private AudioSource nightToDayTrans;
+    private AudioSource demonSounds;
 
     private float dayToNightTime;
     private float nightToDayTime;
@@ -21,6 +22,7 @@ public class AudioManagerScript : MonoBehaviour
         nightSong = overworldMusic[1];
         dayToNightTrans = overworldMusic[2];
         nightToDayTrans = overworldMusic[3];
+        demonSounds = overworldMusic[4];
 
         dayToNightTime = 0.0f;
         nightToDayTime = 0.0f;
@@ -39,6 +41,8 @@ public class AudioManagerScript : MonoBehaviour
                 daySong.Stop();
                 dayToNightTrans.Stop();
                 nightSong.volume = 1.0f;
+                demonSounds.Play();
+                demonSounds.volume = 0.3f;
             }
         }
 
@@ -70,5 +74,6 @@ public class AudioManagerScript : MonoBehaviour
         daySong.Play();
         daySong.volume = 0.0f;
         nightToDayTrans.Play();
+        demonSounds.Stop();
     }
 }
