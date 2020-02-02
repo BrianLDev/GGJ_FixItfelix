@@ -16,13 +16,18 @@ public class BuildingHealth : MonoBehaviour
 	private void Start()
 	{
 		_healthLevel = 0;
-		MaxHealth = BaseHealthData[_healthLevel]; // TODO query GameManager for health multiplier
+		MaxHealth = BaseHealthData[_healthLevel] * (100 + BuildingManager.CachedHealthBonusPercent) / 100;
 		CurrentHealth = MaxHealth;
 	}
 
 	public void DealDamage(int amount)
 	{
 		CurrentHealth -= amount;
+		CheckForDestruction();
+	}
+
+	private void CheckForDestruction()
+	{
 		if (CurrentHealth <= 0)
 		{
 			Destroy(gameObject);
@@ -37,12 +42,16 @@ public class BuildingHealth : MonoBehaviour
 	public void DoUpgradeHealth()
 	{
 		_healthLevel += 1;
-		MaxHealth = BaseHealthData[_healthLevel]; // TODO query GameManager for health multiplier
-		// TODO Update current health
+		int oldMaxHealth = MaxHealth;
+		MaxHealth = BaseHealthData[_healthLevel] * (100 + BuildingManager.CachedHealthBonusPercent) / 100;
+		CurrentHealth += MaxHealth - oldMaxHealth;
 	}
 
-	public void OnHealthMultiplierChanged(int prevPercent, int nextPercent)
+	public void OnHealthBonusChanged(int prevPercent, int nextPercent)
 	{
-		// TODO
+		int oldMaxHealth = MaxHealth;
+		MaxHealth = BaseHealthData[_healthLevel] * (100 + nextPercent) / 100;
+		CurrentHealth += MaxHealth - oldMaxHealth;
+		CheckForDestruction();
 	}
 }
