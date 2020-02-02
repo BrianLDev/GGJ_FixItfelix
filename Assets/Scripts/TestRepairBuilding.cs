@@ -14,6 +14,6 @@ public class TestRepairBuilding : MonoBehaviour, IPointerClickHandler
 
 		Vector3Int mapPosition = map.WorldToCell(data.pointerCurrentRaycast.worldPosition);
 
-		BuildingManager.RepairTile(mapPosition, BuildingManager.GetRepairOptions(mapPosition)[0]);
+		BuildingManager.ConstructBuildingOnTile(mapPosition, BuildingManager.GetConstructionOptions(mapPosition)[0]);
 	}
 }

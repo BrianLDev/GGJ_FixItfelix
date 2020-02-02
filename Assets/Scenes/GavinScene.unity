@@ -630,6 +630,11 @@ PrefabInstance:
       propertyPath: levelManager
       value: 
       objectReference: {fileID: 507538835}
+    - target: {fileID: 8168540146778961542, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: nightDuration
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 341cf9f3054b545b58e66d0351d70222, type: 3}
 --- !u!1 &318609960

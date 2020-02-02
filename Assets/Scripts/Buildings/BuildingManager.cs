@@ -4,11 +4,20 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Linq;
 
-[System.Serializable]
+[Serializable]
 public struct ConstructionSpace
 {
 	public Vector3Int LocalOrigin;
 	public ConstructionSpaceData Data;
+}
+
+[Serializable]
+public struct RepairConfig
+{
+	public int HealthNumerator;
+	public int HealthDenominator;
+	public int CostNumerator;
+	public int CostDenominator;
 }
 
 public class BuildingManager : MonoBehaviour
@@ -17,12 +26,15 @@ public class BuildingManager : MonoBehaviour
 
 	public ConstructionSpace[] ConstructionSpaces;
 
+	public RepairConfig[] RepairCosts;
+
 	private Dictionary<Vector3Int, ConstructionSpace> _positionToConstructionSpace;
 	private Dictionary<Vector3Int, GameObject> _positionToBuildingLogic;
 	private HashSet<GameObject> _activeBuildingLogic;
-    private PlayerStatsScript playerStats;
+	private PlayerStatsScript playerStats;
+    private AudioManagerScript audioManager;
 
-	private int _healthBonusPercent;
+	public int CachedHealthBonusPercent { get; private set; }
 
 	private void Start()
 	{
@@ -42,10 +54,11 @@ public class BuildingManager : MonoBehaviour
 		_positionToBuildingLogic = new Dictionary<Vector3Int, GameObject>();
 		_activeBuildingLogic = new HashSet<GameObject>();
 
-        playerStats = this.transform.parent.gameObject.GetComponentInChildren<PlayerStatsScript>();
-	}
+		playerStats = this.transform.parent.gameObject.GetComponentInChildren<PlayerStatsScript>();
+        audioManager = this.transform.parent.gameObject.GetComponentInChildren<AudioManagerScript>();
+    }
 
-	public BuildingData[] GetRepairOptions(Vector3Int position)
+	public BuildingData[] GetConstructionOptions(Vector3Int position)
 	{
 		if (!_positionToConstructionSpace.ContainsKey(position))
 		{
@@ -56,39 +69,39 @@ public class BuildingManager : MonoBehaviour
 		return _positionToConstructionSpace[position].Data.RepairOptions;
 	}
 
-	public void RepairTile(Vector3Int position, BuildingData repairOption)
+	public void ConstructBuildingOnTile(Vector3Int position, BuildingData buildingOption)
 	{
-		if (!_positionToConstructionSpace.ContainsKey(position))
+		if (!HasRuin(position))
 		{
 			Debug.LogError($"Position {position} does not have a ruined building to restore");
 			return;
 		}
 
 		ConstructionSpace space = _positionToConstructionSpace[position];
-		Tilemap buildingShape = repairOption.BuildingShape;
+		Tilemap buildingShape = buildingOption.BuildingShape;
 
 		GameObject buildingLogic = null;
-		if (repairOption.LogicPrefab != null)
+		if (buildingOption.LogicPrefab != null)
 		{
-			buildingLogic = Instantiate(repairOption.LogicPrefab);
-            int buildingCost = buildingLogic.GetComponent<BuildingInfo>().BaseCost;
-            if (playerStats.GetMind() - buildingCost >= 0)
-            {
-                buildingLogic.transform.position = Map.GetCellCenterWorld(position);
+			int buildingCost = buildingOption.LogicPrefab.GetComponent<BuildingInfo>().BaseCost;
+			if (playerStats.GetMind() - buildingCost < 0)
+			{
+				return;
+			}
+			playerStats.UpdateMind(buildingCost * -1.0f);
 
-                playerStats.UpdateMind(buildingCost * -1.0f);
+			buildingLogic = Instantiate(buildingOption.LogicPrefab);
+			buildingLogic.transform.position = Map.GetCellCenterWorld(position);
+			_activeBuildingLogic.Add(buildingLogic);
+			OnHealthBonusMayHaveChanged();
 
-                _activeBuildingLogic.Add(buildingLogic);
-                OnBuildingsChanged();
+			buildingLogic.GetComponent<BuildingHealth>().BuildingManager = this;
+			buildingLogic.GetComponent<BuildingLogicBase>().BuildingManager = this;
 
-                BuildingOnDestroyProxy proxy = buildingLogic.AddComponent<BuildingOnDestroyProxy>();
-                proxy.OnDestroyEvent.AddListener(() => ReturnToRuin(space, buildingLogic));
-            }
-            else
-            {
-                GameObject.Destroy(buildingLogic);
-                return;
-            }
+            audioManager.PlayBuildingBuilt();
+
+			BuildingOnDestroyProxy proxy = buildingLogic.AddComponent<BuildingOnDestroyProxy>();
+			proxy.OnDestroyEvent.AddListener(() => ReturnToRuin(space, buildingLogic));
 		}
 
 		BoundsInt ruinBounds = _positionToConstructionSpace[position].Data.RuinShape.cellBounds;
@@ -114,12 +127,89 @@ public class BuildingManager : MonoBehaviour
 				Map.SetTile(mapPosition, ruinShape.GetTile(ruinShapePosition));
 				_positionToBuildingLogic.Remove(mapPosition);
 			}
+            audioManager.PlayBuildingDestroyed();
 		}
 
 		if (buildingLogic != null)
 		{
 			_activeBuildingLogic.Remove(buildingLogic);
-			OnBuildingsChanged();
+			OnHealthBonusMayHaveChanged();
+		}
+	}
+
+	public enum BuildingAction
+	{
+		UPGRADE_HEALTH,
+		UPGRADE_PRODUCTION,
+		REPAIR
+	}
+
+	public BuildingAction[] GetBuildingActionOptions(Vector3Int position)
+	{
+		if (!HasActiveBuilding(position))
+		{
+			Debug.LogError($"Position {position} does not have a working building to act on");
+			return null;
+		}
+
+		List<BuildingAction> options = new List<BuildingAction>();
+		GameObject buildingLogic = _positionToBuildingLogic[position];
+		if (buildingLogic.GetComponent<BuildingLogicBase>().CanUpgradeProduction())
+		{
+			options.Add(BuildingAction.UPGRADE_PRODUCTION);
+		}
+		BuildingHealth buildingHealth = buildingLogic.GetComponent<BuildingHealth>();
+		if (buildingHealth.CanUpgradeHealth())
+		{
+			options.Add(BuildingAction.UPGRADE_HEALTH);
+		}
+		if (buildingHealth.CurrentHealth < buildingHealth.MaxHealth)
+		{
+			options.Add(BuildingAction.REPAIR);
+		}
+		return options.ToArray();
+	}
+
+	private int GetRepairCost(BuildingHealth health)
+	{
+		int healthLost = health.MaxHealth - health.CurrentHealth;
+		int buildingCost = health.GetComponent<BuildingInfo>().BaseCost;
+		foreach (RepairConfig config in RepairCosts)
+		{
+			if (healthLost * config.HealthDenominator < health.MaxHealth * config.HealthNumerator)
+			{
+				return buildingCost * config.CostNumerator / config.CostDenominator;
+			}
+		}
+		Debug.LogError("Unexpected branch in GetRepairCost");
+		Debug.LogError($"Building health {health.CurrentHealth} max health {health.MaxHealth} health lost {healthLost}");
+		Debug.LogError("Defaulting to full cost");
+		return buildingCost;
+	}
+
+	public void ExecuteActionOnBuilding(Vector3Int position, BuildingAction action)
+	{
+		GameObject buildingLogic = _positionToBuildingLogic[position];
+		BuildingHealth health = buildingLogic.GetComponent<BuildingHealth>();
+		BuildingLogicBase logic = buildingLogic.GetComponent<BuildingLogicBase>();
+
+		switch (action)
+		{
+		case BuildingAction.UPGRADE_HEALTH:
+			health.DoUpgradeHealth();
+			return;
+		case BuildingAction.UPGRADE_PRODUCTION:
+			logic.DoUpgradeProduction();
+			return;
+		case BuildingAction.REPAIR:
+			int cost = GetRepairCost(health);
+			if (cost > playerStats.GetMind())
+			{
+				return;
+			}
+			health.DoRepair();
+			playerStats.UpdateMind(-cost);
+			return;
 		}
 	}
 
@@ -138,7 +228,7 @@ public class BuildingManager : MonoBehaviour
 
 	public int GetTotalBaseSoulProduction() => AggregateBuildingStats(logic => logic.GetSoulProduction());
 
-	public int GetTotalHealthBonusPercent() => AggregateBuildingStats(logic => logic.GetHealthBonusPercent());
+	public int ComputeTotalHealthBonusPercent() => AggregateBuildingStats(logic => logic.GetHealthBonusPercent());
 
 	public int GetTotalProductionBonusPercent() => AggregateBuildingStats(logic => logic.GetProductionBonusPercent());
 
@@ -148,10 +238,19 @@ public class BuildingManager : MonoBehaviour
 	public int GetSoulProductionWithBonus()
 		=> GetTotalBaseSoulProduction() * (100 + GetTotalProductionBonusPercent()) / 100;
 
-	// To be called every time the list of buildings changes - adding, removing, upgrading, etc.
-	public void OnBuildingsChanged()
+	// To be called every time the health bonus may have changed, triggers a recalculation of health bonus and applies it to buildings if necessary
+	public void OnHealthBonusMayHaveChanged()
 	{
-		// TODO
+		int oldHealthBonusPercent = CachedHealthBonusPercent;
+		CachedHealthBonusPercent = ComputeTotalHealthBonusPercent();
+
+		if (CachedHealthBonusPercent != oldHealthBonusPercent)
+		{
+			foreach (GameObject buildingLogic in _activeBuildingLogic)
+			{
+				buildingLogic.GetComponent<BuildingHealth>().OnHealthBonusChanged(oldHealthBonusPercent, CachedHealthBonusPercent);
+			}
+		}
 	}
 
 	public GameObject[] GetBuildings()
