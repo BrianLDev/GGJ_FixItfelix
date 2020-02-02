@@ -50,6 +50,7 @@ public class SelectionCoinController : TooltipListener, IPointerClickHandler
 	public void OnPointerClick(PointerEventData data)
 	{
 		MenuController.SelectedIndex = OptionIndex;
+        Tooltip.HideTooltip();
 	}
 
 	public override void OnPointerExit(PointerEventData data)

@@ -60,7 +60,7 @@ public class Tooltip : MonoBehaviour
             }
             else
             {
-                transform.position = new Vector3(target.transform.position.x + (rectTransform.rect.width / 2.0f), target.transform.position.y + (rectTransform.rect.height / 2.0f));
+                transform.position = new Vector3(5 + target.transform.position.x + (rectTransform.rect.width / 2.0f), 5 + target.transform.position.y + (rectTransform.rect.height / 2.0f));
             }
         }
         else
