@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneChanger : MonoBehaviour
 {
     public string mainGame;
+    public Canvas m_creditCanvas;
 
     // Start is called before the first frame update
     void Start()
@@ -42,5 +43,10 @@ public class SceneChanger : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void ToggleCredits()
+    {
+        m_creditCanvas.gameObject.SetActive(!m_creditCanvas.gameObject.activeSelf);
     }
 }
