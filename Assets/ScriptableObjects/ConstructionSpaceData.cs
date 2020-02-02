@@ -9,11 +9,6 @@ public class ConstructionSpaceData : ScriptableObject
 {
 	public Tilemap RuinShape;
 	public BuildingData[] RepairOptions;
-
-	private void OnValidate()
-	{
-		RuinShape.CompressBounds();
-	}
 }
 
 [CustomEditor(typeof(ConstructionSpaceData))]

@@ -11,11 +11,6 @@ public class BuildingData : ScriptableObject
 	public Tilemap BuildingShape;
 
 	public GameObject LogicPrefab;
-
-	private void OnValidate()
-	{
-		BuildingShape.CompressBounds();
-	}
 }
 
 [CustomEditor(typeof(BuildingData))]
