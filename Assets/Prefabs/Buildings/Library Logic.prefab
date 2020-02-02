@@ -37,6 +37,21 @@ PrefabInstance:
       propertyPath: BuildingType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7419627859965866650, guid: 5c2f912ccbbc0564eb141d36ed0e5bda,
+        type: 3}
+      propertyPath: BaseHealthData.Array.data[0]
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 7419627859965866650, guid: 5c2f912ccbbc0564eb141d36ed0e5bda,
+        type: 3}
+      propertyPath: BaseHealthData.Array.data[1]
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7419627859965866650, guid: 5c2f912ccbbc0564eb141d36ed0e5bda,
+        type: 3}
+      propertyPath: BaseHealthData.Array.data[2]
+      value: 800
+      objectReference: {fileID: 0}
     - target: {fileID: 7584898115992259770, guid: 5c2f912ccbbc0564eb141d36ed0e5bda,
         type: 3}
       propertyPath: m_Name
