@@ -231,6 +231,7 @@ MonoBehaviour:
   CoinNormalRange: 200
   CoinHighlightScale: 1.5
   CoinHighlightTime: 0.2
+  BorderPadding: 50
   RepairSprite: {fileID: 21300000, guid: 1adc9d35af4ba43dbb24a2309c5dcb8a, type: 3}
   UpgradeHealthSprite: {fileID: 21300000, guid: 882442a2cde4648b0a19e66607c6a27e,
     type: 3}
