@@ -26,6 +26,11 @@ PrefabInstance:
       propertyPath: BaseCost
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: -8716990988578812770, guid: 5c2f912ccbbc0564eb141d36ed0e5bda,
+        type: 3}
+      propertyPath: BuildingType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7419627859965866650, guid: 5c2f912ccbbc0564eb141d36ed0e5bda,
         type: 3}
       propertyPath: BaseHealthData.Array.data[0]

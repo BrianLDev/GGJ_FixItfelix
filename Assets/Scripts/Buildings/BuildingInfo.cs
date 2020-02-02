@@ -4,7 +4,8 @@ public enum BuildingType
 {
 	Mind,
 	Body,
-	Soul
+	Soul,
+	Vice
 }
 
 public class BuildingInfo : MonoBehaviour

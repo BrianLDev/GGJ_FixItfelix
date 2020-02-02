@@ -5,14 +5,13 @@ using UnityEngine;
 public class DemonAI : MonoBehaviour
 {
     public enum DemonState { off_screen, idle, targeting, moving, attacking, exiting }
-
-    [SerializeField] string m_DemonType;
+    public enum DemonType { Mind, Body, Soul }
+    [SerializeField] DemonType m_DemonType;
     [SerializeField] GameObject m_game_Manager;
-    [SerializeField] GameObject firePrefab;
     [SerializeField] DemonState demonState = DemonState.off_screen;
     [SerializeField] int speedNormal = 5;
     [SerializeField] int speedExit = 10;
-    [SerializeField] float idleCountdown = 3f;
+    [SerializeField] float idleCountdown = 2f;
     [SerializeField] int damage = 10;
     [SerializeField] static private float timeToAttack = 0.5f;
     private float attackCountdown = 0.5f;
@@ -72,7 +71,6 @@ public class DemonAI : MonoBehaviour
 
     public void SpawnDemon() {
         speed = speedNormal;
-        m_DemonType = "Building";
         demonState = DemonState.idle;
     }
 
@@ -88,14 +86,22 @@ public class DemonAI : MonoBehaviour
 
         // find building target
         foreach (GameObject bldg in bldgList) {
-            if (bldg.tag == m_DemonType) {
-                // target found, start moving towards it
+            Debug.Log(m_DemonType.ToString() + "Demon considering attacking: " + bldg.GetComponent<BuildingInfo>().BuildingType.ToString() );
+            if (bldg.GetComponent<BuildingInfo>().BuildingType == BuildingType.Vice) {
+                Debug.Log("ATTACKING!!");
+                currentTarget = bldg;
+                demonState = DemonState.moving;
+                break;            
+            }
+            else if (bldg.GetComponent<BuildingInfo>().BuildingType.ToString() == m_DemonType.ToString() ) {
+                Debug.Log("ATTACKING!!");
                 currentTarget = bldg;
                 demonState = DemonState.moving;
                 break;
             }
             else {
-                Debug.Log("No target found...demon is lost");
+                Debug.Log("No match found, attack whatever...\nATTACKING!!");
+                currentTarget = bldgList[0];
             }
         }
     }
@@ -117,9 +123,10 @@ public class DemonAI : MonoBehaviour
         attackCountdown -= Time.fixedDeltaTime;
         if (attackCountdown <= 0) {
             currentTarget.GetComponentInChildren<BuildingHealth>().DealDamage(damage);
+            attackCountdown = timeToAttack;
+
             if (currentTarget.GetComponentInChildren<BuildingHealth>().CurrentHealth <= 0) {
                 // building smashed!  Retarget to new building
-                attackCountdown = timeToAttack;
                 demonState = DemonState.targeting;
             }
         }
