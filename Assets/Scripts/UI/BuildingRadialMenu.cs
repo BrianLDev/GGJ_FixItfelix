@@ -55,7 +55,6 @@ public class BuildingRadialMenu : MonoBehaviour, IInitializePotentialDragHandler
 
 			Image previewImage = coins[i].transform.GetChild(0).GetChild(0).GetComponent<Image>();
 			previewImage.sprite = options[i].PreviewSprite;
-			previewImage.alphaHitTestMinimumThreshold = 0.9f;
 
 			coins[i].GetComponent<RectTransform>().anchoredPosition = canvasPosition;
 
