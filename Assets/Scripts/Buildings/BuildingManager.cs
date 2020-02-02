@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.Events;
 using System.Linq;
 
 [System.Serializable]
@@ -20,6 +20,8 @@ public class BuildingManager : MonoBehaviour
 	private Dictionary<Vector3Int, ConstructionSpace> _positionToConstructionSpace;
 	private Dictionary<Vector3Int, GameObject> _positionToBuildingLogic;
 	private HashSet<GameObject> _activeBuildingLogic;
+
+	private int _healthBonusPercent;
 
 	private void Start()
 	{
@@ -106,6 +108,31 @@ public class BuildingManager : MonoBehaviour
 			OnBuildingsChanged();
 		}
 	}
+
+	private int AggregateBuildingStats(Func<BuildingLogicBase, int> statGetter)
+	{
+		return _activeBuildingLogic.Aggregate(0, (sum, buildingLogic) =>
+	{
+		if (buildingLogic == null) return sum;
+		BuildingLogicBase logic = buildingLogic.GetComponent<BuildingLogicBase>();
+		if (logic == null) return sum;
+		return sum + statGetter(logic);
+	});
+	}
+
+	public int GetTotalBaseMindProduction() => AggregateBuildingStats(logic => logic.GetMindProduction());
+
+	public int GetTotalBaseSoulProduction() => AggregateBuildingStats(logic => logic.GetSoulProduction());
+
+	public int GetTotalHealthBonusPercent() => AggregateBuildingStats(logic => logic.GetHealthBonusPercent());
+
+	public int GetTotalProductionBonusPercent() => AggregateBuildingStats(logic => logic.GetProductionBonusPercent());
+
+	public int GetMindProductionWithBonus()
+		=> GetTotalBaseMindProduction() * (100 + GetTotalProductionBonusPercent()) / 100;
+
+	public int GetSoulProductionWithBonus()
+		=> GetTotalBaseSoulProduction() * (100 + GetTotalProductionBonusPercent()) / 100;
 
 	// To be called every time the list of buildings changes - adding, removing, upgrading, etc.
 	public void OnBuildingsChanged()
