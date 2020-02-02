@@ -50,7 +50,7 @@ public class DemonAI : MonoBehaviour
                 Attacking();
                 break;
             case DemonState.exiting:
-                // TODO: Add any code if needed here
+                Exiting();
                 break;
             default:
                 break;
