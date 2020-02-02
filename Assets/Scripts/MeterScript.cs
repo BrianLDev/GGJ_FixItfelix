@@ -6,6 +6,10 @@ public class MeterScript : MonoBehaviour
 {
     //private float barDisplay;
 
+    public string mindTooltipText = "This is mind";
+    public string bodyTooltipText = "This is body";
+    public string soulTooltipText = "This is soul";
+
     private Vector2 posMind;
     private Vector2 sizeMind;
     private float currentMindState;
@@ -61,21 +65,41 @@ public class MeterScript : MonoBehaviour
 
     void OnGUI()
     {
+        if (Event.current.type == EventType.Repaint)
+        {
+            //Mind bar
+            GUI.BeginGroup(new Rect(posMind.x, posMind.y, sizeMind.x, sizeMind.y), "M");
+            GUI.Box(new Rect(0, 0, sizeMind.x, sizeMind.y), new GUIContent(progressBarEmpty, mindTooltipText));
+            GUI.EndGroup();
 
-        //Mind bar
-        GUI.BeginGroup(new Rect(posMind.x, posMind.y, sizeMind.x, sizeMind.y), "M");
-        GUI.Box(new Rect(0, 0, sizeMind.x, sizeMind.y), progressBarEmpty);
-        GUI.EndGroup();
+            //Body bar
+            GUI.BeginGroup(new Rect(posBody.x, posBody.y, sizeBody.x, sizeBody.y), "B");
+            GUI.Box(new Rect(0, 0, sizeBody.x, sizeBody.y), new GUIContent(progressBarEmpty, bodyTooltipText));
+            GUI.EndGroup();
 
-        //Body bar
-        GUI.BeginGroup(new Rect(posBody.x, posBody.y, sizeBody.x, sizeBody.y), "B");
-        GUI.Box(new Rect(0, 0, sizeBody.x, sizeBody.y), progressBarEmpty);
-        GUI.EndGroup();
+            //Soul bar
+            GUI.BeginGroup(new Rect(posSoul.x, posSoul.y, sizeSoul.x, sizeSoul.y), "S");
+            GUI.Box(new Rect(0, 0, sizeSoul.x, sizeSoul.y), new GUIContent(progressBarEmpty, soulTooltipText));
+            GUI.EndGroup();
 
-        //Soul bar
-        GUI.BeginGroup(new Rect(posSoul.x, posSoul.y, sizeSoul.x, sizeSoul.y), "S");
-        GUI.Box(new Rect(0, 0, sizeSoul.x, sizeSoul.y), progressBarEmpty);
-        GUI.EndGroup();
+
+            if (GUI.tooltip == mindTooltipText)
+            {
+                Tooltip.ShowTooltip("Mind", GUI.tooltip);
+            }
+            else if (GUI.tooltip == bodyTooltipText)
+            {
+                Tooltip.ShowTooltip("Body", GUI.tooltip);
+            }
+            else if (GUI.tooltip == soulTooltipText)
+            {
+                Tooltip.ShowTooltip("Soul", GUI.tooltip);
+            }
+            else
+            {
+                Tooltip.HideTooltip();
+            }
+        }
     }
 
     //Mind methods
