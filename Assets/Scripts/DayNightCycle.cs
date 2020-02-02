@@ -1,164 +1,171 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class DayNightCycle : MonoBehaviour
 {
-    public int[] numberOfMindDemons;
-    public int[] numberOfBodyDemons;
-    public int[] numberOfSoulDemons;
+	public int[] numberOfMindDemons;
+	public int[] numberOfBodyDemons;
+	public int[] numberOfSoulDemons;
 
-    public GameObject levelManager;
-    public GameObject audioManager;
+	public GameObject levelManager;
+	public GameObject audioManager;
 
-    public float nightDuration = 10.0f;
-    private float nightTimeLeft = 0.0f;
+	[FormerlySerializedAs("nightDuration")]
+	public float defaultNightDuration = 10.0f;
+	public float totalNightDuration { get; private set; }
+	private float nightTimeLeft = 0.0f;
 
-    private int currentDay = 0;
+	private int currentDay = 0;
 
-    private int randomMindDemons = 0;
-    private int randomBodyDemons = 0;
-    private int randomSoulDemons = 0;
+	private int randomMindDemons = 0;
+	private int randomBodyDemons = 0;
+	private int randomSoulDemons = 0;
 
-    private LevelStateScript lss;
-    private AudioManagerScript ams;
-    private BuildingManager bm;
+	private LevelStateScript lss;
+	private AudioManagerScript ams;
+	private BuildingManager bm;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        lss = levelManager.GetComponent<LevelStateScript>();
-        ams = audioManager.GetComponent<AudioManagerScript>();
-        bm = this.transform.parent.gameObject.GetComponentInChildren<BuildingManager>();
-    }
+	// Start is called before the first frame update
+	void Start()
+	{
+		lss = levelManager.GetComponent<LevelStateScript>();
+		ams = audioManager.GetComponent<AudioManagerScript>();
+		bm = this.transform.parent.gameObject.GetComponentInChildren<BuildingManager>();
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (nightTimeLeft > 0.0f && lss.IsPlayingGame())
-        {
-            nightTimeLeft -= Time.deltaTime;
-            if (nightTimeLeft < 0.0f)
-            {
-                StartNewDay();
-            }
-            
-        }
-    }
+	// Update is called once per frame
+	void Update()
+	{
+		if (nightTimeLeft > 0.0f && lss.IsPlayingGame())
+		{
+			nightTimeLeft -= Time.deltaTime;
+			if (nightTimeLeft < 0.0f)
+			{
+				StartNewDay();
+				return;
+			}
 
-    public bool IsNightTime()
-    {
-        return nightTimeLeft > 0.0f;
-    }
+			float productionTimeFactor = Time.deltaTime / totalNightDuration;
+			int mindProduction = bm.GetMindProductionWithBonus();
+			int soulProduction = bm.GetSoulProductionWithBonus();
+			lss.UpdatePlayerMind(mindProduction * productionTimeFactor);
+			lss.UpdatePlayerSoul(soulProduction * productionTimeFactor);
+			Debug.Log($"Building soul production {soulProduction}");
+		}
+	}
 
-    public float GetNightDuration()
-    {
-        return nightTimeLeft;
-    }
+	public bool IsNightTime()
+	{
+		return nightTimeLeft > 0.0f;
+	}
 
-    public int GetCurrentDay()
-    {
-        return currentDay;
-    }
+	public float GetNightDuration()
+	{
+		return totalNightDuration;
+	}
 
-    public int GetNumMindDemons()
-    {
-        int day = GetCurrentDay();
-        if (day < numberOfMindDemons.Length)
-        {
-            return numberOfMindDemons[day];
-        }
-        else
-        {
-            return randomMindDemons;
-        }
-    }
+	public int GetCurrentDay()
+	{
+		return currentDay;
+	}
 
-    public int GetNumBodyDemons()
-    {
-        int day = GetCurrentDay();
-        if (day < numberOfBodyDemons.Length)
-        {
-            return numberOfBodyDemons[day];
-        }
-        else
-        {
-            return randomBodyDemons;
-        }
-    }
+	public int GetNumMindDemons()
+	{
+		int day = GetCurrentDay();
+		if (day < numberOfMindDemons.Length)
+		{
+			return numberOfMindDemons[day];
+		}
+		else
+		{
+			return randomMindDemons;
+		}
+	}
 
-    public int GetNumSoulDemons()
-    {
-        int day = GetCurrentDay();
-        if (day < numberOfSoulDemons.Length)
-        {
-            return numberOfSoulDemons[day];
-        }
-        else
-        {
-            return randomSoulDemons;
-        }
-    }
+	public int GetNumBodyDemons()
+	{
+		int day = GetCurrentDay();
+		if (day < numberOfBodyDemons.Length)
+		{
+			return numberOfBodyDemons[day];
+		}
+		else
+		{
+			return randomBodyDemons;
+		}
+	}
 
-    void RandomizeDemonSpawns()
-    {
-        int total = Mathf.CeilToInt(Mathf.Pow(1.5f, currentDay)) - 3;
-        if (total < 0)
-        {
-            total = 0;
-        }
+	public int GetNumSoulDemons()
+	{
+		int day = GetCurrentDay();
+		if (day < numberOfSoulDemons.Length)
+		{
+			return numberOfSoulDemons[day];
+		}
+		else
+		{
+			return randomSoulDemons;
+		}
+	}
 
-        randomMindDemons = 1 + Random.Range(0, total);
-        total -= randomMindDemons;
-        randomBodyDemons = 1 + Random.Range(0, total);
-        total -= randomBodyDemons;
-        randomSoulDemons = 1 + total;
-    }
+	void RandomizeDemonSpawns()
+	{
+		int total = Mathf.CeilToInt(Mathf.Pow(1.5f, currentDay)) - 3;
+		if (total < 0)
+		{
+			total = 0;
+		}
 
-    public void StartNewDay()
-    {
-        currentDay = currentDay + 1;
-        nightTimeLeft = 0.0f;
+		randomMindDemons = 1 + Random.Range(0, total);
+		total -= randomMindDemons;
+		randomBodyDemons = 1 + Random.Range(0, total);
+		total -= randomBodyDemons;
+		randomSoulDemons = 1 + total;
+	}
 
-        ams.TransitionNightToDay();
+	public void StartNewDay()
+	{
+		currentDay = currentDay + 1;
+		nightTimeLeft = 0.0f;
 
-        if (currentDay >= numberOfMindDemons.Length)
-        {
-            RandomizeDemonSpawns();
-        }
+		ams.TransitionNightToDay();
 
-        NightTimeListener[] spawners = FindObjectsOfType<NightTimeListener>();
-        foreach (NightTimeListener listener in spawners)
-        {
-            listener.StartNewDay(this);
-        }
+		if (currentDay >= numberOfMindDemons.Length)
+		{
+			RandomizeDemonSpawns();
+		}
 
-        int soulIncrease = bm.GetSoulProductionWithBonus();
-        lss.UpdatePlayerSoul(soulIncrease);
-    }
+		NightTimeListener[] spawners = FindObjectsOfType<NightTimeListener>();
+		foreach (NightTimeListener listener in spawners)
+		{
+			listener.StartNewDay(this);
+		}
+	}
 
-    public void StartNewNight(float howLong = 0.0f)
-    {
-        if (nightTimeLeft != 0.0f)
-        {
-            // Don't start a new night while there's one active!
-            Debug.Assert(true);
-            return;
-        }
+	public void StartNewNight(float howLong = 0.0f)
+	{
+		if (nightTimeLeft != 0.0f)
+		{
+			// Don't start a new night while there's one active!
+			Debug.Assert(true);
+			return;
+		}
 
-        ams.TransitionDayToNight();
+		ams.TransitionDayToNight();
 
-        if (howLong == 0.0f)
-        {
-            howLong = nightDuration;
-        }
+		if (howLong == 0.0f)
+		{
+			howLong = defaultNightDuration;
+		}
+		totalNightDuration = howLong;
+		nightTimeLeft = howLong;
 
-        nightTimeLeft = howLong;
-
-        NightTimeListener[] spawners = FindObjectsOfType<NightTimeListener>();
-        foreach (NightTimeListener listener in spawners)
-        {
-            listener.StartNewNight(this);
-        }
-    }
+		NightTimeListener[] spawners = FindObjectsOfType<NightTimeListener>();
+		foreach (NightTimeListener listener in spawners)
+		{
+			listener.StartNewNight(this);
+		}
+	}
 }
