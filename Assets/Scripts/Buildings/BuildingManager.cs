@@ -69,6 +69,7 @@ public class BuildingManager : MonoBehaviour
 			buildingLogic.transform.position = Map.GetCellCenterWorld(position);
 
 			_activeBuildingLogic.Add(buildingLogic);
+			OnBuildingsChanged();
 
 			BuildingOnDestroyProxy proxy = buildingLogic.AddComponent<BuildingOnDestroyProxy>();
 			proxy.OnDestroyEvent.AddListener(() => ReturnToRuin(space, buildingLogic));
@@ -102,7 +103,14 @@ public class BuildingManager : MonoBehaviour
 		if (buildingLogic != null)
 		{
 			_activeBuildingLogic.Remove(buildingLogic);
+			OnBuildingsChanged();
 		}
+	}
+
+	// To be called every time the list of buildings changes - adding, removing, upgrading, etc.
+	public void OnBuildingsChanged()
+	{
+		// TODO
 	}
 
 	public GameObject[] GetBuildings()
