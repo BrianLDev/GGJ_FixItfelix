@@ -1,6 +1,10 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.Tilemaps;
+
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 // A building space represents a certain size of ruins that you can replace with a building
 // e.g. A 2x2 ruin that can be replaced by either a house or a library
@@ -11,8 +15,9 @@ public class ConstructionSpaceData : ScriptableObject
 	public BuildingData[] RepairOptions;
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(ConstructionSpaceData))]
-public class ConstructionSpaceEditor : Editor
+public class ConstructionSpaceEditor : UnityEditor.Editor
 {
 	public override void OnInspectorGUI()
 	{
@@ -55,3 +60,4 @@ public class ConstructionSpaceEditor : Editor
 		}
 	}
 }
+#endif

@@ -2,7 +2,10 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.Serialization;
+
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 // A BuildingData object represents a certain kind of building
 // e.g. A library, or a house
@@ -17,6 +20,7 @@ public class BuildingData : ScriptableObject
 	public Sprite PreviewSprite;
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(BuildingData))]
 public class BuildingDataEditor : Editor
 {
@@ -33,3 +37,4 @@ public class BuildingDataEditor : Editor
 		}
 	}
 }
+#endif
