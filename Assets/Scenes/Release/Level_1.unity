@@ -316,6 +316,16 @@ PrefabInstance:
       propertyPath: nightDuration
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 8168540146778961542, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: theCamera
+      value: 
+      objectReference: {fileID: 1492440007}
+    - target: {fileID: 8168540146778961542, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: defaultNightDuration
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8372995013838837769, guid: 341cf9f3054b545b58e66d0351d70222,
         type: 3}
       propertyPath: ConstructionSpaces.Array.size
@@ -564,3 +574,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 715caa56995424d9482d587ab34e58f1, type: 3}
+--- !u!20 &1492440007 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 42084615746903163, guid: 715caa56995424d9482d587ab34e58f1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1492440006}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1492440008 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 42084615746903161, guid: 715caa56995424d9482d587ab34e58f1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1492440006}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1492440009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492440008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f2a37465be1743458aec4d0187e17f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Shader: {fileID: 4800000, guid: 82869c4f44648584097d382dfb4a1759, type: 3}
