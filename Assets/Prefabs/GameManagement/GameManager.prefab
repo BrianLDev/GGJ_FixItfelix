@@ -1862,6 +1862,21 @@ PrefabInstance:
       propertyPath: soulTooltipText
       value: Increase your soul value to repair your life. (Ampitheater)
       objectReference: {fileID: 0}
+    - target: {fileID: 5041827085205920604, guid: 5933dad41e3a4474faa791aa066db87b,
+        type: 3}
+      propertyPath: progressBarEmpty
+      value: 
+      objectReference: {fileID: 2800000, guid: bf5cd447c8f234fb9a9eb66db20ae1f3, type: 3}
+    - target: {fileID: 5041827085205920604, guid: 5933dad41e3a4474faa791aa066db87b,
+        type: 3}
+      propertyPath: centerBar
+      value: 
+      objectReference: {fileID: 2800000, guid: bf5cd447c8f234fb9a9eb66db20ae1f3, type: 3}
+    - target: {fileID: 5041827085205920604, guid: 5933dad41e3a4474faa791aa066db87b,
+        type: 3}
+      propertyPath: rightLeftBar
+      value: 
+      objectReference: {fileID: 2800000, guid: 4e9150ec6aa3b41f786d33181916d1ea, type: 3}
     - target: {fileID: 5041827085205920605, guid: 5933dad41e3a4474faa791aa066db87b,
         type: 3}
       propertyPath: m_LocalPosition.x

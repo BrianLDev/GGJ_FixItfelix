@@ -31,7 +31,8 @@ public class MeterScript : MonoBehaviour
     //public float newMindVal;
     //public float newBodyVal;
     //public float newSoulVal;
-    public Texture2D progressBarEmpty;
+    public Texture2D centerBar;
+    public Texture2D rightLeftBar;
     //public Texture2D progressBarFull;
 
     void Awake()
@@ -71,18 +72,21 @@ public class MeterScript : MonoBehaviour
         if (Event.current.type == EventType.Repaint)
         {
             //Mind bar
-            GUI.BeginGroup(new Rect(posMind.x, posMind.y, sizeMind.x, sizeMind.y), "M");
-            GUI.Box(new Rect(0, 0, sizeMind.x, sizeMind.y), new GUIContent(progressBarEmpty, mindTooltipText));
+            GUI.BeginGroup(new Rect(posMind.x, posMind.y, sizeMind.x, sizeMind.y));
+            GUI.Box(new Rect(0, 0, sizeMind.x, sizeMind.y), new GUIContent(rightLeftBar, mindTooltipText));
+            GUI.DrawTexture(new Rect(0, 0, sizeMind.x, sizeMind.y), rightLeftBar);
             GUI.EndGroup();
 
             //Body bar
-            GUI.BeginGroup(new Rect(posBody.x, posBody.y, sizeBody.x, sizeBody.y), "B");
-            GUI.Box(new Rect(0, 0, sizeBody.x, sizeBody.y), new GUIContent(progressBarEmpty, bodyTooltipText));
+            GUI.BeginGroup(new Rect(posBody.x, posBody.y, sizeBody.x, sizeBody.y));
+            GUI.Box(new Rect(0, 0, sizeBody.x, sizeBody.y), new GUIContent(centerBar, bodyTooltipText));
+            GUI.DrawTexture(new Rect(0, 0, sizeBody.x, sizeBody.y), centerBar);
             GUI.EndGroup();
 
             //Soul bar
-            GUI.BeginGroup(new Rect(posSoul.x, posSoul.y, sizeSoul.x, sizeSoul.y), "S");
-            GUI.Box(new Rect(0, 0, sizeSoul.x, sizeSoul.y), new GUIContent(progressBarEmpty, soulTooltipText));
+            GUI.BeginGroup(new Rect(posSoul.x, posSoul.y, sizeSoul.x, sizeSoul.y));
+            GUI.Box(new Rect(0, 0, sizeSoul.x, sizeSoul.y), new GUIContent(rightLeftBar, soulTooltipText));
+            GUI.DrawTexture(new Rect(0, 0, sizeSoul.x, sizeSoul.y), centerBar);
             GUI.EndGroup();
 
 
