@@ -50,8 +50,10 @@ public class LevelStateScript : MonoBehaviour
         // find building target
         foreach (GameObject bldg in bldgList)
         {
-            
+            totalBldgHealth += bldg.GetComponent<BuildingHealth>().CurrentHealth;
         }
+
+        pss.SetBody(totalBldgHealth);
     }
 
     public void UpdatePlayerMind(float mindNum)
