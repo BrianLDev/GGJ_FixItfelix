@@ -11,6 +11,7 @@ public class BuildingData : ScriptableObject
 	public Tilemap BuildingShape;
 
 	public GameObject LogicPrefab;
+	public Sprite PreviewImage;
 }
 
 [CustomEditor(typeof(BuildingData))]

@@ -17,6 +17,7 @@ public class BuildingManager : MonoBehaviour
 	public ConstructionSpace[] ConstructionSpaces;
 
 	private Dictionary<Vector3Int, ConstructionSpace> _positionToConstructionSpace;
+	private Dictionary<Vector3Int, GameObject> _activeBuildingLogic;
 
 	private void Start()
 	{
@@ -32,6 +33,8 @@ public class BuildingManager : MonoBehaviour
 				_positionToConstructionSpace.Add(mapPosition, space);
 			}
 		}
+
+		_activeBuildingLogic = new Dictionary<Vector3Int, GameObject>();
 	}
 
 	public BuildingData[] GetRepairOptions(Vector3Int position)
@@ -56,19 +59,21 @@ public class BuildingManager : MonoBehaviour
 		ConstructionSpace space = _positionToConstructionSpace[position];
 		Tilemap buildingShape = repairOption.BuildingShape;
 
-		foreach (Vector3Int buildingPosition in buildingShape.cellBounds.allPositionsWithin)
-		{
-			Vector3Int mapPosition = space.LocalOrigin + buildingPosition;
-			Map.SetTile(mapPosition, buildingShape.GetTile(buildingPosition));
-		}
-
+		GameObject buildingLogic = null;
 		if (repairOption.LogicPrefab != null)
 		{
-			GameObject buildingLogic = Instantiate(repairOption.LogicPrefab);
+			buildingLogic = Instantiate(repairOption.LogicPrefab);
 			buildingLogic.transform.position = Map.GetCellCenterWorld(position);
 
 			BuildingOnDestroyProxy proxy = buildingLogic.AddComponent<BuildingOnDestroyProxy>();
 			proxy.OnDestroyEvent.AddListener(() => ReturnToRuin(space));
+		}
+
+		foreach (Vector3Int buildingPosition in buildingShape.cellBounds.allPositionsWithin)
+		{
+			Vector3Int mapPosition = space.LocalOrigin + buildingPosition;
+			Map.SetTile(mapPosition, buildingShape.GetTile(buildingPosition));
+			_activeBuildingLogic.Add(mapPosition, buildingLogic);
 		}
 	}
 
@@ -80,7 +85,18 @@ public class BuildingManager : MonoBehaviour
 		{
 			Vector3Int mapPosition = space.LocalOrigin + ruinShapePosition;
 			Map.SetTile(mapPosition, ruinShape.GetTile(ruinShapePosition));
+			_activeBuildingLogic.Remove(mapPosition);
 		}
+	}
+
+	public bool HasActiveBuilding(Vector3Int mapPosition)
+	{
+		return _activeBuildingLogic.ContainsKey(mapPosition);
+	}
+
+	public bool HasRuin(Vector3Int mapPosition)
+	{
+		return _positionToConstructionSpace.ContainsKey(mapPosition) && !HasActiveBuilding(mapPosition);
 	}
 
 	private void OnDrawGizmos()
