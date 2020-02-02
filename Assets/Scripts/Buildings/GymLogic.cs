@@ -2,7 +2,7 @@
 
 public class GymLogic : BuildingLogicBase
 {
-	public override int GetHealthBonusPercent() => LevelData[_productionLevel];
+	public override int GetHealthBonusPercent() => LevelData[ProductionLevel];
 
 	public override void DoUpgradeProduction()
 	{

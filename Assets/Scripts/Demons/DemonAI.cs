@@ -13,6 +13,9 @@ public class DemonAI : MonoBehaviour
     [SerializeField] int speedNormal = 5;
     [SerializeField] int speedExit = 10;
     [SerializeField] float idleCountdown = 3f;
+    [SerializeField] int damage = 10;
+    [SerializeField] static private float timeToAttack = 0.5f;
+    private float attackCountdown = 0.5f;
 
     private GameObject[] bldgList;
     private int speed;
@@ -111,12 +114,14 @@ public class DemonAI : MonoBehaviour
     }
 
     private void DoAttack() {
-        //  TODO: Smash building
-        currentTarget.GetComponentInChildren<BuildingHealth>().DealDamage(5);
-        if (currentTarget.GetComponentInChildren<BuildingHealth>().CurrentHealth <= 0) {
-            // building smashed!  Spawn fire animation and retarget to new building
-
-            demonState = DemonState.targeting;
+        attackCountdown -= Time.fixedDeltaTime;
+        if (attackCountdown <= 0) {
+            currentTarget.GetComponentInChildren<BuildingHealth>().DealDamage(damage);
+            if (currentTarget.GetComponentInChildren<BuildingHealth>().CurrentHealth <= 0) {
+                // building smashed!  Retarget to new building
+                attackCountdown = timeToAttack;
+                demonState = DemonState.targeting;
+            }
         }
     }
 

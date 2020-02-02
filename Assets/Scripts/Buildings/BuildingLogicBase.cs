@@ -5,12 +5,12 @@ public abstract class BuildingLogicBase : MonoBehaviour
 	[HideInInspector]
 	public BuildingManager BuildingManager;
 
-	protected int _productionLevel;
+	public int ProductionLevel { get; protected set; }
 	public int[] LevelData = new int[3];
 
 	protected virtual void Start()
 	{
-		_productionLevel = 0;
+		ProductionLevel = 0;
 	}
 
 	public virtual int GetMindProduction() => 0;
@@ -21,11 +21,11 @@ public abstract class BuildingLogicBase : MonoBehaviour
 
 	public virtual int GetProductionBonusPercent() => 0;
 
-	public virtual bool CanUpgradeProduction() => _productionLevel + 1 < LevelData.Length;
+	public virtual bool CanUpgradeProduction() => ProductionLevel + 1 < LevelData.Length;
 
 	public virtual void DoUpgradeProduction()
 	{
-		_productionLevel += 1;
+		ProductionLevel += 1;
 	}
 
     public virtual string GetBuildingType() => "";

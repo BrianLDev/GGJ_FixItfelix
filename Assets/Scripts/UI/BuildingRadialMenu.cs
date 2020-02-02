@@ -10,6 +10,8 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerClickHandler
 	public Canvas Canvas;
 	public GameObject SelectionCoinPrefab;
 
+    public GameObject DayNightCycle;
+
 	private bool _active = false;
 	private bool _clickedAgain = false;
 	public int? SelectedIndex;
@@ -33,11 +35,11 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerClickHandler
 
 		Vector3Int mapPosition = BuildingManager.Map.WorldToCell(data.pointerCurrentRaycast.worldPosition);
 
-		if (BuildingManager.HasRuin(mapPosition))
+		if (BuildingManager.HasRuin(mapPosition) && !DayNightCycle.GetComponent<DayNightCycle>().IsNightTime())
 		{
 			SelectConstructBuildingMenu(mapPosition);
 		}
-		else if (BuildingManager.HasActiveBuilding(mapPosition))
+		else if (BuildingManager.HasActiveBuilding(mapPosition) && !DayNightCycle.GetComponent<DayNightCycle>().IsNightTime())
 		{
 			SelectBuildingActionMenu(mapPosition);
 		}
@@ -74,10 +76,12 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerClickHandler
             case BuildingManager.BuildingAction.UPGRADE_HEALTH:
                 coinController.titleText = "Upgrade: Add Walls";
                 coinController.bodyText = "Add walls to the building, upgrading its health.";
+				coinController.cost = BuildingManager.GetHealthUpgradeCost(health);
                 return;
             case BuildingManager.BuildingAction.UPGRADE_PRODUCTION:
                 coinController.titleText = "Upgrade: Renovate Building";
                 coinController.bodyText = "Improve the efficiency of this building.";
+				coinController.cost = BuildingManager.GetProductionUpgradeCost(logic);
                 return;
             case BuildingManager.BuildingAction.REPAIR:
                 coinController.titleText = "Repair";

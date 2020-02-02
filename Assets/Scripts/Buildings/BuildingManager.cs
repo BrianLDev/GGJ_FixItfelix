@@ -34,15 +34,15 @@ public class BuildingManager : MonoBehaviour
 	private HashSet<GameObject> _activeBuildingLogic;
 	private PlayerStatsScript playerStats;
 
-    public AudioManagerScript audioManager;
+	public AudioManagerScript audioManager;
 
 	public int CachedHealthBonusPercent { get; private set; }
 
-    public static BuildingManager instance;
+	public static BuildingManager instance;
 
-    private void Start()
+	private void Start()
 	{
-        instance = this;
+		instance = this;
 
 		_positionToConstructionSpace = new Dictionary<Vector3Int, ConstructionSpace>();
 		_constructionSpaceToRuinLogic = new Dictionary<ConstructionSpace, GameObject>();
@@ -71,8 +71,8 @@ public class BuildingManager : MonoBehaviour
 		_activeBuildingLogic = new HashSet<GameObject>();
 
 		playerStats = this.transform.parent.gameObject.GetComponentInChildren<PlayerStatsScript>();
-        audioManager = this.transform.parent.gameObject.GetComponentInChildren<AudioManagerScript>();
-    }
+		audioManager = this.transform.parent.gameObject.GetComponentInChildren<AudioManagerScript>();
+	}
 
 	private Vector3 GetConstructionSpaceWorldCenter(ConstructionSpace space)
 	{
@@ -119,7 +119,7 @@ public class BuildingManager : MonoBehaviour
 			buildingLogic.GetComponent<BuildingHealth>().BuildingManager = this;
 			buildingLogic.GetComponent<BuildingLogicBase>().BuildingManager = this;
 
-            audioManager.PlayBuildingBuilt();
+			audioManager.PlayBuildingBuilt();
 
 			BuildingOnDestroyProxy proxy = buildingLogic.AddComponent<BuildingOnDestroyProxy>();
 			proxy.OnDestroyEvent.AddListener(() => ReturnToRuin(space, buildingLogic));
@@ -151,7 +151,7 @@ public class BuildingManager : MonoBehaviour
 				Map.SetTile(mapPosition, ruinShape.GetTile(ruinShapePosition));
 				_positionToBuildingLogic.Remove(mapPosition);
 			}
-            audioManager.PlayBuildingDestroyed();
+			audioManager.PlayBuildingDestroyed();
 		}
 
 		if (buildingLogic != null)
@@ -214,6 +214,38 @@ public class BuildingManager : MonoBehaviour
 		return buildingCost;
 	}
 
+	public int GetHealthUpgradeCost(BuildingHealth health)
+	{
+		int baseCost = health.GetComponent<BuildingInfo>().BaseCost;
+		switch (health.HealthUpgradeLevel)
+		{
+			case 0:
+				return baseCost / 4;
+			case 1:
+				return baseCost / 3;
+			default:
+				Debug.LogError("Unexpected branch in GetUpgradeCost");
+				Debug.LogError($"Building health level {health.HealthUpgradeLevel}");
+				return baseCost;
+		}
+	}
+
+	public int GetProductionUpgradeCost(BuildingLogicBase logic)
+	{
+		int baseCost = logic.GetComponent<BuildingInfo>().BaseCost;
+		switch (logic.ProductionLevel)
+		{
+			case 0:
+				return baseCost / 4;
+			case 1:
+				return baseCost / 3;
+			default:
+				Debug.LogError("Unexpected branch in GetUpgradeCost");
+				Debug.LogError($"Building production level {logic.ProductionLevel}");
+				return baseCost;
+		}
+	}
+
 	public void ExecuteActionOnBuilding(Vector3Int position, BuildingAction action)
 	{
 		GameObject buildingLogic = _positionToBuildingLogic[position];
@@ -222,58 +254,70 @@ public class BuildingManager : MonoBehaviour
 
 		switch (action)
 		{
-		case BuildingAction.UPGRADE_HEALTH:
-			health.DoUpgradeHealth();
-                switch (logic.GetBuildingType())
-                {
-                    case "library":
-                        audioManager.PlayUpLibrary();
-                        break;
-                    case "market":
-                        audioManager.PlayUpMarket();
-                        break;
-                    case "gym":
-                        audioManager.PlayUpGym();
-                        break;
-                    case "amp":
-                        audioManager.PlayUpAmp();
-                        break;
-                    case "vice":
-                        audioManager.PlayUpVice();
-                        break;
-                }
-			return;
-		case BuildingAction.UPGRADE_PRODUCTION:
-			logic.DoUpgradeProduction();
-                switch (logic.GetBuildingType())
-                {
-                    case "library":
-                        audioManager.PlayUpLibrary();
-                        break;
-                    case "market":
-                        audioManager.PlayUpMarket();
-                        break;
-                    case "gym":
-                        audioManager.PlayUpGym();
-                        break;
-                    case "amp":
-                        audioManager.PlayUpAmp();
-                        break;
-                    case "vice":
-                        audioManager.PlayUpVice();
-                        break;
-                }
-                return;
-		case BuildingAction.REPAIR:
-                audioManager.PlayBuildingBuilt();
-			int cost = GetRepairCost(health);
-			if (cost > playerStats.GetMind())
-			{
+			case BuildingAction.UPGRADE_HEALTH:
+				int healthUpgradeCost = GetHealthUpgradeCost(health);
+				if (healthUpgradeCost > playerStats.GetMind())
+				{
+					return;
+				}
+				health.DoUpgradeHealth();
+				playerStats.UpdateMind(-healthUpgradeCost);
+				switch (logic.GetBuildingType())
+				{
+					case "library":
+						audioManager.PlayUpLibrary();
+						break;
+					case "market":
+						audioManager.PlayUpMarket();
+						break;
+					case "gym":
+						audioManager.PlayUpGym();
+						break;
+					case "amp":
+						audioManager.PlayUpAmp();
+						break;
+					case "vice":
+						audioManager.PlayUpVice();
+						break;
+				}
 				return;
-			}
-			health.DoRepair();
-			playerStats.UpdateMind(-cost);
-			return;
+			case BuildingAction.UPGRADE_PRODUCTION:
+				int productionUpgradeCost = GetProductionUpgradeCost(logic);
+				if (productionUpgradeCost > playerStats.GetMind())
+				{
+					return;
+				}
+				logic.DoUpgradeProduction();
+				playerStats.UpdateMind(-productionUpgradeCost);
+				switch (logic.GetBuildingType())
+				{
+					case "library":
+						audioManager.PlayUpLibrary();
+						break;
+					case "market":
+						audioManager.PlayUpMarket();
+						break;
+					case "gym":
+						audioManager.PlayUpGym();
+						break;
+					case "amp":
+						audioManager.PlayUpAmp();
+						break;
+					case "vice":
+						audioManager.PlayUpVice();
+						break;
+				}
+				return;
+			case BuildingAction.REPAIR:
+				audioManager.PlayBuildingBuilt();
+				int repairCost = GetRepairCost(health);
+				if (repairCost > playerStats.GetMind())
+				{
+					return;
+				}
+				health.DoRepair();
+				playerStats.UpdateMind(-repairCost);
+				return;
 		}
 	}
 
