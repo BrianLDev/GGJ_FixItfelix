@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -25,7 +26,7 @@ public class BuildingRadialMenu : MonoBehaviour, IInitializePotentialDragHandler
 
 		if (BuildingManager.HasRuin(mapPosition))
 		{
-			StartCoroutine(SelectBuildingMenu(mapPosition));
+			SelectBuildingMenu(mapPosition);
 		}
 		else if (BuildingManager.HasActiveBuilding(mapPosition))
 		{
@@ -39,13 +40,27 @@ public class BuildingRadialMenu : MonoBehaviour, IInitializePotentialDragHandler
 			   * Canvas.GetComponent<RectTransform>().rect.size;
 	}
 
-	private IEnumerator SelectBuildingMenu(Vector3Int mapPosition)
+	private void SelectBuildingMenu(Vector3Int mapPosition)
+	{
+		StartCoroutine(DoSelectMenu(
+			mapPosition, 
+			() => BuildingManager.GetRepairOptions(mapPosition),
+			data => data.PreviewSprite,
+			(index, buildingData) => BuildingManager.RepairTile(mapPosition, buildingData)
+		));
+	}
+
+	private IEnumerator DoSelectMenu<TOption>(
+		Vector3Int mapPosition,
+		Func<TOption[]> getOptions,
+		Func<TOption, Sprite> getPreviewSprite,
+		Action<int, TOption> executeSelection
+	)
 	{
 		Vector3 worldPosition = BuildingManager.Map.GetCellCenterWorld(mapPosition);
 		Vector3 canvasPosition = WorldToCanvasPosition(worldPosition);
-		Debug.Log(canvasPosition);
 
-		BuildingData[] options = BuildingManager.GetRepairOptions(mapPosition);
+		TOption[] options = getOptions();
 
 		GameObject[] coins = new GameObject[options.Length];
 		Coroutine[] animations = new Coroutine[options.Length];
@@ -54,7 +69,7 @@ public class BuildingRadialMenu : MonoBehaviour, IInitializePotentialDragHandler
 			coins[i] = Instantiate(SelectionCoinPrefab, Canvas.transform);
 
 			Image previewImage = coins[i].transform.GetChild(0).GetChild(0).GetComponent<Image>();
-			previewImage.sprite = options[i].PreviewSprite;
+			previewImage.sprite = getPreviewSprite(options[i]);
 
 			coins[i].GetComponent<RectTransform>().anchoredPosition = canvasPosition;
 
@@ -100,8 +115,9 @@ public class BuildingRadialMenu : MonoBehaviour, IInitializePotentialDragHandler
 
 		if (SelectedIndex.HasValue)
 		{
-			BuildingManager.RepairTile(mapPosition, options[SelectedIndex.Value]);
-			yield return StartCoroutine(RetractCoin(coins[SelectedIndex.Value], coins[SelectedIndex.Value].GetComponent<RectTransform>().anchoredPosition));
+			int index = SelectedIndex.Value;
+			executeSelection(index, options[index]);
+			yield return StartCoroutine(RetractCoin(coins[index], coins[index].GetComponent<RectTransform>().anchoredPosition));
 		}
 
 		for (int i = 0; i < coins.Length; i++)
