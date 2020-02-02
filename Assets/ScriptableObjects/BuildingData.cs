@@ -18,6 +18,9 @@ public class BuildingData : ScriptableObject
 
 	[FormerlySerializedAs("PreviewImage")]
 	public Sprite PreviewSprite;
+
+    public string tooltipTitle;
+    public string tooltipDescription;
 }
 
 #if UNITY_EDITOR

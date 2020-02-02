@@ -17,3 +17,6 @@ MonoBehaviour:
   LogicPrefab: {fileID: 8737113611656038525, guid: c8ddf63a4ec57e641a7772490e7dba09,
     type: 3}
   PreviewSprite: {fileID: 21300000, guid: e17013a88ab582645a55b0de6afb2785, type: 3}
+  tooltipTitle: Build Gym
+  tooltipDescription: Reinforces your other buildings, making them stronger and harder
+    to destroy.
