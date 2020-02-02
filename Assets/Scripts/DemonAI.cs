@@ -86,7 +86,6 @@ public class DemonAI : MonoBehaviour
 
     public void MoveTowardsTarget() {
         Vector3 direction = (currentTarget.transform.position - transform.position);
-        Debug.Log("Magnitude = " + direction.magnitude);
         // check if reached target
         if (direction.magnitude <= .11) {
             // reached target.  Start attacking
