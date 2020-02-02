@@ -208,10 +208,10 @@ MonoBehaviour:
   CoinNormalRange: 200
   CoinHighlightScale: 1.5
   CoinHighlightTime: 0.2
-  RepairSprite: {fileID: 21300000, guid: 184f588db49c8c74cacd6a81bc8c116e, type: 3}
-  UpgradeHealthSprite: {fileID: 21300000, guid: 8911875627673d04b84fbf8ac5c1aa7c,
+  RepairSprite: {fileID: 21300000, guid: 1adc9d35af4ba43dbb24a2309c5dcb8a, type: 3}
+  UpgradeHealthSprite: {fileID: 21300000, guid: 882442a2cde4648b0a19e66607c6a27e,
     type: 3}
-  UpgradeProductionSprite: {fileID: 21300000, guid: 298d6a06d0e5f6b40b24cf0bb024de82,
+  UpgradeProductionSprite: {fileID: 21300000, guid: cdb06667d72934ad29bde3fb5a372842,
     type: 3}
 --- !u!1001 &4153731611062213083
 PrefabInstance:
