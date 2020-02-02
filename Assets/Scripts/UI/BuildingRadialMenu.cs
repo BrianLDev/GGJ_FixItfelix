@@ -19,6 +19,10 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerClickHandler
 	public float CoinHighlightScale;
 	public float CoinHighlightTime;
 
+	public Sprite RepairSprite;
+	public Sprite UpgradeHealthSprite;
+	public Sprite UpgradeProductionSprite;
+
 	public void OnPointerClick(PointerEventData data)
 	{
 		if (_active)
@@ -31,21 +35,15 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerClickHandler
 
 		if (BuildingManager.HasRuin(mapPosition))
 		{
-			SelectBuildingMenu(mapPosition);
+			SelectConstructBuildingMenu(mapPosition);
 		}
 		else if (BuildingManager.HasActiveBuilding(mapPosition))
 		{
-
+			SelectBuildingActionMenu(mapPosition);
 		}
 	}
-	private Vector2 WorldToCanvasPosition(Vector2 worldPosition)
-	{
-		return Camera.main.WorldToScreenPoint(worldPosition)
-			   / new Vector2(Screen.width, Screen.height)
-			   * Canvas.GetComponent<RectTransform>().rect.size;
-	}
 
-	private void SelectBuildingMenu(Vector3Int mapPosition)
+	private void SelectConstructBuildingMenu(Vector3Int mapPosition)
 	{
 		StartCoroutine(DoSelectMenu(
 			mapPosition,
@@ -53,6 +51,35 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerClickHandler
 			data => data.PreviewSprite,
 			(index, buildingData) => BuildingManager.ConstructBuildingOnTile(mapPosition, buildingData)
 		));
+	}
+
+	private void SelectBuildingActionMenu(Vector3Int mapPosition)
+	{
+		StartCoroutine(DoSelectMenu(
+			mapPosition,
+			() => BuildingManager.GetBuildingActionOptions(mapPosition),
+			action =>
+			{
+				switch (action)
+				{
+					case BuildingManager.BuildingAction.REPAIR:
+						return RepairSprite;
+					case BuildingManager.BuildingAction.UPGRADE_HEALTH:
+						return UpgradeHealthSprite;
+					case BuildingManager.BuildingAction.UPGRADE_PRODUCTION:
+						return UpgradeProductionSprite;
+				}
+				return null;
+			},
+			(index, action) => BuildingManager.ExecuteActionOnBuilding(mapPosition, action)
+		));
+	}
+
+	private Vector2 WorldToCanvasPosition(Vector2 worldPosition)
+	{
+		return Camera.main.WorldToScreenPoint(worldPosition)
+			   / new Vector2(Screen.width, Screen.height)
+			   * Canvas.GetComponent<RectTransform>().rect.size;
 	}
 
 	private IEnumerator DoSelectMenu<TOption>(
