@@ -81,26 +81,23 @@ public class BuildingManager : MonoBehaviour
 		GameObject buildingLogic = null;
 		if (buildingOption.LogicPrefab != null)
 		{
-			buildingLogic = Instantiate(buildingOption.LogicPrefab);
-			int buildingCost = buildingLogic.GetComponent<BuildingInfo>().BaseCost;
-
-			if (playerStats.GetMind() - buildingCost >= 0)
+			int buildingCost = buildingOption.LogicPrefab.GetComponent<BuildingInfo>().BaseCost;
+			if (playerStats.GetMind() - buildingCost < 0)
 			{
-				buildingLogic.transform.position = Map.GetCellCenterWorld(position);
-
-				playerStats.UpdateMind(buildingCost * -1.0f);
-
-				_activeBuildingLogic.Add(buildingLogic);
-				OnHealthBonusMayHaveChanged();
-
-				BuildingOnDestroyProxy proxy = buildingLogic.AddComponent<BuildingOnDestroyProxy>();
-				proxy.OnDestroyEvent.AddListener(() => ReturnToRuin(space, buildingLogic));
-			}
-			else
-			{
-				GameObject.Destroy(buildingLogic);
 				return;
 			}
+			playerStats.UpdateMind(buildingCost * -1.0f);
+
+			buildingLogic = Instantiate(buildingOption.LogicPrefab);
+			buildingLogic.transform.position = Map.GetCellCenterWorld(position);
+			_activeBuildingLogic.Add(buildingLogic);
+			OnHealthBonusMayHaveChanged();
+
+			buildingLogic.GetComponent<BuildingHealth>().BuildingManager = this;
+			buildingLogic.GetComponent<BuildingLogicBase>().BuildingManager = this;
+
+			BuildingOnDestroyProxy proxy = buildingLogic.AddComponent<BuildingOnDestroyProxy>();
+			proxy.OnDestroyEvent.AddListener(() => ReturnToRuin(space, buildingLogic));
 		}
 
 		BoundsInt ruinBounds = _positionToConstructionSpace[position].Data.RuinShape.cellBounds;
