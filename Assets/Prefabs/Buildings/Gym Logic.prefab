@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BuildingManager: {fileID: 0}
-  LevelData: 320000006e00000096000000
+  LevelData: 190000004b00000064000000
 --- !u!1001 &1153640789318993095
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -389,6 +389,16 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3930784277232875444, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: startPlayerMind
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 3930784277232875444, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: startPlayerSoul
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7853676670548248066, guid: 341cf9f3054b545b58e66d0351d70222,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -454,6 +464,71 @@ PrefabInstance:
       propertyPath: theCamera
       value: 
       objectReference: {fileID: 1492440007}
+    - target: {fileID: 8372995013838837769, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: ConstructionSpaces.Array.data[3].LocalOrigin.x
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372995013838837769, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: ConstructionSpaces.Array.data[11].LocalOrigin.x
+      value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372995013838837769, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: ConstructionSpaces.Array.data[10].LocalOrigin.x
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372995013838837769, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: ConstructionSpaces.Array.data[1].LocalOrigin.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372995013838837769, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: ConstructionSpaces.Array.data[2].LocalOrigin.y
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372995013838837769, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: ConstructionSpaces.Array.data[2].LocalOrigin.x
+      value: -9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372995013838837769, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: ConstructionSpaces.Array.data[7].LocalOrigin.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372995013838837769, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: ConstructionSpaces.Array.data[8].LocalOrigin.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372995013838837769, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: ConstructionSpaces.Array.data[6].LocalOrigin.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372995013838837769, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: ConstructionSpaces.Array.data[5].LocalOrigin.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372995013838837769, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: ConstructionSpaces.Array.data[5].LocalOrigin.x
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372995013838837769, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: ConstructionSpaces.Array.data[6].LocalOrigin.x
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372995013838837769, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: ConstructionSpaces.Array.data[7].LocalOrigin.x
+      value: -3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 341cf9f3054b545b58e66d0351d70222, type: 3}
 --- !u!1 &913626381
