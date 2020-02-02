@@ -1132,7 +1132,7 @@ MonoBehaviour:
   numberOfSoulDemons: 000000000000000001000000
   levelManager: {fileID: 3930784277232875445}
   audioManager: {fileID: 5094764131756103051}
-  defaultNightDuration: 30
+  defaultNightDuration: 10
 --- !u!1 &7272438394493841709
 GameObject:
   m_ObjectHideFlags: 0
@@ -1997,6 +1997,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5817512374360042145, guid: 88bedc7c162828449af8c796ca8fad78,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 11e86a467efa9ad48afff89be76e843c, type: 3}
+    - target: {fileID: 5817512374360042145, guid: 88bedc7c162828449af8c796ca8fad78,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139361585893593776, guid: 88bedc7c162828449af8c796ca8fad78,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88bedc7c162828449af8c796ca8fad78, type: 3}

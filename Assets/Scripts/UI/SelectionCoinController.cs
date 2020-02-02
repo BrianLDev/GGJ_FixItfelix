@@ -17,9 +17,17 @@ public class SelectionCoinController : MonoBehaviour, IPointerEnterHandler, IPoi
 
 	private float _currentScale = 1;
 
+    private AudioManagerScript audioManager;
 
-	public void OnPointerEnter(PointerEventData data)
+    void Start()
+    {
+       audioManager = GameObject.Find("AudioManager").GetComponent<AudioManagerScript>();
+    }
+
+
+    public void OnPointerEnter(PointerEventData data)
 	{
+        audioManager.PlaySwitchCoin();
 		_hover = true;
 	}
 

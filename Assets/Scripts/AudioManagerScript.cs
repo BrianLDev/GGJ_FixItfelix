@@ -17,6 +17,7 @@ public class AudioManagerScript : MonoBehaviour
 
     private AudioSource buildingBuilt;
     private AudioSource buildingDestroyed;
+    private AudioSource switchCoin;
 
     private float dayToNightTime;
     private float nightToDayTime;
@@ -35,6 +36,7 @@ public class AudioManagerScript : MonoBehaviour
         soundEffects = this.GetComponents<AudioSource>();
         buildingBuilt = soundEffects[0];
         buildingDestroyed = soundEffects[1];
+        switchCoin = soundEffects[2];
 
         dayToNightTime = 0.0f;
         nightToDayTime = 0.0f;
@@ -108,5 +110,10 @@ public class AudioManagerScript : MonoBehaviour
     public void PlayBuildingDestroyed()
     {
         buildingDestroyed.Play();
+    }
+
+    public void PlaySwitchCoin()
+    {
+        switchCoin.Play();
     }
 }
