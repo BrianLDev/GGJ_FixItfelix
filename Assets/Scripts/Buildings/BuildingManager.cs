@@ -413,7 +413,7 @@ public class BuildingManager : MonoBehaviour
 		{
 			ConstructionSpace space = ConstructionSpaces[i];
 
-			Gizmos.color = Color.HSVToRGB(Mathf.Repeat(i / Mathf.PI / 2, 1), 1, 1);
+			Gizmos.color = Color.HSVToRGB((float)(i + 1) / ConstructionSpaces.Length, 1, 1);
 
 			if (space.Data == null || space.Data.RuinShape == null) continue;
 			BoundsInt bounds = space.Data.RuinShape.cellBounds;
