@@ -3,9 +3,10 @@
 [RequireComponent(typeof(BuildingInfo))]
 public class BuildingHealth : MonoBehaviour
 {
+	[SerializeField] GameObject FirePrefab;
+
 	[HideInInspector]
 	public BuildingManager BuildingManager;
-
 	public int[] BaseHealthData;
 
 	public int MaxHealth { get; private set; }
@@ -30,6 +31,8 @@ public class BuildingHealth : MonoBehaviour
 	{
 		if (CurrentHealth <= 0)
 		{
+			GameObject fire = Instantiate(FirePrefab, this.transform.position, Quaternion.identity);
+			Destroy(fire, 3f);
 			Destroy(gameObject);
 		}
 	}
