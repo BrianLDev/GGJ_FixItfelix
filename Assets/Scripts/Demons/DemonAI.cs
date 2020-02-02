@@ -142,7 +142,6 @@ public class DemonAI : MonoBehaviour
     }
 
     private void BeGoneDemon() {
-        Debug.Log("DemonAI exiting...");
         Vector3 direction = (currentTarget.transform.position - transform.position);
         direction.Normalize();
         transform.Translate(direction*speed * Time.fixedDeltaTime); 

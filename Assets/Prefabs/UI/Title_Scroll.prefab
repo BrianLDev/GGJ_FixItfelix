@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6747936968170963427
+--- !u!1 &1120878659273685853
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6747936968170963436}
-  - component: {fileID: 6747936968170963437}
-  - component: {fileID: 6747936968170963426}
-  - component: {fileID: 164610643744139462}
-  - component: {fileID: -5788447016723724971}
+  - component: {fileID: 1120878659273685842}
+  - component: {fileID: 1120878659273685843}
+  - component: {fileID: 1120878659273685852}
   m_Layer: 0
-  m_Name: _Template-Demon
-  m_TagString: Demons
+  m_Name: Title_Scroll
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6747936968170963436
+--- !u!4 &1120878659273685842
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6747936968170963427}
+  m_GameObject: {fileID: 1120878659273685853}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.327017, y: 3.162654, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &6747936968170963437
+--- !u!212 &1120878659273685843
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6747936968170963427}
+  m_GameObject: {fileID: 1120878659273685853}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -52,7 +50,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f771e76349d1b004a829267053fb0f35, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -72,67 +70,29 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 110
-  m_Sprite: {fileID: 21300000, guid: 02f096bfe853244a19a345ac18622f57, type: 3}
+  m_SortingOrder: 20
+  m_Sprite: {fileID: 21300000, guid: 0b633ddcf8970bc4c8aa4916a92b4413, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 16.68, y: 22.24}
+  m_Size: {x: 19.2, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6747936968170963426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6747936968170963427}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87a3c10d697c09149a7c0d263fbe45b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_DemonType: 0
-  m_game_Manager: {fileID: 7853676670548248068, guid: 341cf9f3054b545b58e66d0351d70222,
-    type: 3}
-  demonState: 0
-  speedNormal: 5
-  speedExit: 10
-  idleCountdown: 2
-  damage: 10
---- !u!111 &164610643744139462
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6747936968170963427}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: a6882fd9c2e74924c8102d775138b425, type: 2}
-  - {fileID: 7400000, guid: b198e2a8011bc7f4f81eed868b2ba17a, type: 2}
-  - {fileID: 0}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
---- !u!95 &-5788447016723724971
+--- !u!95 &1120878659273685852
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6747936968170963427}
+  m_GameObject: {fileID: 1120878659273685853}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2ab0ead3d2e241a47a4d7e086db71553, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1bf19f789b947427b967d9535768bbc9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
