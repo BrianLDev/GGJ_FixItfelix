@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6747936968170963436}
   - component: {fileID: 6747936968170963437}
   - component: {fileID: 6747936968170963426}
+  - component: {fileID: 164610643744139462}
+  - component: {fileID: -5788447016723724971}
   m_Layer: 0
   m_Name: _Template-Demon
   m_TagString: Untagged
@@ -97,5 +99,43 @@ MonoBehaviour:
   m_DemonType: Mind
   m_game_Manager: {fileID: 7853676670548248068, guid: 341cf9f3054b545b58e66d0351d70222,
     type: 3}
-  speed: 10
+  speedNormal: 8
+  speedExit: 16
   demonState: 0
+--- !u!111 &164610643744139462
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6747936968170963427}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: a6882fd9c2e74924c8102d775138b425, type: 2}
+  - {fileID: 7400000, guid: b198e2a8011bc7f4f81eed868b2ba17a, type: 2}
+  - {fileID: 0}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!95 &-5788447016723724971
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6747936968170963427}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2ab0ead3d2e241a47a4d7e086db71553, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
