@@ -77,6 +77,7 @@ public class Tooltip : MonoBehaviour
 
     public static void ShowTooltip(string titleText = "", string bodyText = "", int costAmount = 0, int benefitAmount = 0)
     {
+        costAmount = -costAmount;
         tooltip.target = null;
 
         tooltip.title.text = titleText;

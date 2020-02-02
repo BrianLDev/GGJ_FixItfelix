@@ -30,7 +30,7 @@ public class BuildingManager : MonoBehaviour
 
 	private Dictionary<Vector3Int, ConstructionSpace> _positionToConstructionSpace;
 	private Dictionary<ConstructionSpace, GameObject> _constructionSpaceToRuinLogic;
-	private Dictionary<Vector3Int, GameObject> _positionToBuildingLogic;
+	public Dictionary<Vector3Int, GameObject> _positionToBuildingLogic;
 	private HashSet<GameObject> _activeBuildingLogic;
 	private PlayerStatsScript playerStats;
 
@@ -38,8 +38,12 @@ public class BuildingManager : MonoBehaviour
 
 	public int CachedHealthBonusPercent { get; private set; }
 
-	private void Start()
+    public static BuildingManager instance;
+
+    private void Start()
 	{
+        instance = this;
+
 		_positionToConstructionSpace = new Dictionary<Vector3Int, ConstructionSpace>();
 		_constructionSpaceToRuinLogic = new Dictionary<ConstructionSpace, GameObject>();
 
@@ -193,7 +197,7 @@ public class BuildingManager : MonoBehaviour
 		return options.ToArray();
 	}
 
-	private int GetRepairCost(BuildingHealth health)
+	public int GetRepairCost(BuildingHealth health)
 	{
 		int healthLost = health.MaxHealth - health.CurrentHealth;
 		int buildingCost = health.GetComponent<BuildingInfo>().BaseCost;
