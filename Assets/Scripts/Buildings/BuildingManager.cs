@@ -220,11 +220,48 @@ public class BuildingManager : MonoBehaviour
 		{
 		case BuildingAction.UPGRADE_HEALTH:
 			health.DoUpgradeHealth();
+                switch (logic.GetBuildingType())
+                {
+                    case "library":
+                        audioManager.PlayUpLibrary();
+                        break;
+                    case "market":
+                        audioManager.PlayUpMarket();
+                        break;
+                    case "gym":
+                        audioManager.PlayUpGym();
+                        break;
+                    case "amp":
+                        audioManager.PlayUpAmp();
+                        break;
+                    case "vice":
+                        audioManager.PlayUpVice();
+                        break;
+                }
 			return;
 		case BuildingAction.UPGRADE_PRODUCTION:
 			logic.DoUpgradeProduction();
-			return;
+                switch (logic.GetBuildingType())
+                {
+                    case "library":
+                        audioManager.PlayUpLibrary();
+                        break;
+                    case "market":
+                        audioManager.PlayUpMarket();
+                        break;
+                    case "gym":
+                        audioManager.PlayUpGym();
+                        break;
+                    case "amp":
+                        audioManager.PlayUpAmp();
+                        break;
+                    case "vice":
+                        audioManager.PlayUpVice();
+                        break;
+                }
+                return;
 		case BuildingAction.REPAIR:
+                audioManager.PlayBuildingBuilt();
 			int cost = GetRepairCost(health);
 			if (cost > playerStats.GetMind())
 			{

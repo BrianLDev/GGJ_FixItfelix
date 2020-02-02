@@ -27,4 +27,6 @@ public abstract class BuildingLogicBase : MonoBehaviour
 	{
 		_productionLevel += 1;
 	}
+
+    public virtual string GetBuildingType() => "";
 }
