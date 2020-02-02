@@ -58,5 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e48968dd60aef4ab774c93d4fe2465, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FirePrefab: {fileID: 2861054854626948131, guid: 3e1aa9245ad5c37418dce98186402817,
+    type: 3}
   BuildingManager: {fileID: 0}
   BaseHealthData: 000000000000000000000000

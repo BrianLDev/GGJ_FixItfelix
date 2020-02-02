@@ -29,6 +29,7 @@ public class BuildingManager : MonoBehaviour
 	public RepairConfig[] RepairCosts;
 
 	private Dictionary<Vector3Int, ConstructionSpace> _positionToConstructionSpace;
+	private Dictionary<ConstructionSpace, GameObject> _constructionSpaceToRuinLogic;
 	private Dictionary<Vector3Int, GameObject> _positionToBuildingLogic;
 	private HashSet<GameObject> _activeBuildingLogic;
 	private PlayerStatsScript playerStats;
@@ -39,10 +40,20 @@ public class BuildingManager : MonoBehaviour
 	private void Start()
 	{
 		_positionToConstructionSpace = new Dictionary<Vector3Int, ConstructionSpace>();
+		_constructionSpaceToRuinLogic = new Dictionary<ConstructionSpace, GameObject>();
 
 		foreach (var space in ConstructionSpaces)
 		{
+			GameObject ruinLogic = null;
+			if (space.Data.RuinLogicPrefab != null)
+			{
+				ruinLogic = Instantiate(space.Data.RuinLogicPrefab);
+				ruinLogic.transform.position = GetConstructionSpaceWorldCenter(space);
+				_constructionSpaceToRuinLogic.Add(space, ruinLogic);
+			}
+
 			Tilemap ruinShape = space.Data.RuinShape;
+
 			foreach (Vector3Int ruinShapePosition in ruinShape.cellBounds.allPositionsWithin)
 			{
 				Vector3Int mapPosition = space.LocalOrigin + ruinShapePosition;
@@ -57,6 +68,11 @@ public class BuildingManager : MonoBehaviour
 		playerStats = this.transform.parent.gameObject.GetComponentInChildren<PlayerStatsScript>();
         audioManager = this.transform.parent.gameObject.GetComponentInChildren<AudioManagerScript>();
     }
+
+	private Vector3 GetConstructionSpaceWorldCenter(ConstructionSpace space)
+	{
+		return Map.LocalToWorld(Map.CellToLocalInterpolated(space.LocalOrigin + space.Data.RuinShape.cellBounds.center));
+	}
 
 	public BuildingData[] GetConstructionOptions(Vector3Int position)
 	{
@@ -91,7 +107,7 @@ public class BuildingManager : MonoBehaviour
 			playerStats.UpdateMind(buildingCost * -1.0f);
 
 			buildingLogic = Instantiate(buildingOption.LogicPrefab);
-			buildingLogic.transform.position = Map.GetCellCenterWorld(position);
+			buildingLogic.transform.position = GetConstructionSpaceWorldCenter(space);
 			_activeBuildingLogic.Add(buildingLogic);
 			OnHealthBonusMayHaveChanged();
 
@@ -113,6 +129,9 @@ public class BuildingManager : MonoBehaviour
 			Map.SetTile(mapPosition, buildingShape.GetTile(buildingPosition));
 			_positionToBuildingLogic.Add(mapPosition, buildingLogic);
 		}
+
+		GameObject ruinLogic = _constructionSpaceToRuinLogic[space];
+		if (ruinLogic != null) ruinLogic.SetActive(false);
 	}
 
 	private void ReturnToRuin(ConstructionSpace space, GameObject buildingLogic)
@@ -135,6 +154,9 @@ public class BuildingManager : MonoBehaviour
 			_activeBuildingLogic.Remove(buildingLogic);
 			OnHealthBonusMayHaveChanged();
 		}
+
+		GameObject ruinLogic = _constructionSpaceToRuinLogic[space];
+		if (ruinLogic != null) ruinLogic.SetActive(true);
 	}
 
 	public enum BuildingAction
