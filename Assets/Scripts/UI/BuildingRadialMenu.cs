@@ -20,6 +20,7 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerClickHandler
 	public float CoinNormalRange;
 	public float CoinHighlightScale;
 	public float CoinHighlightTime;
+	public float BorderPadding;
 
 	public Sprite RepairSprite;
 	public Sprite UpgradeHealthSprite;
@@ -144,6 +145,38 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerClickHandler
 
 		GameObject[] coins = new GameObject[options.Length];
 		Coroutine[] animations = new Coroutine[options.Length];
+
+		Vector3[] endPositions = new Vector3[options.Length];
+		Vector3 borderCompensation = Vector3.zero;
+		RectTransform canvasRectTransform = Canvas.GetComponent<RectTransform>();
+		Vector2 canvasSize = canvasRectTransform.rect.size;
+
+		for (int i = 0; i < options.Length; i++)
+		{
+			float angle = Mathf.Lerp(0, 2 * Mathf.PI, (float)i / options.Length);
+			endPositions[i] = canvasPosition + new Vector3(-Mathf.Sin(angle), Mathf.Cos(angle)) * CoinNormalRange;
+			Vector2 min = new Vector2(endPositions[i].x, endPositions[i].y) - SelectionCoinPrefab.GetComponent<RectTransform>().sizeDelta / 2;
+			Vector2 max = new Vector2(endPositions[i].x, endPositions[i].y) + SelectionCoinPrefab.GetComponent<RectTransform>().sizeDelta / 2;
+
+			if (min.x < BorderPadding)
+			{
+				borderCompensation.x = Mathf.Max(borderCompensation.x, BorderPadding - min.x);
+			}
+			if (min.y < BorderPadding)
+			{
+				borderCompensation.y = Mathf.Max(borderCompensation.y, BorderPadding - min.y);
+			}
+			if (max.x > canvasSize.x - BorderPadding)
+			{
+				borderCompensation.x = Mathf.Min(borderCompensation.x, canvasSize.x - BorderPadding - max.x);
+			}
+			if (max.y > canvasSize.y - BorderPadding)
+			{
+				borderCompensation.y = Mathf.Min(borderCompensation.y, canvasSize.y - BorderPadding - max.y);
+			}
+		}
+		Debug.Log($"Border compensation {borderCompensation}");
+
 		for (int i = 0; i < options.Length; i++)
 		{
 			coins[i] = Instantiate(SelectionCoinPrefab, Canvas.transform);
@@ -180,7 +213,7 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerClickHandler
 
 			animations[i] = StartCoroutine(ExtendCoin(
 				coins[i],
-				Mathf.Lerp(0, 2 * Mathf.PI, (float)i / options.Length)
+				endPositions[i] + borderCompensation
 			));
 		}
 		foreach (Coroutine coroutine in animations)
@@ -231,13 +264,12 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerClickHandler
 		_active = false;
 	}
 
-	private IEnumerator ExtendCoin(GameObject coin, float angle)
+	private IEnumerator ExtendCoin(GameObject coin, Vector3 endPosition)
 	{
 		float startTime = Time.time;
 
 		RectTransform coinTransform = coin.GetComponent<RectTransform>();
 		Vector3 startPosition = coinTransform.anchoredPosition;
-		Vector3 endPosition = startPosition + new Vector3(-Mathf.Sin(angle), Mathf.Cos(angle)) * CoinNormalRange;
 
 		while (Time.time - startTime < CoinsExpandTime)
 		{
