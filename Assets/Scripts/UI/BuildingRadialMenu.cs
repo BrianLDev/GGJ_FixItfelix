@@ -49,9 +49,9 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerClickHandler
 	{
 		StartCoroutine(DoSelectMenu(
 			mapPosition,
-			() => BuildingManager.GetRepairOptions(mapPosition),
+			() => BuildingManager.GetConstructionOptions(mapPosition),
 			data => data.PreviewSprite,
-			(index, buildingData) => BuildingManager.RepairTile(mapPosition, buildingData)
+			(index, buildingData) => BuildingManager.ConstructBuildingOnTile(mapPosition, buildingData)
 		));
 	}
 

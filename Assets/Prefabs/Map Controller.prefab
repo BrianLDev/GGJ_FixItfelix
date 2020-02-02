@@ -149,6 +149,19 @@ MonoBehaviour:
     Data: {fileID: 11400000, guid: 241dbc55acc44fd4084bd81d154a4074, type: 2}
   - LocalOrigin: {x: 2, y: 2, z: 0}
     Data: {fileID: 11400000, guid: 241dbc55acc44fd4084bd81d154a4074, type: 2}
+  RepairCosts:
+  - HealthNumerator: 1
+    HealthDenominator: 3
+    CostNumerator: 1
+    CostDenominator: 3
+  - HealthNumerator: 2
+    HealthDenominator: 3
+    CostNumerator: 1
+    CostDenominator: 2
+  - HealthNumerator: 1
+    HealthDenominator: 1
+    CostNumerator: 2
+    CostDenominator: 3
 --- !u!114 &8446339868985873200
 MonoBehaviour:
   m_ObjectHideFlags: 0

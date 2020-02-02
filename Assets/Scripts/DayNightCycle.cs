@@ -42,6 +42,7 @@ public class DayNightCycle : MonoBehaviour
             {
                 StartNewDay();
             }
+            
         }
     }
 
@@ -132,8 +133,8 @@ public class DayNightCycle : MonoBehaviour
             listener.StartNewDay(this);
         }
 
-        int soulBonus = bm.GetSoulProductionWithBonus();
-        lss.UpdatePlayerSoul(soulBonus);
+        int soulIncrease = bm.GetSoulProductionWithBonus();
+        lss.UpdatePlayerSoul(soulIncrease);
     }
 
     public void StartNewNight(float howLong = 0.0f)
