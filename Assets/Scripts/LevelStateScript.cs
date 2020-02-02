@@ -15,6 +15,7 @@ public class LevelStateScript : MonoBehaviour
     private DayNightCycle dnc;
     private SceneChanger sc;
     private GameObject[] buildings;
+    private bool playingGame;
 
     // Start is called before the first frame update
     void Start()
@@ -27,18 +28,25 @@ public class LevelStateScript : MonoBehaviour
         dnc = gameManager.GetComponentInChildren<DayNightCycle>();
 
         sc = sceneManagement.GetComponent<SceneChanger>();
+
+        playingGame = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (pss.GetBody() <= 0 && dnc.IsNightTime())
+        if (playingGame)
         {
-            LoseGame();
-        }
-        else if (pss.GetSoul() >= 2000)
-        {
-            WinGame();
+            if (pss.GetBody() <= 0 && dnc.IsNightTime())
+            {
+                playingGame = false;
+                LoseGame();
+            }
+            else if (pss.GetSoul() >= 2000)
+            {
+                playingGame = false;
+                WinGame();
+            }
         }
     }
 
