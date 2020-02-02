@@ -284,3 +284,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 341cf9f3054b545b58e66d0351d70222, type: 3}
+--- !u!1839735485 &1040897913 stripped
+Tilemap:
+  m_CorrespondingSourceObject: {fileID: 8066614550985123249, guid: 341cf9f3054b545b58e66d0351d70222,
+    type: 3}
+  m_PrefabInstance: {fileID: 1040897912}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1040897914 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8372995013838837774, guid: 341cf9f3054b545b58e66d0351d70222,
+    type: 3}
+  m_PrefabInstance: {fileID: 1040897912}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1040897915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040897914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1343976d45f4e13489a7db244b5e4284, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Map: {fileID: 1040897913}
+  OptionsPool:
+  - Tile: {fileID: 11400000, guid: 4b48bace4b915944998a0b5c1be56b70, type: 2}
+    Weight: 70
+  - Tile: {fileID: 11400000, guid: 602241633a34d7b4a9eec23a251b2e7c, type: 2}
+    Weight: 20
+  - Tile: {fileID: 11400000, guid: 97e177019858ed94a96c0b2a878e2690, type: 2}
+    Weight: 10
