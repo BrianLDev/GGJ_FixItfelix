@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 059c0e7b1db5b804ab69e4d9b8c3ae93, type: 3}
-  m_Name: House Data
+  m_Name: Ampitheater Data
   m_EditorClassIdentifier: 
   BuildingShape: {fileID: 1723114056848834002, guid: 929b4346c9af120489147f32122f3072,
     type: 3}
-  LogicPrefab: {fileID: 8737113611656038525, guid: 1f2d073e55c77f243be5dc78aa7dd9b2,
-    type: 3}
+  LogicPrefab: {fileID: 0}

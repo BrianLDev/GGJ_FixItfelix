@@ -22,6 +22,10 @@ public class LevelStateScript : MonoBehaviour
         pss.SetMind(startPlayerMind);
         pss.SetBody(startPlayerBody);
         pss.SetSoul(startPlayerSoul);
+
+        dnc = gameManager.GetComponentInChildren<DayNightCycle>();
+
+        sc = sceneManagement.GetComponent<SceneChanger>();
     }
 
     // Update is called once per frame
@@ -35,6 +39,11 @@ public class LevelStateScript : MonoBehaviour
         {
             WinGame();
         }
+    }
+
+    public void UpdatePlayerMind(float mindNum)
+    {
+        pss.UpdateMind(mindNum);
     }
 
     private void WinGame()

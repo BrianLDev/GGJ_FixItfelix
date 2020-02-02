@@ -8,6 +8,8 @@ public class DayNightCycle : MonoBehaviour
     public int[] numberOfBodyDemons;
     public int[] numberOfSoulDemons;
 
+    public GameObject levelManager;
+
     public float nightDuration = 10.0f;
     private float nightTimeLeft = 0.0f;
 
@@ -17,9 +19,12 @@ public class DayNightCycle : MonoBehaviour
     private int randomBodyDemons = 0;
     private int randomSoulDemons = 0;
 
+    private LevelStateScript lss;
+
     // Start is called before the first frame update
     void Start()
     {
+        lss = levelManager.GetComponent<LevelStateScript>();
     }
 
     // Update is called once per frame
@@ -108,6 +113,8 @@ public class DayNightCycle : MonoBehaviour
     {
         currentDay = currentDay + 1;
         nightTimeLeft = 0.0f;
+
+        lss.UpdatePlayerMind(currentDay * 100.0f);
 
         if (currentDay >= numberOfMindDemons.Length)
         {

@@ -193,6 +193,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8168540146778961542, guid: 341cf9f3054b545b58e66d0351d70222,
+        type: 3}
+      propertyPath: levelManager
+      value: 
+      objectReference: {fileID: 755571640}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 341cf9f3054b545b58e66d0351d70222, type: 3}
 --- !u!1 &304276311 stripped
@@ -672,6 +677,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 634453012}
   m_CullTransparentMesh: 0
+--- !u!1 &755571640 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2508849157969283545, guid: b85895783d1c81b4aae1f150c69ac993,
+    type: 3}
+  m_PrefabInstance: {fileID: 2508849158556029537}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1125376906
 GameObject:
   m_ObjectHideFlags: 0
@@ -957,6 +968,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1442021012}
   m_CullTransparentMesh: 0
+--- !u!1 &1474931334 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2642781486865861663, guid: fa25f3b10f13f8a4c9ab812e3ca84abb,
+    type: 3}
+  m_PrefabInstance: {fileID: 533800150}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1497877592
 GameObject:
   m_ObjectHideFlags: 0
@@ -1165,6 +1182,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1589664942}
   m_CullTransparentMesh: 0
+--- !u!1 &1952365160 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7853676670548248068, guid: 341cf9f3054b545b58e66d0351d70222,
+    type: 3}
+  m_PrefabInstance: {fileID: 297015763}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &69249070450422832
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1251,6 +1274,16 @@ PrefabInstance:
       propertyPath: playerStatsObj
       value: 
       objectReference: {fileID: 364599978}
+    - target: {fileID: 2508849157969283544, guid: b85895783d1c81b4aae1f150c69ac993,
+        type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 1952365160}
+    - target: {fileID: 2508849157969283544, guid: b85895783d1c81b4aae1f150c69ac993,
+        type: 3}
+      propertyPath: sceneManagement
+      value: 
+      objectReference: {fileID: 1474931334}
     - target: {fileID: 2508849157969283545, guid: b85895783d1c81b4aae1f150c69ac993,
         type: 3}
       propertyPath: m_Name
