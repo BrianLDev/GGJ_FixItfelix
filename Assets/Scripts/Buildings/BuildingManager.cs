@@ -33,7 +33,8 @@ public class BuildingManager : MonoBehaviour
 	private Dictionary<Vector3Int, GameObject> _positionToBuildingLogic;
 	private HashSet<GameObject> _activeBuildingLogic;
 	private PlayerStatsScript playerStats;
-    private AudioManagerScript audioManager;
+
+    public AudioManagerScript audioManager;
 
 	public int CachedHealthBonusPercent { get; private set; }
 
