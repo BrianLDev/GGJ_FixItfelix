@@ -33,7 +33,7 @@ public class DayNightCycle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (nightTimeLeft > 0.0f)
+        if (nightTimeLeft > 0.0f && lss.IsPlayingGame())
         {
             nightTimeLeft -= Time.deltaTime;
             if (nightTimeLeft < 0.0f)
@@ -117,7 +117,6 @@ public class DayNightCycle : MonoBehaviour
         currentDay = currentDay + 1;
         nightTimeLeft = 0.0f;
 
-        lss.UpdatePlayerMind(currentDay * 100.0f);
         ams.TransitionNightToDay();
 
         if (currentDay >= numberOfMindDemons.Length)
@@ -134,7 +133,7 @@ public class DayNightCycle : MonoBehaviour
 
     public void StartNewNight(float howLong = 0.0f)
     {
-        if (nightTimeLeft != 0.0f)
+        if (nightTimeLeft != 0.0f || !lss.IsPlayingGame())
         {
             // Don't start a new night while there's one active!
             Debug.Assert(true);

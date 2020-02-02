@@ -283,7 +283,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 244}
+  m_AnchoredPosition: {x: 0, y: 150}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4285600134958559953
@@ -409,9 +409,9 @@ MonoBehaviour:
   numberOfMindDemons: 010000000200000002000000
   numberOfBodyDemons: 000000000000000000000000
   numberOfSoulDemons: 000000000000000001000000
-  levelManager: {fileID: 3930784277232875445}
+  levelManager: {fileID: 0}
   audioManager: {fileID: 5094764131756103051}
-  nightDuration: 10
+  nightDuration: 30
 --- !u!1 &7272438394493841709
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,12 +778,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b85895783d1c81b4aae1f150c69ac993, type: 3}
---- !u!1 &3930784277232875445 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2508849157969283545, guid: b85895783d1c81b4aae1f150c69ac993,
-    type: 3}
-  m_PrefabInstance: {fileID: 1467551692129828460}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3930784277232875447 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2508849157969283547, guid: b85895783d1c81b4aae1f150c69ac993,
@@ -1364,15 +1358,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e05cc3401dbd5414983f80320d7c81af, type: 3}
---- !u!1 &6695840281872849895 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 69249070639771290, guid: e05cc3401dbd5414983f80320d7c81af,
-    type: 3}
-  m_PrefabInstance: {fileID: 6636725762630759805}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6695840281872849889 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 69249070639771292, guid: e05cc3401dbd5414983f80320d7c81af,
+    type: 3}
+  m_PrefabInstance: {fileID: 6636725762630759805}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6695840281872849895 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 69249070639771290, guid: e05cc3401dbd5414983f80320d7c81af,
     type: 3}
   m_PrefabInstance: {fileID: 6636725762630759805}
   m_PrefabAsset: {fileID: 0}
@@ -1387,6 +1381,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SceneManagement
+      objectReference: {fileID: 0}
+    - target: {fileID: 3696247739837380990, guid: fa25f3b10f13f8a4c9ab812e3ca84abb,
+        type: 3}
+      propertyPath: mainGame
+      value: Level_1
       objectReference: {fileID: 0}
     - target: {fileID: 5748270214755402379, guid: fa25f3b10f13f8a4c9ab812e3ca84abb,
         type: 3}
@@ -1523,6 +1522,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DemonSpawnManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 9167563443077632764, guid: 2688338f92ea020449e87361933dda31,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2688338f92ea020449e87361933dda31, type: 3}

@@ -14,6 +14,7 @@ public class LevelStateScript : MonoBehaviour
     private PlayerStatsScript pss;
     private DayNightCycle dnc;
     private SceneChanger sc;
+    private AudioManagerScript ams;
     private GameObject[] buildings;
     private bool playingGame;
 
@@ -28,6 +29,8 @@ public class LevelStateScript : MonoBehaviour
         dnc = gameManager.GetComponentInChildren<DayNightCycle>();
 
         sc = sceneManagement.GetComponent<SceneChanger>();
+
+        ams = gameManager.GetComponentInChildren<AudioManagerScript>();
 
         playingGame = true;
     }
@@ -70,6 +73,11 @@ public class LevelStateScript : MonoBehaviour
         //pss.SetMind(pss.GetMind() - buildingCost);
     }
 
+    public bool IsPlayingGame()
+    {
+        return playingGame;
+    }
+
     public void UpdatePlayerMind(float mindNum)
     {
         pss.UpdateMind(mindNum);
@@ -77,11 +85,13 @@ public class LevelStateScript : MonoBehaviour
 
     private void WinGame()
     {
+        ams.musicCanPlay = false;
         sc.LoadWinGame();
     }
 
     private void LoseGame()
     {
+        ams.musicCanPlay = false;
         sc.LoadLoseGame();
     }
 }

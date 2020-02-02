@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class AudioManagerScript : MonoBehaviour
 {
+    public bool musicCanPlay;
+
+    private AudioSource[] overworldMusic;
     private AudioSource daySong;
     private AudioSource nightSong;
     private AudioSource dayToNightTrans;
     private AudioSource nightToDayTrans;
     private AudioSource demonSounds;
+    private AudioSource angelTheme;
 
     private float dayToNightTime;
     private float nightToDayTime;
@@ -17,12 +21,13 @@ public class AudioManagerScript : MonoBehaviour
     void Start()
     {
         GameObject mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        AudioSource[] overworldMusic = mainCamera.GetComponents<AudioSource>();
+        overworldMusic = mainCamera.GetComponents<AudioSource>();
         daySong = overworldMusic[0];
         nightSong = overworldMusic[1];
         dayToNightTrans = overworldMusic[2];
         nightToDayTrans = overworldMusic[3];
         demonSounds = overworldMusic[4];
+        //angelTheme = overworldMusic[5];
 
         dayToNightTime = 0.0f;
         nightToDayTime = 0.0f;
@@ -31,32 +36,43 @@ public class AudioManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (dayToNightTime > 0.0f)
+        if (musicCanPlay)
         {
-            nightSong.volume += 0.1f * Time.deltaTime;
-            daySong.volume -= 0.4f * Time.deltaTime;
-            dayToNightTime -= Time.deltaTime;
-            if (dayToNightTime < 0.0f)
+            if (dayToNightTime > 0.0f)
             {
-                daySong.Stop();
-                dayToNightTrans.Stop();
-                nightSong.volume = 1.0f;
-                demonSounds.Play();
-                demonSounds.volume = 0.3f;
+                nightSong.volume += 0.1f * Time.deltaTime;
+                daySong.volume -= 0.4f * Time.deltaTime;
+                dayToNightTime -= Time.deltaTime;
+                if (dayToNightTime < 0.0f)
+                {
+                    daySong.Stop();
+                    dayToNightTrans.Stop();
+                    nightSong.volume = 1.0f;
+                    demonSounds.Play();
+                    demonSounds.volume = 0.3f;
+                }
+            }
+
+            if (nightToDayTime > 0.0f)
+            {
+                daySong.volume += 0.1f * Time.deltaTime;
+                nightSong.volume -= 0.4f * Time.deltaTime;
+                nightToDayTime -= Time.deltaTime;
+                if (nightToDayTime < 0.0f)
+                {
+                    nightSong.Stop();
+                    nightToDayTrans.Stop();
+                    daySong.volume = 1.0f;
+                }
             }
         }
+    }
 
-        if (nightToDayTime > 0.0f)
+    public void StopAllMusic()
+    {
+        foreach (AudioSource aSrc in overworldMusic)
         {
-            daySong.volume += 0.1f * Time.deltaTime;
-            nightSong.volume -= 0.4f * Time.deltaTime;
-            nightToDayTime -= Time.deltaTime;
-            if (nightToDayTime < 0.0f)
-            {
-                nightSong.Stop();
-                nightToDayTrans.Stop();
-                daySong.volume = 1.0f;
-            }
+            aSrc.Stop();
         }
     }
 
