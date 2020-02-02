@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 059c0e7b1db5b804ab69e4d9b8c3ae93, type: 3}
-  m_Name: Library Data
+  m_Name: Vice Data
   m_EditorClassIdentifier: 
-  BuildingShape: {fileID: 6701906410631213038, guid: 72169f5f34ae02e47be13921adfc772d,
+  BuildingShape: {fileID: 2096725599282118846, guid: 7b684510958bd77468f1f484cdcc39ef,
     type: 3}
-  LogicPrefab: {fileID: 8737113611656038525, guid: 1f2d073e55c77f243be5dc78aa7dd9b2,
-    type: 3}
-  PreviewImage: {fileID: 21300000, guid: 3190b4189571b834ca7592167e5541b5, type: 3}
+  LogicPrefab: {fileID: 0}
+  PreviewSprite: {fileID: 21300000, guid: 31ce512330db1464ab1e7a118d6e6c5f, type: 3}

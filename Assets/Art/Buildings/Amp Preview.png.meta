@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 41702d1cb925c472d88a1f1152281b9a
+guid: a4d9a1525b30e184a908b88b620bf3cc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -902295713805861632
-    second: Vice_0
+      213: 6232147970284393451
+    second: Amp_0
   - first:
-      213: -7606913139791911393
-    second: Vice_1
+      213: -8472103100050434103
+    second: Amp_1
   - first:
-      213: 590912531564815335
-    second: Vice_2
+      213: 5308409095100017129
+    second: Amp_2
   - first:
-      213: 2583256120153598068
-    second: Vice_3
+      213: 3486604893620392911
+    second: Amp_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -52,7 +52,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Vice_0
+      name: Amp_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00d7e3034d66a73f0800000000000000
-      internalID: -902295713805861632
+      spriteID: be319744f890d7650800000000000000
+      internalID: 6232147970284393451
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Vice_1
+      name: Amp_1
       rect:
         serializedVersion: 2
         x: 128
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f16a3717dc0de6690800000000000000
-      internalID: -7606913139791911393
+      spriteID: 9c7120d1e1b0d6a80800000000000000
+      internalID: -8472103100050434103
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Vice_2
+      name: Amp_2
       rect:
         serializedVersion: 2
         x: 0
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e36f3111d7533800800000000000000
-      internalID: 590912531564815335
+      spriteID: 9e9a3e362f14ba940800000000000000
+      internalID: 5308409095100017129
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Vice_3
+      name: Amp_3
       rect:
         serializedVersion: 2
         x: 128
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 478eb9d21c199d320800000000000000
-      internalID: 2583256120153598068
+      spriteID: fc3d16c8da8e26030800000000000000
+      internalID: 3486604893620392911
       vertices: []
       indices: 
       edges: []

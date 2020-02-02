@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 41702d1cb925c472d88a1f1152281b9a
+guid: 3190b4189571b834ca7592167e5541b5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -902295713805861632
-    second: Vice_0
+      213: -2943310664998851243
+    second: 2x2_Library_1_0
   - first:
-      213: -7606913139791911393
-    second: Vice_1
+      213: 5343896974760111299
+    second: 2x2_Library_1_1
   - first:
-      213: 590912531564815335
-    second: Vice_2
+      213: -7203629824099338616
+    second: 2x2_Library_1_2
   - first:
-      213: 2583256120153598068
-    second: Vice_3
+      213: -9201908717458454743
+    second: 2x2_Library_1_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -52,7 +52,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Vice_0
+      name: 2x2_Library_1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00d7e3034d66a73f0800000000000000
-      internalID: -902295713805861632
+      spriteID: 55def156b824727d0800000000000000
+      internalID: -2943310664998851243
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Vice_1
+      name: 2x2_Library_1_1
       rect:
         serializedVersion: 2
         x: 128
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f16a3717dc0de6690800000000000000
-      internalID: -7606913139791911393
+      spriteID: 3cc6cd04cf5592a40800000000000000
+      internalID: 5343896974760111299
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Vice_2
+      name: 2x2_Library_1_2
       rect:
         serializedVersion: 2
         x: 0
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e36f3111d7533800800000000000000
-      internalID: 590912531564815335
+      spriteID: 886362967d0970c90800000000000000
+      internalID: -7203629824099338616
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Vice_3
+      name: 2x2_Library_1_3
       rect:
         serializedVersion: 2
         x: 128
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 478eb9d21c199d320800000000000000
-      internalID: 2583256120153598068
+      spriteID: 927815876c04c4080800000000000000
+      internalID: -9201908717458454743
       vertices: []
       indices: 
       edges: []

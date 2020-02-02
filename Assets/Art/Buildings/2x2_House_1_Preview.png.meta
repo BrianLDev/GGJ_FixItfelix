@@ -1,19 +1,31 @@
 fileFormatVersion: 2
-guid: 41702d1cb925c472d88a1f1152281b9a
+guid: 33130660ba3595e439abdf941304cfef
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -902295713805861632
-    second: Vice_0
+      213: 4861262304741276785
+    second: 2x2_House_1_0
   - first:
-      213: -7606913139791911393
-    second: Vice_1
+      213: -5513175875871797273
+    second: 2x2_House_1_1
   - first:
-      213: 590912531564815335
-    second: Vice_2
+      213: -4003351931330483591
+    second: 2x2_House_1_2
   - first:
-      213: 2583256120153598068
-    second: Vice_3
+      213: -521726063915787526
+    second: 2x2_House_1_3
+  - first:
+      213: 6010248937629664728
+    second: 2x2_House_1_0
+  - first:
+      213: 8958646910389574113
+    second: 2x2_House_1_1
+  - first:
+      213: 4831919083154747925
+    second: 2x2_House_1_2
+  - first:
+      213: 3317188529679658581
+    second: 2x2_House_1_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -52,7 +64,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -110,7 +122,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Vice_0
+      name: 2x2_House_1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +136,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00d7e3034d66a73f0800000000000000
-      internalID: -902295713805861632
+      spriteID: 8d5c51ba091b86350800000000000000
+      internalID: 6010248937629664728
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Vice_1
+      name: 2x2_House_1_1
       rect:
         serializedVersion: 2
         x: 128
@@ -145,14 +157,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f16a3717dc0de6690800000000000000
-      internalID: -7606913139791911393
+      spriteID: 1e9dbe966e1835c70800000000000000
+      internalID: 8958646910389574113
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Vice_2
+      name: 2x2_House_1_2
       rect:
         serializedVersion: 2
         x: 0
@@ -166,14 +178,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e36f3111d7533800800000000000000
-      internalID: 590912531564815335
+      spriteID: 512bed63ecc6e0340800000000000000
+      internalID: 4831919083154747925
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Vice_3
+      name: 2x2_House_1_3
       rect:
         serializedVersion: 2
         x: 128
@@ -187,8 +199,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 478eb9d21c199d320800000000000000
-      internalID: 2583256120153598068
+      spriteID: 55e6e8c7465090e20800000000000000
+      internalID: 3317188529679658581
       vertices: []
       indices: 
       edges: []

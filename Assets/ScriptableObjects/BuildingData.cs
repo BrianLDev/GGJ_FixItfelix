@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.Serialization;
 using UnityEditor;
 
 // A BuildingData object represents a certain kind of building
@@ -11,6 +12,9 @@ public class BuildingData : ScriptableObject
 	public Tilemap BuildingShape;
 
 	public GameObject LogicPrefab;
+
+	[FormerlySerializedAs("PreviewImage")]
+	public Sprite PreviewSprite;
 }
 
 [CustomEditor(typeof(BuildingData))]
