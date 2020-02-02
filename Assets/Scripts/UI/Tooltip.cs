@@ -21,6 +21,8 @@ public class Tooltip : MonoBehaviour
 
     private RectTransform rectTransform;
 
+    private GameObject target = null;
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,11 +48,37 @@ public class Tooltip : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-        transform.position = new Vector3(Input.mousePosition.x + (rectTransform.rect.width / 2.0f), Input.mousePosition.y + (rectTransform.rect.height / 2.0f));
+        if (target)
+        {
+            RectTransform targetTransform = target.GetComponent<RectTransform>();
+            if (targetTransform)
+            {
+                Debug.Log((targetTransform.rect.width / 2.0f) + ", " + target.transform.position.x + ", " + (rectTransform.rect.width / 2.0f));
+                //rectTransform.rect.Set((targetTransform.rect.width / 2.0f) + targetTransform.rect.x + (rectTransform.rect.width / 2.0f), (targetTransform.rect.height / 2.0f) + targetTransform.rect.y + (rectTransform.rect.height / 2.0f), rectTransform.rect.width, rectTransform.rect.height);
+                //rectTransform.rect.Set(target.transform.position.x, target.transform.position.y, rectTransform.rect.width, rectTransform.rect.height);
+                transform.position = new Vector3(target.transform.position.x + (targetTransform.rect.width / 2.0f) + (rectTransform.rect.width / 3.0f), target.transform.position.y + (targetTransform.rect.height / 2.0f) + (rectTransform.rect.height / 3.0f));
+            }
+            else
+            {
+                transform.position = new Vector3(target.transform.position.x + (rectTransform.rect.width / 2.0f), target.transform.position.y + (rectTransform.rect.height / 2.0f));
+            }
+        }
+        else
+        {
+            transform.position = new Vector3(Input.mousePosition.x + (rectTransform.rect.width / 2.0f), Input.mousePosition.y + (rectTransform.rect.height / 2.0f));
+        }
     }
 
-    public static void ShowTooltip(string titleText, string bodyText, int costAmount = 0, int benefitAmount = 0)
+    public static void ShowTooltip(GameObject gameObject = null, string titleText = "", string bodyText = "", int costAmount = 0, int benefitAmount = 0)
     {
+        ShowTooltip(titleText, bodyText, costAmount, benefitAmount);
+        tooltip.target = gameObject;
+    }
+
+    public static void ShowTooltip(string titleText = "", string bodyText = "", int costAmount = 0, int benefitAmount = 0)
+    {
+        tooltip.target = null;
+
         tooltip.title.text = titleText;
         tooltip.body.text = bodyText;
 

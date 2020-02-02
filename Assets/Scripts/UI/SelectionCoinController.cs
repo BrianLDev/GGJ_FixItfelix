@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SelectionCoinController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class SelectionCoinController : TooltipListener, IPointerClickHandler
 {
 	[HideInInspector]
 	public BuildingRadialMenu MenuController;
@@ -18,8 +18,9 @@ public class SelectionCoinController : MonoBehaviour, IPointerEnterHandler, IPoi
 	private float _currentScale = 1;
 
 
-	public void OnPointerEnter(PointerEventData data)
+	public override void OnPointerEnter(PointerEventData data)
 	{
+        base.OnPointerEnter(data);
 		_hover = true;
 	}
 
@@ -44,8 +45,9 @@ public class SelectionCoinController : MonoBehaviour, IPointerEnterHandler, IPoi
 		MenuController.SelectedIndex = OptionIndex;
 	}
 
-	public void OnPointerExit(PointerEventData data)
+	public override void OnPointerExit(PointerEventData data)
 	{
-		_hover = false;
+        base.OnPointerExit(data);
+        _hover = false;
 	}
 }
