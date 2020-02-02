@@ -409,7 +409,7 @@ MonoBehaviour:
   numberOfMindDemons: 010000000200000002000000
   numberOfBodyDemons: 000000000000000000000000
   numberOfSoulDemons: 000000000000000001000000
-  levelManager: {fileID: 0}
+  levelManager: {fileID: 3930784277232875445}
   audioManager: {fileID: 5094764131756103051}
   nightDuration: 30
 --- !u!1 &7272438394493841709
@@ -778,6 +778,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b85895783d1c81b4aae1f150c69ac993, type: 3}
+--- !u!1 &3930784277232875445 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2508849157969283545, guid: b85895783d1c81b4aae1f150c69ac993,
+    type: 3}
+  m_PrefabInstance: {fileID: 1467551692129828460}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3930784277232875447 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2508849157969283547, guid: b85895783d1c81b4aae1f150c69ac993,
@@ -1358,15 +1364,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e05cc3401dbd5414983f80320d7c81af, type: 3}
---- !u!4 &6695840281872849889 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 69249070639771292, guid: e05cc3401dbd5414983f80320d7c81af,
-    type: 3}
-  m_PrefabInstance: {fileID: 6636725762630759805}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6695840281872849895 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 69249070639771290, guid: e05cc3401dbd5414983f80320d7c81af,
+    type: 3}
+  m_PrefabInstance: {fileID: 6636725762630759805}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6695840281872849889 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 69249070639771292, guid: e05cc3401dbd5414983f80320d7c81af,
     type: 3}
   m_PrefabInstance: {fileID: 6636725762630759805}
   m_PrefabAsset: {fileID: 0}
