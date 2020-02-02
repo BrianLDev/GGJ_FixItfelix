@@ -101,7 +101,12 @@ public class BuildingRadialMenu : MonoBehaviour, IInitializePotentialDragHandler
 		if (SelectedIndex.HasValue)
 		{
 			BuildingManager.RepairTile(mapPosition, options[SelectedIndex.Value]);
-			StartCoroutine(RetractCoin(coins[SelectedIndex.Value], coins[SelectedIndex.Value].GetComponent<RectTransform>().anchoredPosition));
+			yield return StartCoroutine(RetractCoin(coins[SelectedIndex.Value], coins[SelectedIndex.Value].GetComponent<RectTransform>().anchoredPosition));
+		}
+
+		for (int i = 0; i < coins.Length; i++)
+		{
+			Destroy(coins[i]);
 		}
 	}
 
@@ -133,12 +138,13 @@ public class BuildingRadialMenu : MonoBehaviour, IInitializePotentialDragHandler
 
 		RectTransform coinTransform = coin.GetComponent<RectTransform>();
 		Vector3 startPosition = coinTransform.anchoredPosition;
+		Vector3 startScale = coinTransform.localScale;
 
 		while (Time.time - startTime < CoinsExpandTime)
 		{
 			float progress = (Time.time - startTime) / CoinsExpandTime;
 
-			coinTransform.localScale = Vector3.one * (1 - progress);
+			coinTransform.localScale = startScale * (1 - progress);
 			coinTransform.anchoredPosition = Vector3.Lerp(startPosition, endPosition, progress);
 
 			yield return null;
