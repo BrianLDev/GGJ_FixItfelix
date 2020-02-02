@@ -47,6 +47,11 @@ public class BuildingHealth : MonoBehaviour
 		CurrentHealth += MaxHealth - oldMaxHealth;
 	}
 
+	public void DoRepair()
+	{
+		CurrentHealth = MaxHealth;
+	}
+
 	public void OnHealthBonusChanged(int prevPercent, int nextPercent)
 	{
 		int oldMaxHealth = MaxHealth;

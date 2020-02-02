@@ -4,11 +4,20 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Linq;
 
-[System.Serializable]
+[Serializable]
 public struct ConstructionSpace
 {
 	public Vector3Int LocalOrigin;
 	public ConstructionSpaceData Data;
+}
+
+[Serializable]
+public struct RepairConfig
+{
+	public int HealthNumerator;
+	public int HealthDenominator;
+	public int CostNumerator;
+	public int CostDenominator;
 }
 
 public class BuildingManager : MonoBehaviour
@@ -16,6 +25,8 @@ public class BuildingManager : MonoBehaviour
 	public Tilemap Map;
 
 	public ConstructionSpace[] ConstructionSpaces;
+
+	public RepairConfig[] RepairCosts;
 
 	private Dictionary<Vector3Int, ConstructionSpace> _positionToConstructionSpace;
 	private Dictionary<Vector3Int, GameObject> _positionToBuildingLogic;
@@ -45,7 +56,7 @@ public class BuildingManager : MonoBehaviour
 		playerStats = this.transform.parent.gameObject.GetComponentInChildren<PlayerStatsScript>();
 	}
 
-	public BuildingData[] GetRepairOptions(Vector3Int position)
+	public BuildingData[] GetConstructionOptions(Vector3Int position)
 	{
 		if (!_positionToConstructionSpace.ContainsKey(position))
 		{
@@ -58,7 +69,7 @@ public class BuildingManager : MonoBehaviour
 
 	public void ConstructBuildingOnTile(Vector3Int position, BuildingData buildingOption)
 	{
-		if (!_positionToConstructionSpace.ContainsKey(position))
+		if (!HasRuin(position))
 		{
 			Debug.LogError($"Position {position} does not have a ruined building to restore");
 			return;
@@ -121,6 +132,82 @@ public class BuildingManager : MonoBehaviour
 		{
 			_activeBuildingLogic.Remove(buildingLogic);
 			OnHealthBonusMayHaveChanged();
+		}
+	}
+
+	public enum BuildingAction
+	{
+		UPGRADE_HEALTH,
+		UPGRADE_PRODUCTION,
+		REPAIR
+	}
+
+	public BuildingAction[] GetBuildingActionOptions(Vector3Int position)
+	{
+		if (!HasActiveBuilding(position))
+		{
+			Debug.LogError($"Position {position} does not have a working building to act on");
+			return null;
+		}
+
+		List<BuildingAction> options = new List<BuildingAction>();
+		GameObject buildingLogic = _positionToBuildingLogic[position];
+		if (buildingLogic.GetComponent<BuildingLogicBase>().CanUpgradeProduction())
+		{
+			options.Add(BuildingAction.UPGRADE_PRODUCTION);
+		}
+		BuildingHealth buildingHealth = buildingLogic.GetComponent<BuildingHealth>();
+		if (buildingHealth.CanUpgradeHealth())
+		{
+			options.Add(BuildingAction.UPGRADE_HEALTH);
+		}
+		if (buildingHealth.CurrentHealth < buildingHealth.MaxHealth)
+		{
+			options.Add(BuildingAction.REPAIR);
+		}
+		return options.ToArray();
+	}
+
+	private int GetRepairCost(BuildingHealth health)
+	{
+		int healthLost = health.MaxHealth - health.CurrentHealth;
+		int buildingCost = health.GetComponent<BuildingInfo>().BaseCost;
+		foreach (RepairConfig config in RepairCosts)
+		{
+			if (healthLost * config.HealthDenominator < health.MaxHealth * config.HealthNumerator)
+			{
+				return buildingCost * config.CostNumerator / config.CostDenominator;
+			}
+		}
+		Debug.LogError("Unexpected branch in GetRepairCost");
+		Debug.LogError($"Building health {health.CurrentHealth} max health {health.MaxHealth} health lost {healthLost}");
+		Debug.LogError("Defaulting to full cost");
+		return buildingCost;
+	}
+
+	public void ExecuteActionOnBuilding(Vector3Int position, BuildingAction action)
+	{
+		GameObject buildingLogic = _positionToBuildingLogic[position];
+		BuildingHealth health = buildingLogic.GetComponent<BuildingHealth>();
+		BuildingLogicBase logic = buildingLogic.GetComponent<BuildingLogicBase>();
+
+		switch (action)
+		{
+		case BuildingAction.UPGRADE_HEALTH:
+			health.DoUpgradeHealth();
+			return;
+		case BuildingAction.UPGRADE_PRODUCTION:
+			logic.DoUpgradeProduction();
+			return;
+		case BuildingAction.REPAIR:
+			int cost = GetRepairCost(health);
+			if (cost > playerStats.GetMind())
+			{
+				return;
+			}
+			health.DoRepair();
+			playerStats.UpdateMind(-cost);
+			return;
 		}
 	}
 
