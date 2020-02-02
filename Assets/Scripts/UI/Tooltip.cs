@@ -48,10 +48,12 @@ public class Tooltip : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
+        print(target != null);
         if (target)
         {
             RectTransform targetTransform = target.GetComponent<RectTransform>();
-            if (targetTransform)
+            print(targetTransform != null);
+            if (targetTransform != null)
             {
                 Debug.Log((targetTransform.rect.width / 2.0f) + ", " + target.transform.position.x + ", " + (rectTransform.rect.width / 2.0f));
                 //rectTransform.rect.Set((targetTransform.rect.width / 2.0f) + targetTransform.rect.x + (rectTransform.rect.width / 2.0f), (targetTransform.rect.height / 2.0f) + targetTransform.rect.y + (rectTransform.rect.height / 2.0f), rectTransform.rect.width, rectTransform.rect.height);
@@ -60,12 +62,13 @@ public class Tooltip : MonoBehaviour
             }
             else
             {
-                transform.position = new Vector3(5 + target.transform.position.x + (rectTransform.rect.width / 2.0f), 5 + target.transform.position.y + (rectTransform.rect.height / 2.0f));
+                //transform.position = new Vector3(5 + target.transform.position.x + (rectTransform.rect.width / 2.0f), 5 + target.transform.position.y + (rectTransform.rect.height / 2.0f));
+                transform.position = new Vector3(5 + Input.mousePosition.x + (rectTransform.rect.width / 2.0f), 5 + Input.mousePosition.y + (rectTransform.rect.height / 2.0f));
             }
         }
         else
         {
-            transform.position = new Vector3(Input.mousePosition.x + (rectTransform.rect.width / 2.0f), Input.mousePosition.y + (rectTransform.rect.height / 2.0f));
+            transform.position = new Vector3(5 + Input.mousePosition.x + (rectTransform.rect.width / 2.0f), 5 + Input.mousePosition.y + (rectTransform.rect.height / 2.0f));
         }
     }
 
@@ -77,6 +80,7 @@ public class Tooltip : MonoBehaviour
 
     public static void ShowTooltip(string titleText = "", string bodyText = "", int costAmount = 0, int benefitAmount = 0)
     {
+        costAmount = -costAmount;
         tooltip.target = null;
 
         tooltip.title.text = titleText;

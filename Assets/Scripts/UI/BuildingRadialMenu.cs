@@ -45,17 +45,54 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerClickHandler
 		}
 	}
 
-	private void SelectConstructBuildingMenu(Vector3Int mapPosition)
+    private void ApplyTooltip(SelectionCoinController coinController, BuildingData buildingData)
+    {
+        BuildingInfo buildingInfo = buildingData.LogicPrefab.GetComponent<BuildingInfo>();
+        coinController.titleText = buildingData.tooltipTitle;
+        coinController.bodyText = buildingData.tooltipDescription;
+        coinController.cost = buildingInfo.BaseCost;
+        coinController.benefit = buildingData.LogicPrefab.GetComponent<BuildingHealth>().BaseHealthData[0];
+    }
+
+    private void SelectConstructBuildingMenu(Vector3Int mapPosition)
 	{
-		StartCoroutine(DoSelectMenu(
-			mapPosition,
-			() => BuildingManager.GetConstructionOptions(mapPosition),
-			data => data.PreviewSprite,
-			(index, buildingData) => BuildingManager.ConstructBuildingOnTile(mapPosition, buildingData)
-		));
+        StartCoroutine(DoSelectMenu(
+            mapPosition,
+            () => BuildingManager.GetConstructionOptions(mapPosition),
+            data => data.PreviewSprite,
+            (index, buildingData) => BuildingManager.ConstructBuildingOnTile(mapPosition, buildingData),
+            (coinController, option) => ApplyTooltip(coinController, option)
+        ));
 	}
 
-	private void SelectBuildingActionMenu(Vector3Int mapPosition)
+    private void ApplyTooltip(Vector3Int mapPosition, SelectionCoinController coinController, BuildingManager.BuildingAction buildingAction)
+    {
+        GameObject buildingLogic = BuildingManager.instance._positionToBuildingLogic[mapPosition];
+        BuildingHealth health = buildingLogic.GetComponent<BuildingHealth>();
+        BuildingLogicBase logic = buildingLogic.GetComponent<BuildingLogicBase>();
+
+        switch (buildingAction)
+        {
+            case BuildingManager.BuildingAction.UPGRADE_HEALTH:
+                coinController.titleText = "Upgrade: Add Walls";
+                coinController.bodyText = "Add walls to the building, upgrading its health.";
+				coinController.cost = BuildingManager.GetHealthUpgradeCost(health);
+                return;
+            case BuildingManager.BuildingAction.UPGRADE_PRODUCTION:
+                coinController.titleText = "Upgrade: Renovate Building";
+                coinController.bodyText = "Improve the efficiency of this building.";
+				coinController.cost = BuildingManager.GetProductionUpgradeCost(logic);
+                return;
+            case BuildingManager.BuildingAction.REPAIR:
+                coinController.titleText = "Repair";
+                coinController.bodyText = "Repair this building to full health. Cost based on damage.";
+                coinController.cost = BuildingManager.instance.GetRepairCost(health);
+                coinController.benefit = health.MaxHealth - health.CurrentHealth;
+                return;
+        }
+    }
+
+    private void SelectBuildingActionMenu(Vector3Int mapPosition)
 	{
 		StartCoroutine(DoSelectMenu(
 			mapPosition,
@@ -73,8 +110,9 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerClickHandler
 				}
 				return null;
 			},
-			(index, action) => BuildingManager.ExecuteActionOnBuilding(mapPosition, action)
-		));
+			(index, action) => BuildingManager.ExecuteActionOnBuilding(mapPosition, action),
+            (coinController, option) => ApplyTooltip(mapPosition, coinController, option)
+        ));
 	}
 
 	private Vector2 WorldToCanvasPosition(Vector2 worldPosition)
@@ -88,7 +126,8 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerClickHandler
 		Vector3Int mapPosition,
 		Func<TOption[]> getOptions,
 		Func<TOption, Sprite> getPreviewSprite,
-		Action<int, TOption> executeSelection
+		Action<int, TOption> executeSelection,
+        Action<SelectionCoinController, TOption> applyTooltip
 	)
 	{
 		_active = true;
@@ -116,8 +155,9 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerClickHandler
 			coinController.HighlightScale = CoinHighlightScale;
 			coinController.HighlightTime = CoinHighlightTime;
 			coinController.CanScale = false;
+            applyTooltip(coinController, options[i]);
 
-			animations[i] = StartCoroutine(ExtendCoin(
+            animations[i] = StartCoroutine(ExtendCoin(
 				coins[i],
 				Mathf.Lerp(0, 2 * Mathf.PI, (float)i / options.Length)
 			));

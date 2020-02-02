@@ -12,7 +12,7 @@ public class TooltipListener : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void OnMouseEnter()
     {
-        Tooltip.ShowTooltip(this.gameObject, titleText, bodyText, cost, benefit);
+        Tooltip.ShowTooltip(titleText, bodyText, cost, benefit);
     }
 
     public void OnMouseExit()
@@ -22,13 +22,11 @@ public class TooltipListener : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
-        print("OPEn");
         Tooltip.ShowTooltip(this.gameObject, titleText, bodyText, cost, benefit);
     }
 
     public virtual void OnPointerExit(PointerEventData eventData)
     {
-        print("OPEx");
         Tooltip.HideTooltip();
     }
 }

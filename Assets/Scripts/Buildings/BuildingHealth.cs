@@ -12,12 +12,12 @@ public class BuildingHealth : MonoBehaviour
 	public int MaxHealth { get; private set; }
 	public int CurrentHealth { get; private set; }
 
-	private int _healthLevel;
+	public int HealthUpgradeLevel { get; private set; }
 
 	private void Start()
 	{
-		_healthLevel = 0;
-		MaxHealth = BaseHealthData[_healthLevel] * (100 + BuildingManager.CachedHealthBonusPercent) / 100;
+		HealthUpgradeLevel = 0;
+		MaxHealth = BaseHealthData[HealthUpgradeLevel] * (100 + BuildingManager.CachedHealthBonusPercent) / 100;
 		CurrentHealth = MaxHealth;
 	}
 
@@ -39,14 +39,14 @@ public class BuildingHealth : MonoBehaviour
 
 	public bool CanUpgradeHealth()
 	{
-		return _healthLevel + 1 < BaseHealthData.Length;
+		return HealthUpgradeLevel + 1 < BaseHealthData.Length;
 	}
 
 	public void DoUpgradeHealth()
 	{
-		_healthLevel += 1;
+		HealthUpgradeLevel += 1;
 		int oldMaxHealth = MaxHealth;
-		MaxHealth = BaseHealthData[_healthLevel] * (100 + BuildingManager.CachedHealthBonusPercent) / 100;
+		MaxHealth = BaseHealthData[HealthUpgradeLevel] * (100 + BuildingManager.CachedHealthBonusPercent) / 100;
 		CurrentHealth += MaxHealth - oldMaxHealth;
 	}
 
@@ -58,7 +58,7 @@ public class BuildingHealth : MonoBehaviour
 	public void OnHealthBonusChanged(int prevPercent, int nextPercent)
 	{
 		int oldMaxHealth = MaxHealth;
-		MaxHealth = BaseHealthData[_healthLevel] * (100 + nextPercent) / 100;
+		MaxHealth = BaseHealthData[HealthUpgradeLevel] * (100 + nextPercent) / 100;
 		CurrentHealth += MaxHealth - oldMaxHealth;
 		CheckForDestruction();
 	}
