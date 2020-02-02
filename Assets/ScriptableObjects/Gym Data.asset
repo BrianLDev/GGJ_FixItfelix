@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BuildingShape: {fileID: 7432836789938919089, guid: d275d72a3b1be3445ba0bae0d08e72c6,
     type: 3}
-  LogicPrefab: {fileID: 0}
+  LogicPrefab: {fileID: 8737113611656038525, guid: c8ddf63a4ec57e641a7772490e7dba09,
+    type: 3}
   PreviewSprite: {fileID: 21300000, guid: e17013a88ab582645a55b0de6afb2785, type: 3}

@@ -6,7 +6,7 @@ public abstract class BuildingLogicBase : MonoBehaviour
 	public BuildingManager BuildingManager;
 
 	protected int _productionLevel;
-	public int[] LevelData;
+	public int[] LevelData = new int[3];
 
 	protected virtual void Start()
 	{

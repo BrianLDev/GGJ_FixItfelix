@@ -1,20 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &2742807026436896582
+--- !u!114 &5783196390748422630
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8737113611656038525}
+  m_GameObject: {fileID: 2672700915883887146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e757e89d50f352045a9bc882065c9e8e, type: 3}
+  m_Script: {fileID: 11500000, guid: 222017589534132459e14f47d54e23db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   BuildingManager: {fileID: 0}
-  LevelData: fa000000f401000020030000
---- !u!1001 &1153640789318993095
+  LevelData: 000000000000000000000000
+--- !u!1001 &5500495986421745296
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -24,32 +24,7 @@ PrefabInstance:
     - target: {fileID: -8716990988578812770, guid: 5c2f912ccbbc0564eb141d36ed0e5bda,
         type: 3}
       propertyPath: BaseCost
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: -8716990988578812770, guid: 5c2f912ccbbc0564eb141d36ed0e5bda,
-        type: 3}
-      propertyPath: BaseMaxHealth
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: -8716990988578812770, guid: 5c2f912ccbbc0564eb141d36ed0e5bda,
-        type: 3}
-      propertyPath: BaseT1MaxHealth
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: -8716990988578812770, guid: 5c2f912ccbbc0564eb141d36ed0e5bda,
-        type: 3}
-      propertyPath: BaseT2MaxHealth
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: -8716990988578812770, guid: 5c2f912ccbbc0564eb141d36ed0e5bda,
-        type: 3}
-      propertyPath: BaseT3MaxHealth
-      value: 400
-      objectReference: {fileID: 0}
-    - target: {fileID: -8716990988578812770, guid: 5c2f912ccbbc0564eb141d36ed0e5bda,
-        type: 3}
-      propertyPath: BuildingType
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7419627859965866650, guid: 5c2f912ccbbc0564eb141d36ed0e5bda,
         type: 3}
@@ -59,7 +34,7 @@ PrefabInstance:
     - target: {fileID: 7419627859965866650, guid: 5c2f912ccbbc0564eb141d36ed0e5bda,
         type: 3}
       propertyPath: BaseHealthData.Array.data[1]
-      value: 300
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 7419627859965866650, guid: 5c2f912ccbbc0564eb141d36ed0e5bda,
         type: 3}
@@ -69,7 +44,7 @@ PrefabInstance:
     - target: {fileID: 7584898115992259770, guid: 5c2f912ccbbc0564eb141d36ed0e5bda,
         type: 3}
       propertyPath: m_Name
-      value: Library Logic
+      value: Vice Logic
       objectReference: {fileID: 0}
     - target: {fileID: 7584898115992259771, guid: 5c2f912ccbbc0564eb141d36ed0e5bda,
         type: 3}
@@ -128,9 +103,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c2f912ccbbc0564eb141d36ed0e5bda, type: 3}
---- !u!1 &8737113611656038525 stripped
+--- !u!1 &2672700915883887146 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7584898115992259770, guid: 5c2f912ccbbc0564eb141d36ed0e5bda,
     type: 3}
-  m_PrefabInstance: {fileID: 1153640789318993095}
+  m_PrefabInstance: {fileID: 5500495986421745296}
   m_PrefabAsset: {fileID: 0}
