@@ -56,7 +56,7 @@ public class BuildingManager : MonoBehaviour
 		return _positionToConstructionSpace[position].Data.RepairOptions;
 	}
 
-	public void RepairTile(Vector3Int position, BuildingData repairOption)
+	public void ConstructBuildingOnTile(Vector3Int position, BuildingData buildingOption)
 	{
 		if (!_positionToConstructionSpace.ContainsKey(position))
 		{
@@ -65,12 +65,12 @@ public class BuildingManager : MonoBehaviour
 		}
 
 		ConstructionSpace space = _positionToConstructionSpace[position];
-		Tilemap buildingShape = repairOption.BuildingShape;
+		Tilemap buildingShape = buildingOption.BuildingShape;
 
 		GameObject buildingLogic = null;
-		if (repairOption.LogicPrefab != null)
+		if (buildingOption.LogicPrefab != null)
 		{
-			buildingLogic = Instantiate(repairOption.LogicPrefab);
+			buildingLogic = Instantiate(buildingOption.LogicPrefab);
 			int buildingCost = buildingLogic.GetComponent<BuildingInfo>().BaseCost;
 
 			if (playerStats.GetMind() - buildingCost >= 0)

@@ -51,7 +51,7 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerClickHandler
 			mapPosition,
 			() => BuildingManager.GetRepairOptions(mapPosition),
 			data => data.PreviewSprite,
-			(index, buildingData) => BuildingManager.RepairTile(mapPosition, buildingData)
+			(index, buildingData) => BuildingManager.ConstructBuildingOnTile(mapPosition, buildingData)
 		));
 	}
 
