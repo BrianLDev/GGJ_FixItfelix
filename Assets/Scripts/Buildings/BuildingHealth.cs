@@ -44,6 +44,12 @@ public class BuildingHealth : MonoBehaviour
 		return HealthUpgradeLevel + 1 < BaseHealthData.Length;
 	}
 
+	public int PredictHealthUpgradeIncrease()
+	{
+		int newMaxHealth = BaseHealthData[HealthUpgradeLevel+1] * (100 + BuildingManager.CachedHealthBonusPercent) / 100;
+		return newMaxHealth - MaxHealth;
+	}
+
 	public void DoUpgradeHealth()
 	{
 		HealthUpgradeLevel += 1;
