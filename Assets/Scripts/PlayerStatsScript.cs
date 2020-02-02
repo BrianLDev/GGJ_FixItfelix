@@ -11,8 +11,11 @@ public class PlayerStatsScript : MonoBehaviour
     private float mySoul;
     private MeterScript meterScript;
 
+    public static PlayerStatsScript instance;
+
     void Awake()
     {
+        instance = this;
         myMind = 100.0f;
         myBody = 100.0f;
         mySoul = 100.0f;

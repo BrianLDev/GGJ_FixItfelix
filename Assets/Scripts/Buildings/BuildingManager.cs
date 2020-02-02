@@ -113,7 +113,37 @@ public class BuildingManager : MonoBehaviour
 		if (buildingOption.LogicPrefab != null)
 		{
 			int buildingCost = buildingOption.LogicPrefab.GetComponent<BuildingInfo>().BaseCost;
-			if (playerStats.GetMind() - buildingCost < 0)
+            if (Characters.lysEnabled)
+            {
+                if (buildingOption.LogicPrefab.GetComponent<BuildingInfo>().BuildingType == BuildingType.Mind)
+                {
+                    buildingCost = Mathf.CeilToInt(buildingCost * 0.75f);
+                }
+                else
+                {
+                    buildingCost = Mathf.CeilToInt(buildingCost * 1.50f);
+                }
+            }
+            else if (Characters.angelEnabled)
+            {
+                if (buildingOption.LogicPrefab.GetComponent<BuildingInfo>().BuildingType == BuildingType.Mind)
+                {
+                    buildingCost = Mathf.CeilToInt(buildingCost * 1.5f);
+                }
+                else
+                {
+                    buildingCost = Mathf.CeilToInt(buildingCost * 0.75f);
+                }
+            }
+            else if (Characters.steelEnabled)
+            {
+                if (buildingOption.LogicPrefab.GetComponent<BuildingInfo>().BuildingType == BuildingType.Body)
+                {
+                    buildingCost = Mathf.CeilToInt(buildingCost * 0.75f);
+                }
+            }
+
+            if (playerStats.GetMind() - buildingCost < 0)
 			{
 				return;
 			}
@@ -382,6 +412,10 @@ public class BuildingManager : MonoBehaviour
 	{
 		int oldHealthBonusPercent = CachedHealthBonusPercent;
 		CachedHealthBonusPercent = ComputeTotalHealthBonusPercent();
+        if (Characters.jacqueEnabled)
+        {
+            CachedHealthBonusPercent = CachedHealthBonusPercent + 25;
+        }
 
 		if (CachedHealthBonusPercent != oldHealthBonusPercent)
 		{

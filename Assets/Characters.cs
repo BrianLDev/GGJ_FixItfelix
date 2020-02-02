@@ -69,10 +69,13 @@ public class Characters : NightTimeListener
         else if (characterID == jacqueID)
         {
             jacqueEnabled = true;
+            BuildingManager.instance.OnHealthBonusMayHaveChanged();
+            PlayerStatsScript.instance.UpdateMind(-200f);
         }
         else if (characterID == steelID)
         {
             steelEnabled = true;
+            PlayerStatsScript.instance.UpdateSoul(-100f);
         }
         else if (characterID == angelID)
         {
