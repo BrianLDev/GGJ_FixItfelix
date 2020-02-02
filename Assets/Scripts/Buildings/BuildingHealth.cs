@@ -9,6 +9,8 @@ public class BuildingHealth : MonoBehaviour
 	public BuildingManager BuildingManager;
 	public int[] BaseHealthData;
 
+	public Sprite WallSprite;
+
 	public int MaxHealth { get; private set; }
 	public int CurrentHealth { get; private set; }
 

@@ -46,6 +46,12 @@ PrefabInstance:
       propertyPath: BaseHealthData.Array.data[2]
       value: 750
       objectReference: {fileID: 0}
+    - target: {fileID: 7419627859965866650, guid: 5c2f912ccbbc0564eb141d36ed0e5bda,
+        type: 3}
+      propertyPath: WallSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 656ad717dea704a5ca5d74a8e9183cb3,
+        type: 3}
     - target: {fileID: 7584898115992259770, guid: 5c2f912ccbbc0564eb141d36ed0e5bda,
         type: 3}
       propertyPath: m_Name
