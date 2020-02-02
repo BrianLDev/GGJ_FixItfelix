@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Characters : MonoBehaviour
+public class Characters : NightTimeListener
 {
     public static Characters instance;
 
@@ -86,5 +86,49 @@ public class Characters : MonoBehaviour
     {
         characterID = 0;
         characterCanvas.SetActive(false);
+    }
+
+    public override void StartNewDay(DayNightCycle cycle)
+    {
+        if (cycle.GetCurrentDay() % 2 == 1)
+        {
+            int random = Random.Range(0, 3);
+            if (lysEnabled)
+            {
+                random = random + 1;
+            }
+
+            if (jacqueEnabled)
+            {
+                random = random + 1;
+            }
+
+            if (angelEnabled)
+            {
+                random = random + 1;
+            }
+
+            if (!angelEnabled && random >= 3)
+            {
+                StartCharacter(angelID);
+            }
+            else if (!lysEnabled && random >= 2)
+            {
+                StartCharacter(lysID);
+            }
+            else if (!steelEnabled && random >= 1)
+            {
+                StartCharacter(steelID);
+            }
+            else if (!jacqueEnabled)
+            {
+                StartCharacter(jacqueID);
+            }
+        }
+    }
+
+    public override void StartNewNight(DayNightCycle cycle)
+    {
+        throw new System.NotImplementedException();
     }
 }
