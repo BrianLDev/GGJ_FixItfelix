@@ -103,15 +103,15 @@ public class MeterScript : MonoBehaviour
 
             if (GUI.tooltip == mindTooltipText)
             {
-                Tooltip.ShowTooltip(mindTitle, GUI.tooltip);
+                Tooltip.ShowTooltip(mindTitle, GUI.tooltip + " [" + Mathf.FloorToInt(PlayerStatsScript.instance.GetMind()).ToString() + "]");
             }
             else if (GUI.tooltip == bodyTooltipText)
             {
-                Tooltip.ShowTooltip(bodyTitle, GUI.tooltip);
+                Tooltip.ShowTooltip(bodyTitle, GUI.tooltip + " [" + Mathf.FloorToInt(PlayerStatsScript.instance.GetBody()).ToString() + "]");
             }
             else if (GUI.tooltip == soulTooltipText)
             {
-                Tooltip.ShowTooltip(soulTitle, GUI.tooltip);
+                Tooltip.ShowTooltip(soulTitle, GUI.tooltip + " [" + Mathf.FloorToInt(PlayerStatsScript.instance.GetSoul()).ToString() + "]");
             }
             else if (tooltipTitle == mindTitle || tooltipTitle == bodyTitle || tooltipTitle == soulTitle)
             {
