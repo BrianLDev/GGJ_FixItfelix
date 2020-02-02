@@ -48,21 +48,15 @@ public class Tooltip : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-        print(target != null);
         if (target)
         {
             RectTransform targetTransform = target.GetComponent<RectTransform>();
-            print(targetTransform != null);
             if (targetTransform != null)
             {
-                Debug.Log((targetTransform.rect.width / 2.0f) + ", " + target.transform.position.x + ", " + (rectTransform.rect.width / 2.0f));
-                //rectTransform.rect.Set((targetTransform.rect.width / 2.0f) + targetTransform.rect.x + (rectTransform.rect.width / 2.0f), (targetTransform.rect.height / 2.0f) + targetTransform.rect.y + (rectTransform.rect.height / 2.0f), rectTransform.rect.width, rectTransform.rect.height);
-                //rectTransform.rect.Set(target.transform.position.x, target.transform.position.y, rectTransform.rect.width, rectTransform.rect.height);
                 transform.position = new Vector3(target.transform.position.x + (targetTransform.rect.width / 2.0f) + (rectTransform.rect.width / 3.0f), target.transform.position.y + (targetTransform.rect.height / 2.0f) + (rectTransform.rect.height / 3.0f));
             }
             else
             {
-                //transform.position = new Vector3(5 + target.transform.position.x + (rectTransform.rect.width / 2.0f), 5 + target.transform.position.y + (rectTransform.rect.height / 2.0f));
                 transform.position = new Vector3(5 + Input.mousePosition.x + (rectTransform.rect.width / 2.0f), 5 + Input.mousePosition.y + (rectTransform.rect.height / 2.0f));
             }
         }

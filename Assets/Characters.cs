@@ -25,19 +25,37 @@ public class Characters : NightTimeListener
 
     public GameObject characterCanvas;
 
+    public float dayTime = 0.0f;
+    public bool startedCharacter = false;
+
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
         characterCanvas = transform.Find("CharacterCanvas").gameObject;
         characterImage = characterCanvas.transform.Find("Image").GetComponent<RawImage>();
+    }
 
-        //StartCharacter(steelID);
+    public void FixedUpdate()
+    {
+        if (DayNightCycle.instance.IsNightTime())
+        {
+            dayTime = 0.0f;
+            startedCharacter = false;
+        }
+        else
+        {
+            dayTime = dayTime + Time.fixedDeltaTime;
+            if (dayTime > 3.0f && characterID != 0 && !startedCharacter)
+            {
+                StartCharacter(characterID);
+                startedCharacter = true;
+            }
+        }
     }
 
     public void StartCharacter(int idToStart)
     {
-        print("start" + idToStart);
         characterCanvas.SetActive(true);
         if (idToStart == lysID)
         {
@@ -111,21 +129,22 @@ public class Characters : NightTimeListener
                 random = random + 1;
             }
 
+            
             if (!angelEnabled && random >= 3)
             {
-                StartCharacter(angelID);
+                characterID = angelID;
             }
             else if (!lysEnabled && random >= 2)
             {
-                StartCharacter(lysID);
+                characterID = lysID;
             }
             else if (!steelEnabled && random >= 1)
             {
-                StartCharacter(steelID);
+                characterID = steelID;
             }
             else if (!jacqueEnabled)
             {
-                StartCharacter(jacqueID);
+                characterID = jacqueID;
             }
         }
     }
