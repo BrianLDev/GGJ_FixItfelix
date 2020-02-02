@@ -20,6 +20,7 @@ public class DayNightCycle : MonoBehaviour
     public Camera theCamera;
     CameraShader shader;
 
+    public static DayNightCycle instance;
 
     [FormerlySerializedAs("nightDuration")]
 	public float defaultNightDuration = 10.0f;
@@ -39,6 +40,8 @@ public class DayNightCycle : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
+        instance = this;
+
         shader = theCamera.GetComponent<CameraShader>();
 
         lss = levelManager.GetComponent<LevelStateScript>();

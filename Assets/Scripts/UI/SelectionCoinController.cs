@@ -12,7 +12,8 @@ public class SelectionCoinController : TooltipListener, IPointerClickHandler
 	[HideInInspector]
 	public float HighlightTime;
 	[HideInInspector]
-	public bool CanScale = false;
+	public bool FullyActive = false; // If the coin is fully extended and the player can afford to select this option
+	public bool CanAfford;
 	private bool _hover;
 
 	private float _currentScale = 1;
@@ -33,7 +34,7 @@ public class SelectionCoinController : TooltipListener, IPointerClickHandler
 
 	private void Update()
 	{
-		if (!CanScale) return;
+		if (!FullyActive) return;
 
 		if (_hover)
 		{
@@ -49,6 +50,7 @@ public class SelectionCoinController : TooltipListener, IPointerClickHandler
 
 	public void OnPointerClick(PointerEventData data)
 	{
+		if (!FullyActive) return;
 		MenuController.SelectedIndex = OptionIndex;
         Tooltip.HideTooltip();
 	}
