@@ -14,6 +14,7 @@ public class LevelStateScript : MonoBehaviour
     private PlayerStatsScript pss;
     private DayNightCycle dnc;
     private SceneChanger sc;
+    private GameObject[] buildings;
 
     // Start is called before the first frame update
     void Start()
@@ -35,9 +36,21 @@ public class LevelStateScript : MonoBehaviour
         {
             LoseGame();
         }
-        if (pss.GetSoul() >= 2000)
+        else if (pss.GetSoul() >= 2000)
         {
             WinGame();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        GameObject[] bldgList = GameObject.FindGameObjectsWithTag("Building");
+
+        float totalBldgHealth = 0.0f;
+        // find building target
+        foreach (GameObject bldg in bldgList)
+        {
+            
         }
     }
 
