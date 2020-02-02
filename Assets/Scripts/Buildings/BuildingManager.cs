@@ -32,6 +32,7 @@ public class BuildingManager : MonoBehaviour
 	private Dictionary<Vector3Int, GameObject> _positionToBuildingLogic;
 	private HashSet<GameObject> _activeBuildingLogic;
 	private PlayerStatsScript playerStats;
+    private AudioManagerScript audioManager;
 
 	public int CachedHealthBonusPercent { get; private set; }
 
@@ -54,7 +55,8 @@ public class BuildingManager : MonoBehaviour
 		_activeBuildingLogic = new HashSet<GameObject>();
 
 		playerStats = this.transform.parent.gameObject.GetComponentInChildren<PlayerStatsScript>();
-	}
+        audioManager = this.transform.parent.gameObject.GetComponentInChildren<AudioManagerScript>();
+    }
 
 	public BuildingData[] GetConstructionOptions(Vector3Int position)
 	{
@@ -96,6 +98,8 @@ public class BuildingManager : MonoBehaviour
 			buildingLogic.GetComponent<BuildingHealth>().BuildingManager = this;
 			buildingLogic.GetComponent<BuildingLogicBase>().BuildingManager = this;
 
+            audioManager.PlayBuildingBuilt();
+
 			BuildingOnDestroyProxy proxy = buildingLogic.AddComponent<BuildingOnDestroyProxy>();
 			proxy.OnDestroyEvent.AddListener(() => ReturnToRuin(space, buildingLogic));
 		}
@@ -123,6 +127,7 @@ public class BuildingManager : MonoBehaviour
 				Map.SetTile(mapPosition, ruinShape.GetTile(ruinShapePosition));
 				_positionToBuildingLogic.Remove(mapPosition);
 			}
+            audioManager.PlayBuildingDestroyed();
 		}
 
 		if (buildingLogic != null)
