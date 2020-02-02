@@ -9,31 +9,33 @@ public class DemonSpawner : NightTimeListener
     private int bodyDemons;
     private int soulDemons;
     private static int demonCount;
+    private List<GameObject> activeDemons;
     private float timeBetweenSpawns;
     private float timeToNextSpawn;
     private bool isNightPhase = false;
     private float nightDuration;
+    private 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        activeDemons = new List<GameObject>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
     }
 
     void FixedUpdate() {
         if (isNightPhase) {
             spawningDemons();
+            nightDuration -= Time.fixedDeltaTime;
         }    
     }
 
     public override void StartNewNight(DayNightCycle cycle) {
-        Debug.Log("Demon spawner: enter night mode!");
+        Debug.Log("Demon spawner: enter night mode...");
         isNightPhase = true;
         mindDemons = cycle.GetNumMindDemons();
         bodyDemons = cycle.GetNumBodyDemons();
@@ -44,7 +46,8 @@ public class DemonSpawner : NightTimeListener
     }
 
     public override void StartNewDay(DayNightCycle cycle) {
-        Debug.Log("Demon spawner: night mode ending");
+        Debug.Log("Demon spawner: A new day begins...");
+        beGoneDemons();
         isNightPhase = false;
         mindDemons = 0;
         bodyDemons = 0;
@@ -56,15 +59,23 @@ public class DemonSpawner : NightTimeListener
         if (timeToNextSpawn <= 0 && demonCount > 0) {
             Vector3 spawnLocation = new Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height), 0);
             spawnLocation = Camera.main.ScreenToWorldPoint(spawnLocation);
-            Debug.Log("Spawning demon at..." + spawnLocation);
-            Instantiate(mindDemonPrefab, spawnLocation, Quaternion.identity);
+
+            Debug.Log("Spawning demon at: " + spawnLocation);
+            // TODO: select mind, body, or soul demon
+            GameObject demon = Instantiate(mindDemonPrefab, spawnLocation, Quaternion.identity);
+            activeDemons.Add(demon);
+
             demonCount--;
             timeToNextSpawn = timeBetweenSpawns;
         }
     }
 
     private void beGoneDemons() {
-        // TODO: write demon scatter code here
+        if (activeDemons.Count > 0) {
+            foreach (GameObject demon in activeDemons) {
+                demon.GetComponent<DemonAI>().EndNightPhase();
+            }
+        }
     }
 
 }
