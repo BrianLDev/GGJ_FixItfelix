@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class DemonAI : MonoBehaviour
 {
+    public enum DemonState { off_screen, idle, targeting, moving, attacking, vice, exiting }
+
     [SerializeField] string m_DemonType;
     [SerializeField] GameObject m_game_Manager;
-    
-    GameObject currentTarget = null;
-    public int speed = 10;
+    [SerializeField] int speed = 10;
+    [SerializeField] DemonState demonState = DemonState.off_screen;
+
+    private GameObject[] bldgList;
+
+    private GameObject currentTarget = null;
 
     // Start is called before the first frame update
     void Start()
@@ -16,32 +21,61 @@ public class DemonAI : MonoBehaviour
     }
     private void Awake()
     {
+        SpawnDemon();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (currentTarget == null) {
-            FindTarget();
+        switch(demonState) {
+            case DemonState.off_screen:
+                // TODO: Add any code if needed here
+                break;
+            case DemonState.idle:
+                // TODO: Add any code if needed here
+                break;
+            case DemonState.targeting:
+                FindTarget();
+                break;
+            case DemonState.moving:
+                // do nothing here.  handled in FixedUpdate
+                break;
+            case DemonState.attacking:
+                Attacking();
+                break;
+            case DemonState.vice:
+                Vice();
+                break;
+            case DemonState.exiting:
+                // TODO: Add any code if needed here
+                break;
+            default:
+                break;
         }
-        else {
-            MoveTowardsBldg();
-        }
+    }
 
+    void FixedUpdate() {
+        if (demonState == DemonState.moving && currentTarget != null) {
+            MoveTowardsTarget();
+        }
     }
 
     public void SpawnDemon() {
         // TODO: update this later to initialize and spawn the demon
-        m_DemonType = "Mind";  
+        m_DemonType = "Building";
+        demonState = DemonState.targeting;
     }
 
     public void FindTarget() {
-        GameObject[] bldgList_Mind = GameObject.FindGameObjectsWithTag("Mind");
+        bldgList = GameObject.FindGameObjectsWithTag("Building");
 
         // find building target
-        foreach (GameObject bldgMind in bldgList_Mind) {
-            if (bldgMind.tag == m_DemonType) {
-                currentTarget = bldgMind;
+        foreach (GameObject bldg in bldgList) {
+            if (bldg.tag == m_DemonType) {
+                // target found, start moving towards it
+                Debug.Log("Target found: " + bldg);
+                currentTarget = bldg;
+                demonState = DemonState.moving;
                 break;
             }
             else {
@@ -50,17 +84,34 @@ public class DemonAI : MonoBehaviour
         }
     }
 
-    public void MoveTowardsBldg() {
+    public void MoveTowardsTarget() {
         Vector3 direction = (currentTarget.transform.position - transform.position);
-        direction.Normalize();
-        transform.Translate(direction*speed * Time.deltaTime);
+        // check if reached target
+        if (direction.magnitude <= .11) {
+            // reached target.  Start attacking
+            demonState = DemonState.attacking;
+        }
+        else {
+            direction.Normalize();
+            transform.Translate(direction*speed * Time.fixedDeltaTime); 
+        }
 
-        // Check the array to see if you find a building, saving the first, checking by proximity.
-        // If you find a the m_DemonType tag on the building, thats the better target. If you see Vice as the tag, that's the best target
-        // If the demon is next to a building, deal damage to it.    
+    }
+
+    public void Attacking() {
+        //  TODO: Smash building
+        currentTarget.GetComponentInChildren<BuildingHealth>().DealDamage(5);
+        if (currentTarget.GetComponentInChildren<BuildingHealth>().CurrentHealth <= 0) {
+            // building smashed!  need to retarget
+            demonState = DemonState.targeting;
+        }
+    }
+
+    public void Vice() {
+        //  TODO: All of the vices
     }
 
     public void EndNightPhase() {
-
+        // TODO: add code here for demon to leave the scene
     }
 }
