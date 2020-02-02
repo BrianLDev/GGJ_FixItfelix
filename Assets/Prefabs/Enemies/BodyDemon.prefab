@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5174919191350655194
+--- !u!1001 &5235413450874514863
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 6747936968170963427, guid: 0882aaaabda26417fbdc0a36ef394170,
         type: 3}
       propertyPath: m_Name
-      value: _Template-Demon
+      value: Demon_Template
       objectReference: {fileID: 0}
     - target: {fileID: 6747936968170963436, guid: 0882aaaabda26417fbdc0a36ef394170,
         type: 3}
