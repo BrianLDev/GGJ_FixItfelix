@@ -25,6 +25,11 @@ public class AudioManagerScript : MonoBehaviour
     private AudioSource upgradeAmp;
     private AudioSource upgradeMarket;
 
+    private AudioSource angelTheme;
+    private AudioSource steelTheme;
+    private AudioSource jacqueTheme;
+    private AudioSource lysTheme;
+
     private float dayToNightTime;
     private float nightToDayTime;
 
@@ -49,6 +54,7 @@ public class AudioManagerScript : MonoBehaviour
         upgradeAmp = soundEffects[5];
         upgradeGym = soundEffects[6];
         upgradeVice = soundEffects[7];
+
 
 
         dayToNightTime = 0.0f;
@@ -156,5 +162,10 @@ public class AudioManagerScript : MonoBehaviour
     public void PlayUpVice()
     {
         upgradeVice.Play();
+    }
+
+    public void PlayAngelTheme()
+    {
+        angelTheme.Play();
     }
 }
