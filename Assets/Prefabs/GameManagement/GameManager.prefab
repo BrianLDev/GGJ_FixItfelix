@@ -2610,7 +2610,7 @@ MonoBehaviour:
   NightImage: {fileID: 21300000, guid: 30ebc898bac5345ada2d9a1d34424264, type: 3}
   Day_NightSwitch: {fileID: 2097259176354862296}
   theCamera: {fileID: 0}
-  defaultNightDuration: 8
+  defaultNightDuration: 15
   currentDay: 0
 --- !u!1 &7272438394493841709
 GameObject:

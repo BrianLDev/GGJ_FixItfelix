@@ -9,10 +9,10 @@ public class DemonAI : MonoBehaviour
     [SerializeField] DemonType demonType;
     [SerializeField] GameObject m_game_Manager;
     [SerializeField] DemonState demonState = DemonState.off_screen;
-    [SerializeField] int speedNormal = 5;
-    [SerializeField] int speedExit = 10;
+    [SerializeField] int speedNormal = 4;
+    [SerializeField] int speedExit = 8;
     [SerializeField] float idleCountdown = 2f;
-    [SerializeField] int damage = 10;
+    [SerializeField] int damage = 5;
     [SerializeField] static private float timeToAttack = 0.5f;
     private float attackCountdown = 0.5f;
 

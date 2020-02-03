@@ -103,7 +103,7 @@ MonoBehaviour:
   speedNormal: 5
   speedExit: 10
   idleCountdown: 2
-  damage: 10
+  damage: 5
 --- !u!111 &164610643744139462
 Animation:
   m_ObjectHideFlags: 0

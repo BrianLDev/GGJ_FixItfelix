@@ -40,11 +40,13 @@ public class DemonSpawner : NightTimeListener
 
     public override void StartNewNight(DayNightCycle cycle) {
         Debug.Log("Demon spawner: enter night mode...");
+        Debug.Log("Day " + cycle.currentDay + ":\nNight duration: " + cycle.GetNightDuration() + " seconds.");
         isNightPhase = true;
         activeDemons = new List<GameObject>();
         mindDemons = cycle.GetNumMindDemons();
         bodyDemons = cycle.GetNumBodyDemons();
         soulDemons = cycle.GetNumSoulDemons();
+        Debug.Log("Mind Demons: " + mindDemons + ", Body Demons: " + bodyDemons + ", Soul Demons: " + soulDemons);
         demonsToSpawn = mindDemons + bodyDemons + soulDemons;
         timeBetweenSpawns = (cycle.GetNightDuration() - timeToFirstSpawn) / demonsToSpawn;
         timeToNextSpawn = timeToFirstSpawn;

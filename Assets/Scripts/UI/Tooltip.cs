@@ -92,7 +92,7 @@ public class Tooltip : MonoBehaviour
         }
         else
         {
-            print("no cost");
+            // print("no cost");
             //tooltip.rectTransform.rect.Set(tooltip.rectTransform.rect.x, tooltip.rectTransform.rect.y, tooltip.rectTransform.rect.width, tooltip.defaultHeight - costBenefitHeight);
             //tooltip.rectTransform.rect.Set(tooltip.rectTransform.rect.x, tooltip.rectTransform.rect.y, 167, 76);
             tooltip.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, tooltip.defaultHeight - costBenefitHeight);
