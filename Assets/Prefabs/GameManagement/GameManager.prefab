@@ -391,7 +391,7 @@ MonoBehaviour:
   characterImage: {fileID: 0}
   characterCanvas: {fileID: 0}
   dayTime: 0
-  startedCharacter: 0
+  shouldAddCharacter: 0
 --- !u!1 &751322495
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,6 +946,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1286896617
 GameObject:
   m_ObjectHideFlags: 0
@@ -1234,6 +1245,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 672914508}
         m_MethodName: DeclineCharacter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2588,7 +2610,7 @@ MonoBehaviour:
   NightImage: {fileID: 21300000, guid: 30ebc898bac5345ada2d9a1d34424264, type: 3}
   Day_NightSwitch: {fileID: 2097259176354862296}
   theCamera: {fileID: 0}
-  defaultNightDuration: 8
+  defaultNightDuration: 14
   currentDay: 0
 --- !u!1 &7272438394493841709
 GameObject:

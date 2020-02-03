@@ -23,7 +23,7 @@ public class DayNightCycle : MonoBehaviour
     public static DayNightCycle instance;
 
     [FormerlySerializedAs("nightDuration")]
-	public float defaultNightDuration = 10.0f;
+	public float defaultNightDuration = 15.0f;
 	public float totalNightDuration { get; private set; }
 	private float nightTimeLeft = 0.0f;
 
