@@ -6,7 +6,7 @@ public class DemonAI : MonoBehaviour
 {
     public enum DemonState { off_screen, idle, targeting, moving, attacking, exiting }
     public enum DemonType { Mind, Body, Soul }
-    [SerializeField] DemonType m_DemonType;
+    [SerializeField] DemonType demonType;
     [SerializeField] GameObject m_game_Manager;
     [SerializeField] DemonState demonState = DemonState.off_screen;
     [SerializeField] int speedNormal = 5;
@@ -85,23 +85,34 @@ public class DemonAI : MonoBehaviour
         bldgList = GameObject.FindGameObjectsWithTag("Building");
 
         // find building target
+        // first search for vice bldgs top priority
         foreach (GameObject bldg in bldgList) {
-            Debug.Log(m_DemonType.ToString() + "Demon considering attacking: " + bldg.GetComponent<BuildingInfo>().BuildingType.ToString() );
+            Debug.Log(demonType.ToString() + " Demon considering attacking: " + bldg.GetComponent<BuildingInfo>().BuildingType.ToString() );
             if (bldg.GetComponent<BuildingInfo>().BuildingType == BuildingType.Vice) {
-                Debug.Log("ATTACKING!!");
+                Debug.Log("MOVING TO IT!!");
                 currentTarget = bldg;
                 demonState = DemonState.moving;
                 break;            
             }
-            else if (bldg.GetComponent<BuildingInfo>().BuildingType.ToString() == m_DemonType.ToString() ) {
-                Debug.Log("ATTACKING!!");
-                currentTarget = bldg;
-                demonState = DemonState.moving;
-                break;
+        }
+        // no vice found so now checking for matching type
+        if (currentTarget == null) {
+            foreach (GameObject bldg in bldgList) {
+                if (bldg.GetComponent<BuildingInfo>().BuildingType.ToString() == demonType.ToString() ) {
+                Debug.Log("MOVING TO IT!!");
+                    currentTarget = bldg;
+                    demonState = DemonState.moving;
+                    break;
+                }
             }
-            else {
-                Debug.Log("No match found, attack whatever...\nATTACKING!!");
-                currentTarget = bldgList[0];
+        }
+        // no vice or matching so just target whatever
+        if (currentTarget == null) {
+            foreach (GameObject bldg in bldgList) {
+            Debug.Log("No match found, attack whatever...\nMOVING TO IT!!");
+            currentTarget = bldg;
+            demonState = DemonState.moving;
+            break;
             }
         }
     }
