@@ -96,14 +96,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87a3c10d697c09149a7c0d263fbe45b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_DemonType: 0
+  demonType: 0
   m_game_Manager: {fileID: 7853676670548248068, guid: 341cf9f3054b545b58e66d0351d70222,
     type: 3}
   demonState: 0
   speedNormal: 5
   speedExit: 10
   idleCountdown: 2
-  damage: 10
+  damage: 7
 --- !u!111 &164610643744139462
 Animation:
   m_ObjectHideFlags: 0
