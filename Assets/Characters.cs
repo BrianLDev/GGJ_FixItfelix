@@ -142,8 +142,7 @@ public class Characters : NightTimeListener
 
     public override void StartNewDay(DayNightCycle cycle)
     {
-        print("new day " + (cycle.GetCurrentDay() % 2 == 1).ToString());
-        if (cycle.GetCurrentDay() % 2 == 1)
+        if (cycle.GetCurrentDay() % 3 == 2)
         {
             List<int> characters = new List<int>();
             if (!angelEnabled)

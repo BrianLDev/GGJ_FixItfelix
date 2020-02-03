@@ -128,7 +128,8 @@ public class BuildingManager : MonoBehaviour
                     buildingCost = Mathf.CeilToInt(buildingCost * 1.50f);
                 }
             }
-            else if (Characters.angelEnabled)
+
+            if (Characters.angelEnabled)
             {
                 if (buildingOption.LogicPrefab.GetComponent<BuildingInfo>().BuildingType == BuildingType.Mind)
                 {
@@ -139,7 +140,8 @@ public class BuildingManager : MonoBehaviour
                     buildingCost = Mathf.CeilToInt(buildingCost * 0.75f);
                 }
             }
-            else if (Characters.steelEnabled)
+
+            if (Characters.steelEnabled)
             {
                 if (buildingOption.LogicPrefab.GetComponent<BuildingInfo>().BuildingType == BuildingType.Body)
                 {
