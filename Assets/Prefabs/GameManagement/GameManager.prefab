@@ -3031,27 +3031,27 @@ PrefabInstance:
         type: 3}
       propertyPath: centerBar
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2800000, guid: bf5cd447c8f234fb9a9eb66db20ae1f3, type: 3}
     - target: {fileID: 5041827085205920604, guid: 5933dad41e3a4474faa791aa066db87b,
         type: 3}
       propertyPath: rightLeftBar
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2800000, guid: d5296e4a09bd57e40ac5a247e42b109b, type: 3}
     - target: {fileID: 5041827085205920604, guid: 5933dad41e3a4474faa791aa066db87b,
         type: 3}
       propertyPath: leftRightBar
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2800000, guid: d5296e4a09bd57e40ac5a247e42b109b, type: 3}
     - target: {fileID: 5041827085205920604, guid: 5933dad41e3a4474faa791aa066db87b,
         type: 3}
       propertyPath: leftHand
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2800000, guid: ef60e9d52cfaa482a9f20ae1998be38d, type: 3}
     - target: {fileID: 5041827085205920604, guid: 5933dad41e3a4474faa791aa066db87b,
         type: 3}
       propertyPath: rightHand
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2800000, guid: b180262954df54674b44d684b2954a30, type: 3}
     - target: {fileID: 5041827085205920605, guid: 5933dad41e3a4474faa791aa066db87b,
         type: 3}
       propertyPath: m_LocalPosition.x
