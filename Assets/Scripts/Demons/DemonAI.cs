@@ -12,7 +12,7 @@ public class DemonAI : MonoBehaviour
     [SerializeField] int speedNormal = 5;
     [SerializeField] int speedExit = 10;
     [SerializeField] float idleCountdown = 2f;
-    [SerializeField] int damage = 7;
+    [SerializeField] int damage = 10;
     [SerializeField] static private float timeToAttack = 0.5f;
     private float attackCountdown = 0.5f;
 
