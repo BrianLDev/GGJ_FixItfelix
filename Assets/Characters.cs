@@ -26,7 +26,7 @@ public class Characters : NightTimeListener
     public GameObject characterCanvas;
 
     public float dayTime = 0.0f;
-    public bool startedCharacter = false;
+    public bool shouldAddCharacter = false;
 
     private AudioManagerScript audioManager;
 
@@ -45,15 +45,15 @@ public class Characters : NightTimeListener
         if (DayNightCycle.instance.IsNightTime())
         {
             dayTime = 0.0f;
-            startedCharacter = false;
+            shouldAddCharacter = false;
         }
         else
         {
             dayTime = dayTime + Time.fixedDeltaTime;
-            if (dayTime > 3.0f && characterID != 0 && !startedCharacter)
+            if (dayTime > 3.0f && characterID != 0 && shouldAddCharacter)
             {
                 StartCharacter(characterID);
-                startedCharacter = true;
+                shouldAddCharacter = false;
             }
         }
     }
@@ -142,44 +142,39 @@ public class Characters : NightTimeListener
 
     public override void StartNewDay(DayNightCycle cycle)
     {
+        print("new day " + (cycle.GetCurrentDay() % 2 == 1).ToString());
         if (cycle.GetCurrentDay() % 2 == 1)
         {
-            int random = Random.Range(0, 3);
-            if (lysEnabled)
+            List<int> characters = new List<int>();
+            if (!angelEnabled)
             {
-                random = random + 1;
+                characters.Add(angelID);
             }
 
-            if (jacqueEnabled)
+            if (!jacqueEnabled)
             {
-                random = random + 1;
+                characters.Add(jacqueID);
             }
 
-            if (angelEnabled)
+            if (!lysEnabled)
             {
-                random = random + 1;
+                characters.Add(lysID);
             }
 
-
-            if (!angelEnabled && random >= 3)
+            if (!steelEnabled)
             {
-                characterID = angelID;
+                characters.Add(steelID);
             }
-            else if (!jacqueEnabled && random >= 2)
+            
+            if (characters.Count > 0)
             {
-                characterID = jacqueID;
-            }
-            else if (!lysEnabled && random >= 1)
-            {
-                characterID = lysID;
-            }
-            else if (!steelEnabled)
-            {
-                characterID = steelID;
+                characterID = characters[Random.Range(0, characters.Count - 1)];
+                shouldAddCharacter = true;
             }
             else
             {
                 characterID = 0;
+                shouldAddCharacter = false;
             }
         }
     }
