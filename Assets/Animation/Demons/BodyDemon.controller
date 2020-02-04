@@ -65,8 +65,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: Direction
     m_EventTreshold: 0
-  - m_ConditionMode: 4
-    m_ConditionEvent: xDirection
+  - m_ConditionMode: 3
+    m_ConditionEvent: yDirection
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2021153398759182754}
@@ -161,7 +161,7 @@ AnimatorStateTransition:
     m_ConditionEvent: Direction
     m_EventTreshold: 0
   - m_ConditionMode: 3
-    m_ConditionEvent: xDirection
+    m_ConditionEvent: yDirection
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2421911660603530958}

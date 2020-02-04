@@ -16,16 +16,18 @@ public class DemonAI : MonoBehaviour
     [SerializeField] int speedExit = 8;
     [SerializeField] float idleCountdown = 2f;
     [SerializeField] int damage = 5;
-    [SerializeField] static private float timeToAttack = 0.5f;
+    [SerializeField] float attackTimeInterval = 0.75f;
     #pragma warning restore 0649    // restore the warning for SerializeFields that are assigned within the Unity Editor
     private float attackCountdown = 0.5f;
     private GameObject[] bldgList;
     private int speed;
     private GameObject currentTarget = null;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
     }
     private void Awake()
     {
@@ -135,12 +137,19 @@ public class DemonAI : MonoBehaviour
         }
     }
 
-    public void MoveTowardsTarget() {
+    public void MoveTowardsTarget() { 
+
         Vector3 direction = (currentTarget.transform.position - transform.position);
+
+        animator.SetBool("attacking", false);     
+        animator.SetFloat("xDirection", direction.x);
+        animator.SetFloat("yDirection", direction.y);
+
         // check if reached target
         if (direction.magnitude <= .11) {
             // reached target.  Start attacking
             demonState = DemonState.attacking;
+            animator.SetBool("attacking", true);     
         }
         else {
             direction.Normalize();
@@ -152,7 +161,7 @@ public class DemonAI : MonoBehaviour
         attackCountdown -= Time.fixedDeltaTime;
         if (attackCountdown <= 0) {
             currentTarget.GetComponentInChildren<BuildingHealth>().DealDamage(damage);
-            attackCountdown = timeToAttack;
+            attackCountdown = attackTimeInterval;
 
             if (currentTarget.GetComponentInChildren<BuildingHealth>().CurrentHealth <= 0) {
                 // building smashed!  Retarget to new building
