@@ -6,7 +6,7 @@ public class DemonAI : MonoBehaviour
 {
     public enum DemonState { off_screen, idle, targeting, moving, attacking, exiting }
     public enum DemonType { Mind, Body, Soul }
-    [SerializeField] DemonType demonType;
+    [SerializeField] DemonType demonType = DemonType.Mind;  // default to Mind type.  Actual type assigned in Unity with Prefab
     [SerializeField] GameObject m_game_Manager;
     [SerializeField] DemonState demonState = DemonState.off_screen;
     [SerializeField] int speedNormal = 4;
@@ -81,15 +81,30 @@ public class DemonAI : MonoBehaviour
         }
     }
 
+    // Shuffle algorithm for arrays to target misc buildings first
+    private static void Shuffle<T>(T[] origArray) {
+        // Debug.Log("SHUFFLING BUILDINGS...");
+        System.Random r = new System.Random();
+
+        for (int i=0; i<origArray.Length - 1; i++) {
+            int loc = r.Next(0, origArray.Length);
+            // Debug.Log("Swapping " + origArray[i] + " with " + origArray[loc]);
+            T temp = origArray[i];
+            origArray[i] = origArray[loc];
+            origArray[loc] = temp;
+        }
+    }
     public void FindTarget() {
         bldgList = GameObject.FindGameObjectsWithTag("Building");
+        Shuffle(bldgList);
+
 
         // find building target
         // first search for vice bldgs top priority
         foreach (GameObject bldg in bldgList) {
-            Debug.Log(demonType.ToString() + " Demon considering attacking: " + bldg.GetComponent<BuildingInfo>().BuildingType.ToString() );
+            // Debug.Log(demonType.ToString() + " Demon considering attacking: " + bldg.GetComponent<BuildingInfo>().BuildingType.ToString() );
             if (bldg.GetComponent<BuildingInfo>().BuildingType == BuildingType.Vice) {
-                Debug.Log("MOVING TO IT!!");
+                // Debug.Log("DEMON WANTS THAT VICE!!");
                 currentTarget = bldg;
                 demonState = DemonState.moving;
                 break;            
@@ -99,7 +114,7 @@ public class DemonAI : MonoBehaviour
         if (currentTarget == null) {
             foreach (GameObject bldg in bldgList) {
                 if (bldg.GetComponent<BuildingInfo>().BuildingType.ToString() == demonType.ToString() ) {
-                Debug.Log("MOVING TO IT!!");
+                // Debug.Log("DEMON GOING TOWARDS " + demonType.ToString() );
                     currentTarget = bldg;
                     demonState = DemonState.moving;
                     break;
@@ -109,7 +124,7 @@ public class DemonAI : MonoBehaviour
         // no vice or matching so just target whatever
         if (currentTarget == null) {
             foreach (GameObject bldg in bldgList) {
-            Debug.Log("No match found, attack whatever...\nMOVING TO IT!!");
+            // Debug.Log("No match found, attack whatever...\nMOVING TOWARDS BUILDING TYPE " + bldg.GetComponent<BuildingInfo>().BuildingType.ToString() );
             currentTarget = bldg;
             demonState = DemonState.moving;
             break;
@@ -144,7 +159,6 @@ public class DemonAI : MonoBehaviour
     }
 
     public void EndNightPhase() {
-        Debug.Log("DemonAI ending night phase...");
         demonState = DemonState.exiting;
         speed = speedExit;
         currentTarget = new GameObject();
