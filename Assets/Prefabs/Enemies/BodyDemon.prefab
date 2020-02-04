@@ -32,6 +32,11 @@ PrefabInstance:
       propertyPath: m_DemonType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6747936968170963426, guid: 0882aaaabda26417fbdc0a36ef394170,
+        type: 3}
+      propertyPath: demonType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6747936968170963427, guid: 0882aaaabda26417fbdc0a36ef394170,
         type: 3}
       propertyPath: m_Name
