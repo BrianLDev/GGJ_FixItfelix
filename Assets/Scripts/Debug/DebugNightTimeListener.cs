@@ -15,7 +15,7 @@ public class DebugNightTimeListener : NightTimeListener
 
     public override void StartNewNight(DayNightCycle cycle)
     {
-        Debug.Log("Night " + cycle.currentDay + ":\nNight duration: " + cycle.GetNightDuration() + " seconds.");
-        Debug.Log("Mind Demons: " + cycle.GetNumMindDemons() + ", Body Demons: " + cycle.GetNumBodyDemons() + ", Soul Demons: " + cycle.GetNumSoulDemons());
+        Debug.Log("Night " + cycle.currentDay + ", duration: " + cycle.GetNightDuration() + " seconds.\n" + 
+                  "Mind Demons: " + cycle.GetNumMindDemons() + ", Body Demons: " + cycle.GetNumBodyDemons() + ", Soul Demons: " + cycle.GetNumSoulDemons());
     }
 }

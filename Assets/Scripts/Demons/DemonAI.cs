@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+#pragma warning disable 0649    // disable the warning for SerializeFields that are assigned within the Unity Editor
+
 public class DemonAI : MonoBehaviour
 {
+    #pragma warning disable 0649    // disable the warning for SerializeFields that are assigned within the Unity Editor
     public enum DemonState { off_screen, idle, targeting, moving, attacking, exiting }
     public enum DemonType { Mind, Body, Soul }
-    [SerializeField] DemonType demonType = DemonType.Mind;  // default to Mind type.  Actual type assigned in Unity with Prefab
+    [SerializeField] DemonType demonType;
     [SerializeField] GameObject m_game_Manager;
     [SerializeField] DemonState demonState = DemonState.off_screen;
     [SerializeField] int speedNormal = 4;
@@ -14,8 +17,8 @@ public class DemonAI : MonoBehaviour
     [SerializeField] float idleCountdown = 2f;
     [SerializeField] int damage = 5;
     [SerializeField] static private float timeToAttack = 0.5f;
+    #pragma warning restore 0649    // restore the warning for SerializeFields that are assigned within the Unity Editor
     private float attackCountdown = 0.5f;
-
     private GameObject[] bldgList;
     private int speed;
     private GameObject currentTarget = null;
@@ -94,10 +97,10 @@ public class DemonAI : MonoBehaviour
             origArray[loc] = temp;
         }
     }
+
     public void FindTarget() {
         bldgList = GameObject.FindGameObjectsWithTag("Building");
         Shuffle(bldgList);
-
 
         // find building target
         // first search for vice bldgs top priority

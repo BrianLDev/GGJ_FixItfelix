@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+
 public class DemonSpawner : NightTimeListener
 {
+    #pragma warning disable 0649    // disable the warning for SerializeFields that are assigned within the Unity Editor
     [SerializeField] GameObject mindDemonPrefab, bodyDemonPrefab, soulDemonPrefab;
+    [SerializeField] float timeToFirstSpawn = 1.0f;
+    #pragma warning restore 0649    // restore the warning for SerializeFields that are assigned within the Unity Editor
     private int mindDemons;
     private int bodyDemons;
     private int soulDemons;
@@ -13,7 +17,6 @@ public class DemonSpawner : NightTimeListener
     private List<GameObject> activeDemons;
     private float timeBetweenSpawns;
     private float timeToNextSpawn;
-    [SerializeField] float timeToFirstSpawn = 1.0f;
     private bool isNightPhase = false;
     private float nightDuration;
     private 
@@ -39,7 +42,6 @@ public class DemonSpawner : NightTimeListener
     }
 
     public override void StartNewNight(DayNightCycle cycle) {
-        Debug.Log("Demon spawner: enter night mode...");
         isNightPhase = true;
         activeDemons = new List<GameObject>();
         mindDemons = cycle.GetNumMindDemons();
@@ -51,7 +53,6 @@ public class DemonSpawner : NightTimeListener
     }
 
     public override void StartNewDay(DayNightCycle cycle) {
-        Debug.Log("Demon spawner: A new day begins...");
         BeGoneDemons();
         isNightPhase = false;
         mindDemons = 0;
@@ -106,3 +107,4 @@ public class DemonSpawner : NightTimeListener
     }
 
 }
+

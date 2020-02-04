@@ -3,8 +3,10 @@
 [RequireComponent(typeof(BuildingInfo))]
 public class BuildingHealth : MonoBehaviour
 {
+    #pragma warning disable 0649    // disable the warning for SerializeFields that are assigned within the Unity Editor
 	[SerializeField] GameObject FirePrefab;
-
+    #pragma warning restore 0649    // restore the warning for SerializeFields that are assigned within the Unity Editor
+	
 	[HideInInspector]
 	public BuildingManager BuildingManager;
 	public int[] BaseHealthData;
