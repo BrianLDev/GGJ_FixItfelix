@@ -80,23 +80,30 @@ public class MeterScript : MonoBehaviour
             Rect leftPos = new Rect(posMind.x, posMind.y, sizeMind.x, sizeMind.y);
             GUI.BeginGroup(leftPos);
             GUI.Box(new Rect(0, 0, sizeMind.x, sizeMind.y), new GUIContent(leftRightBar, mindTooltipText));
+            GUI.color = Color.red;
             GUI.DrawTexture(new Rect(0, 0, sizeMind.x, sizeMind.y), leftRightBar);
             GUI.EndGroup();
 
+            // Left hand
+            GUI.color = Color.white;
             GUI.DrawTexture(new Rect(posMind.x - Screen.width * 0.075f, posMind.y - Screen.height * 0.035f, Screen.width * 0.1f, sizeMind.y * 8.0f), leftHand);
 
             //Body bar
             GUI.BeginGroup(new Rect(posBody.x, posBody.y, sizeBody.x, sizeBody.y));
             GUI.Box(new Rect(0, 0, sizeBody.x, sizeBody.y), new GUIContent(centerBar, bodyTooltipText));
+            GUI.color = Color.green;
             GUI.DrawTexture(new Rect(0, 0, sizeBody.x, sizeBody.y), centerBar);
             GUI.EndGroup();
 
             //Soul bar
             GUI.BeginGroup(new Rect(posSoul.x, posSoul.y, sizeSoul.x, sizeSoul.y));
             GUI.Box(new Rect(0, 0, sizeSoul.x, sizeSoul.y), new GUIContent(rightLeftBar, soulTooltipText));
+            GUI.color = Color.blue;
             GUI.DrawTexture(new Rect(0, 0, sizeSoul.x, sizeSoul.y), centerBar);
             GUI.EndGroup();
 
+            // Right hand
+            GUI.color = Color.white;
             GUI.DrawTexture(new Rect(posSoul.x + (sizeSoul.x * 0.99f), posSoul.y - Screen.height * 0.035f, Screen.width * 0.1f, sizeSoul.y * 8.0f), rightHand);
 
             string tooltipTitle = Tooltip.GetTitle();

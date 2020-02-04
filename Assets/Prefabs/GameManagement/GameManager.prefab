@@ -2931,7 +2931,7 @@ PrefabInstance:
     - target: {fileID: 2508849157969283544, guid: b85895783d1c81b4aae1f150c69ac993,
         type: 3}
       propertyPath: startPlayerMind
-      value: 350
+      value: 325
       objectReference: {fileID: 0}
     - target: {fileID: 2508849157969283544, guid: b85895783d1c81b4aae1f150c69ac993,
         type: 3}
