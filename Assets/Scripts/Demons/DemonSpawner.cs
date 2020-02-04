@@ -40,13 +40,11 @@ public class DemonSpawner : NightTimeListener
 
     public override void StartNewNight(DayNightCycle cycle) {
         Debug.Log("Demon spawner: enter night mode...");
-        Debug.Log("Day " + cycle.currentDay + ":\nNight duration: " + cycle.GetNightDuration() + " seconds.");
         isNightPhase = true;
         activeDemons = new List<GameObject>();
         mindDemons = cycle.GetNumMindDemons();
         bodyDemons = cycle.GetNumBodyDemons();
         soulDemons = cycle.GetNumSoulDemons();
-        Debug.Log("Mind Demons: " + mindDemons + ", Body Demons: " + bodyDemons + ", Soul Demons: " + soulDemons);
         demonsToSpawn = mindDemons + bodyDemons + soulDemons;
         timeBetweenSpawns = (cycle.GetNightDuration() - timeToFirstSpawn) / demonsToSpawn;
         timeToNextSpawn = timeToFirstSpawn;
@@ -68,22 +66,31 @@ public class DemonSpawner : NightTimeListener
             // pick a random spot on the screen to spawn
             Vector3 spawnLocation = new Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height), 0);
             spawnLocation = Camera.main.ScreenToWorldPoint(spawnLocation);
-
             Debug.Log("Spawning demon at: " + spawnLocation);
-            // TODO: select mind, body, or soul demon
+
             GameObject demon = new GameObject();
-            if (mindDemons > 0) {
-                demon = Instantiate(mindDemonPrefab, spawnLocation, Quaternion.identity);
-                mindDemons--;
+
+            bool isDemonSpawned = false;
+            while (!isDemonSpawned && demonsToSpawn > 0) {
+                int selector = Random.Range(1, 4);  // 1-3. With ints, the max in Random.Range is exclusive
+
+                if (selector == 1 && mindDemons > 0) {
+                    demon = Instantiate(mindDemonPrefab, spawnLocation, Quaternion.identity);
+                    mindDemons--;
+                    isDemonSpawned = true;
+                }
+                else if (selector == 2 && bodyDemons > 0) {
+                    demon = Instantiate(bodyDemonPrefab, spawnLocation, Quaternion.identity);
+                    bodyDemons--;
+                    isDemonSpawned = true;
+                }
+                else if (selector == 3 && soulDemons > 0) {
+                    demon = Instantiate(soulDemonPrefab, spawnLocation, Quaternion.identity);
+                    soulDemons--;
+                    isDemonSpawned = true;
+                }
             }
-            else if (bodyDemons > 0) {
-                demon = Instantiate(bodyDemonPrefab, spawnLocation, Quaternion.identity);
-                bodyDemons--;
-            }
-            else if (soulDemons > 0) {
-                demon = Instantiate(soulDemonPrefab, spawnLocation, Quaternion.identity);
-                soulDemons--;
-            }
+
             activeDemons.Add(demon);
             demonsToSpawn--;
             timeToNextSpawn = timeBetweenSpawns;
