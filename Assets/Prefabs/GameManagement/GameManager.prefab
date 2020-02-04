@@ -2610,7 +2610,7 @@ MonoBehaviour:
   NightImage: {fileID: 21300000, guid: 30ebc898bac5345ada2d9a1d34424264, type: 3}
   Day_NightSwitch: {fileID: 2097259176354862296}
   theCamera: {fileID: 0}
-  defaultNightDuration: 15
+  defaultNightDuration: 13
   currentDay: 0
 --- !u!1 &7272438394493841709
 GameObject:
@@ -2931,7 +2931,7 @@ PrefabInstance:
     - target: {fileID: 2508849157969283544, guid: b85895783d1c81b4aae1f150c69ac993,
         type: 3}
       propertyPath: startPlayerMind
-      value: 300
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 2508849157969283544, guid: b85895783d1c81b4aae1f150c69ac993,
         type: 3}

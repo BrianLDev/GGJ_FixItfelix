@@ -43,7 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc10f4e5d3e76c4094b15602259518c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPlayerMind: 500
-  startPlayerBody: 200
-  startPlayerSoul: 500
+  startPlayerMind: 450
+  startPlayerBody: 0
+  startPlayerSoul: 100
   playerStatsObj: {fileID: 0}
+  gameManager: {fileID: 0}
+  sceneManagement: {fileID: 0}
