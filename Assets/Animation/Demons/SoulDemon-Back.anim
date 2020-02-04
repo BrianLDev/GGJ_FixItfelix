@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MindUp
+  m_Name: SoulDemon-Back
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,11 +20,13 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: bf35d635ee53244da80067cae7648870, type: 3}
+      value: {fileID: 21300000, guid: 0f6ca49651cf34c81b7077dfbd091060, type: 3}
     - time: 0.083333336
-      value: {fileID: 21300000, guid: 1bfee0e9362d141c193ca6cf31e5aa82, type: 3}
+      value: {fileID: 21300000, guid: 1a4e371d0fe0144b2a912119cf3ecaee, type: 3}
     - time: 0.16666667
-      value: {fileID: 21300000, guid: 8ec9f1be6016144ac8edd59356462303, type: 3}
+      value: {fileID: 21300000, guid: ff1b143fb328948b18cfc4c0dbc3f179, type: 3}
+    - time: 0.25
+      value: {fileID: 21300000, guid: 3dc463cc91457488ba499ac253b8f723, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,15 +46,16 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: bf35d635ee53244da80067cae7648870, type: 3}
-    - {fileID: 21300000, guid: 1bfee0e9362d141c193ca6cf31e5aa82, type: 3}
-    - {fileID: 21300000, guid: 8ec9f1be6016144ac8edd59356462303, type: 3}
+    - {fileID: 21300000, guid: 0f6ca49651cf34c81b7077dfbd091060, type: 3}
+    - {fileID: 21300000, guid: 1a4e371d0fe0144b2a912119cf3ecaee, type: 3}
+    - {fileID: 21300000, guid: ff1b143fb328948b18cfc4c0dbc3f179, type: 3}
+    - {fileID: 21300000, guid: 3dc463cc91457488ba499ac253b8f723, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.25
+    m_StopTime: 0.33333334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

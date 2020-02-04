@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SoulFor
+  m_Name: BodyDemon-Attack
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,13 +20,11 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 42b62cc67fead465aafe75c7ec718da9, type: 3}
+      value: {fileID: 21300000, guid: b0fb1209324774c90a96b592d225cfa1, type: 3}
     - time: 0.083333336
-      value: {fileID: 21300000, guid: d72f6768ba2fe4db0869b8f419c04582, type: 3}
+      value: {fileID: 21300000, guid: 3db1ebdd2275146979b5ae808c361ca8, type: 3}
     - time: 0.16666667
-      value: {fileID: 21300000, guid: 5004937978d20453da6d2913ffcdf480, type: 3}
-    - time: 0.25
-      value: {fileID: 21300000, guid: 09d5974f9c11f45cc8b22a6e60337e92, type: 3}
+      value: {fileID: 21300000, guid: 04532e83ca992421d954dcc44b36e854, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -46,16 +44,15 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 42b62cc67fead465aafe75c7ec718da9, type: 3}
-    - {fileID: 21300000, guid: d72f6768ba2fe4db0869b8f419c04582, type: 3}
-    - {fileID: 21300000, guid: 5004937978d20453da6d2913ffcdf480, type: 3}
-    - {fileID: 21300000, guid: 09d5974f9c11f45cc8b22a6e60337e92, type: 3}
+    - {fileID: 21300000, guid: b0fb1209324774c90a96b592d225cfa1, type: 3}
+    - {fileID: 21300000, guid: 3db1ebdd2275146979b5ae808c361ca8, type: 3}
+    - {fileID: 21300000, guid: 04532e83ca992421d954dcc44b36e854, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.33333334
+    m_StopTime: 0.25
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
