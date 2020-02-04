@@ -138,7 +138,14 @@ public class MeterScript : MonoBehaviour
     private void MoveMindBar(float newMindPos)
     {
         currentMindPos -= newMindPos;
-        posMind = new Vector2(Screen.width * currentMindPos, Screen.height * 0.9f);
+        if (currentMindPos >= 0.0f)
+        {
+            posMind = new Vector2(Screen.width * currentMindPos, Screen.height * 0.9f);
+        }
+        else
+        {
+            posMind = new Vector2(0.0f, Screen.height * 0.9f);
+        }
     }
 
     //Body methods
@@ -184,7 +191,14 @@ public class MeterScript : MonoBehaviour
     public void MoveSoulBar(float newSoulPos)
     {
         currentSoulPos += newSoulPos;
-        posSoul = new Vector2(Screen.width * currentSoulPos, Screen.height * 0.9f);
+        if (currentSoulPos <= Screen.width)
+        {
+            posSoul = new Vector2(Screen.width * currentSoulPos, Screen.height * 0.9f);
+        }
+        else
+        {
+            posSoul = new Vector2(Screen.width * currentSoulPos, Screen.height * 0.9f);
+        }
     }
 
     public void UpdateStateOfSoul(float newSoulState)
