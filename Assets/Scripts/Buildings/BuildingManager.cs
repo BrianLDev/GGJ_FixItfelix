@@ -97,9 +97,50 @@ public class BuildingManager : MonoBehaviour
 		return _positionToConstructionSpace[position].Data.RepairOptions;
 	}
 
+	public int GetConstructionCost(BuildingData data)
+	{
+		BuildingInfo info = data.LogicPrefab.GetComponent<BuildingInfo>();
+		float cost = info.BaseCost;
+		BuildingType buildingType = info.BuildingType;
+
+		if (Characters.lysEnabled)
+		{
+			if (buildingType == BuildingType.Mind)
+			{
+				cost *= 0.75f;
+			}
+			else
+			{
+				cost *= 1.50f;
+			}
+		}
+
+		if (Characters.angelEnabled)
+		{
+			if (buildingType == BuildingType.Mind)
+			{
+				cost *= 1.5f;
+			}
+			else
+			{
+				cost *= 0.75f;
+			}
+		}
+
+		if (Characters.steelEnabled)
+		{
+			if (buildingType == BuildingType.Body)
+			{
+				cost *= 0.75f;
+			}
+		}
+
+		return Mathf.CeilToInt(cost);
+	}
+
 	public bool CanAffordConstruction(BuildingData data)
 	{
-		return playerStats.GetMind() >= data.LogicPrefab.GetComponent<BuildingInfo>().BaseCost;
+		return playerStats.GetMind() >= GetConstructionCost(data);
 	}
 
 	public void ConstructBuildingOnTile(Vector3Int position, BuildingData buildingOption)
@@ -116,40 +157,9 @@ public class BuildingManager : MonoBehaviour
 		GameObject buildingLogic = null;
 		if (buildingOption.LogicPrefab != null)
 		{
-			int buildingCost = buildingOption.LogicPrefab.GetComponent<BuildingInfo>().BaseCost;
-            if (Characters.lysEnabled)
-            {
-                if (buildingOption.LogicPrefab.GetComponent<BuildingInfo>().BuildingType == BuildingType.Mind)
-                {
-                    buildingCost = Mathf.CeilToInt(buildingCost * 0.75f);
-                }
-                else
-                {
-                    buildingCost = Mathf.CeilToInt(buildingCost * 1.50f);
-                }
-            }
+			int buildingCost = GetConstructionCost(buildingOption);
 
-            if (Characters.angelEnabled)
-            {
-                if (buildingOption.LogicPrefab.GetComponent<BuildingInfo>().BuildingType == BuildingType.Mind)
-                {
-                    buildingCost = Mathf.CeilToInt(buildingCost * 1.5f);
-                }
-                else
-                {
-                    buildingCost = Mathf.CeilToInt(buildingCost * 0.75f);
-                }
-            }
-
-            if (Characters.steelEnabled)
-            {
-                if (buildingOption.LogicPrefab.GetComponent<BuildingInfo>().BuildingType == BuildingType.Body)
-                {
-                    buildingCost = Mathf.CeilToInt(buildingCost * 0.75f);
-                }
-            }
-
-            if (playerStats.GetMind() - buildingCost < 0)
+			if (playerStats.GetMind() - buildingCost < 0)
 			{
 				return;
 			}
@@ -434,10 +444,10 @@ public class BuildingManager : MonoBehaviour
 	{
 		int oldHealthBonusPercent = CachedHealthBonusPercent;
 		CachedHealthBonusPercent = ComputeTotalHealthBonusPercent();
-        if (Characters.jacqueEnabled)
-        {
-            CachedHealthBonusPercent = CachedHealthBonusPercent + 25;
-        }
+		if (Characters.jacqueEnabled)
+		{
+			CachedHealthBonusPercent = CachedHealthBonusPercent + 25;
+		}
 
 		if (CachedHealthBonusPercent != oldHealthBonusPercent)
 		{

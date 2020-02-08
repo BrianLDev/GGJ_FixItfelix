@@ -51,7 +51,7 @@ public class BuildingRadialMenu : MonoBehaviour, IPointerClickHandler
 		BuildingInfo buildingInfo = buildingData.LogicPrefab.GetComponent<BuildingInfo>();
 		coinController.titleText = buildingData.tooltipTitle;
 		coinController.bodyText = buildingData.tooltipDescription;
-		coinController.cost = buildingInfo.BaseCost;
+		coinController.cost = BuildingManager.GetConstructionCost(buildingData);
 		coinController.benefit = buildingData.LogicPrefab.GetComponent<BuildingHealth>().BaseHealthData[0];
 	}
 
